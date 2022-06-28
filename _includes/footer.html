@@ -1,0 +1,36 @@
+<footer>
+	<div class="footer-wrapper">
+		<div class="lang-nav-wrapper">
+			<div class="footer-lang-selector">
+				<div class="lang-flag english"></div>
+				<select name="lang-selector" id="lang">
+					<option value="english">English</option>
+					<option value="chinese">中文</option>
+				</select>
+			</div>
+			<nav class="footer-nav">
+				<ul>
+					<li><a href="https://decentraland.org" target="_blank">Home</a></li>
+          <li><a href="{{ site.legal_url }}" target="_blank">Legal Information</a></li>
+					<li><a href="{{ site.press_url }}" target="_blank">Press Kit</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="social-copyright-wrapper">
+			<ul class="footer-links">
+				{% for link in site.data.footer %}
+					<li><a {% if link.new_window %}target="_blank"{% endif %} href="{% include relative-src.html src=link.link %}" {% if link.social_icon %}class="{{ link.social_icon }}-icon"{% endif %}>
+						{% if link.social_icon %}
+							{% include social-icon.html icon=link.social_icon %}
+						{% endif %}
+						{{ link.name }}</a></li>
+				{% endfor %}
+			</ul>
+			<div class="copyright">
+				&copy; {{ site.time | date: "%Y" }} {{ site.title }}
+				<br/>
+				<a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="noopener noreferrer" target="_blank">CC BY-SA 3.0</a>
+			</div>
+		</div>
+	</div>
+</footer>

@@ -1,0 +1,31 @@
+---
+title: Search
+sitemap: false
+---
+<div class="wrapper">
+	<h1 class="search-title"><span id="search-process">Loading</span> results <span id="search-query-container" style="display: none;">for "<strong id="search-query"></strong>"</span></h1>
+	<ul id="search-results"></ul>
+</div>
+
+<script>
+	window.data = {
+		{% for post in site.posts %}
+			{% if post.title %}
+				{% unless post.excluded_in_search %}
+					{% if added %},{% endif %}
+					{% assign added = false %}
+					"{{ post.url | slugify }}": {
+						"id": "{{ post.url | slugify }}",
+						"title": "{{ post.title | xml_escape }}",
+						"categories": "{{ post.categories | join: ", " | xml_escape }}",
+						"url": " {{ post.url | xml_escape }}",
+						"content": {{ post.content | strip_html | replace_regex: "[\s/\n]+"," " | strip | jsonify }}
+					}
+					{% assign added = true %}
+				{% endunless %}
+			{% endif %}
+		{% endfor %}
+	};
+</script>
+{%- comment -%} <script src="{{ site.baseurl }}/js/lunr.min.js"></script> {%- endcomment -%}
+<script src="{{ site.baseurl }}/js/search.js"></script>

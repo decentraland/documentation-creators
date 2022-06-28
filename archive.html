@@ -1,0 +1,48 @@
+---
+---
+{% assign posts = site.posts | sort: "title" %}
+
+
+
+{% for post in site.posts %}
+  {% assign c = post.categories | join: "," %}
+  {% if c != "" %}
+    {% capture categories %}{{categories}},{{c}}{% endcapture %}
+  {% endif %}
+  {% endfor %}
+{% assign categories = categories | split: "," | uniq | sort: self %}
+
+<div class="wrapper">
+  <section>
+    <h1 class="docs-intro-title">
+      Site map
+    </h1>
+    <p class="docs-intro-desc">
+    </p>
+  </section>
+  <div>
+
+
+    {% for cat in categories %}
+    {% assign posts = site.categories[cat] %}
+    {% assign len = posts | size %}
+    {% if cat != 'releases' %}
+
+    {% if len > 0 %}
+    <h2 style="text-transform:capitalize;">
+      {{ cat | replace: "-", " " }} <span class="count">({{ posts | size }})</span>
+    </h2>
+    <ul>
+      {% assign posts_sorted = posts | sort: 'date' %}
+      {% for post in posts_sorted %}
+      <li>
+        <a href="{{ site.baseurl }}{{post.url}}">{{post.title}}</a>
+        <p>{{post.description}}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>

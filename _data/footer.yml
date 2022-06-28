@@ -1,0 +1,15 @@
+# - link: https://facebook.com/decentraland
+#   new_window: true
+#   social_icon: Facebook
+- link: https://dcl.gg/discord
+  social_icon: Discord
+  new_window: true
+- link: https://reddit.com/r/decentraland
+  new_window: true
+  social_icon: Reddit
+- link: https://github.com/decentraland
+  social_icon: Github
+  new_window: true
+- link: https://twitter.com/decentraland
+  social_icon: Twitter
+  new_window: true

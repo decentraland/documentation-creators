@@ -1,0 +1,127 @@
+.modalDialog {
+  position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.6);
+	z-index: 99999;
+	opacity:0;
+	-webkit-transition: opacity 200ms ease-in;
+	-moz-transition: opacity 200ms ease-in;
+	transition: opacity 200ms ease-in;
+	pointer-events: none;
+
+	&.show {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	& > div {
+		max-width: 600px;
+		position: relative;
+		margin: 10% auto;
+		padding: 130px 40px 40px;
+		border-radius: 3px;
+		background: #fff;
+		box-sizing: border-box;
+	}
+
+	h2 {
+		font-weight: bold;
+		position: absolute;
+		top: 0;
+		left: 0;
+		padding: 0 40px;
+		line-height: 100px;
+		width: 100%;
+		box-sizing: border-box;
+		background: #eee;
+    border-radius: 2px 2px 0 0;
+    margin: 0;
+	}
+
+	p {
+		font-size: .9em;
+		line-height: 1.3em;
+		margin: 0 0 20px 0;
+	}
+
+	input[type="email"] {
+		font-size: 1em;
+	}
+
+	.close {
+		position: absolute;
+		top: 16px;
+		right: 16px;
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		background-color: #F2F3F5;
+		font-size: 30px;
+		line-height: 1;
+		text-align: center;
+		color: $docs_primary_black;
+		z-index: 99;
+    cursor: pointer;
+  }
+
+	&.index-modal {
+		min-height: 100vh;
+		padding: 76px 15px 40px;
+		margin: 0;
+		background-color: white;
+
+    overflow-y: scroll;
+
+    .close {
+      position: fixed;
+      font-size: 27px;
+      padding-top: 5px;
+      padding-right: 1px;
+    }
+
+		> ul li.active h3 {
+			font-weight: 500;
+		}
+
+		h3 {
+			margin-top: 0;
+			margin-bottom: 10px;
+		}
+
+		h3 a {
+			margin-top: 0;
+			font-size: 22px;
+			line-height: 32px;
+			color: #0A0F1F;
+		}
+
+		ul {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+
+			li {
+				margin: 0 0 15px 0;
+			}
+		}
+
+		a {
+			display: block;
+			text-decoration: none;
+			-webkit-transition: transform .2s ease;
+			font-size: 15px;
+			line-height: 24px;
+			letter-spacing: -0.3px;
+			text-transform: capitalize;
+			color: #7D8499;
+
+			&.active {
+				color: #000;
+				transform: translateX(10px);
+			}
+		}
+	}
+}

@@ -1,0 +1,41 @@
+---
+layout: default
+---
+<div class="tutorial {{ page.set }} wrapper post-wrapper">
+
+  <section class="main-container">
+    {% include sidebar.html %}
+
+    <section class="tutorial-content">
+      <div class="tutorial-main" data-swiftype-index="true">
+        <h1>{{page.title}}</h1>
+        {{ content }}
+      </div>
+
+      {% if page.type == "Video" %}
+        {% include youtube.html video_id=page.video_id %}
+        {% if page.resources %}
+          <div class="resources">
+            <ul>
+              {% for resource in page.resources %}
+                <li><a href="{{ resource.link }}">{{ resource.name }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endif %}
+
+      {% include following.html %}
+      {% include feedback.html %}
+    </section>
+  </section>
+</div>
+
+{%- comment -%} {% if page.set %}
+  {% assign set_file_name = "_sets/" | append: page.set | append: ".md" %}
+  {% assign set = site.sets | where: "path", set_file_name | first %}
+  {% include override-color.html accent_color=set.accent_color %}
+{% endif %} {%- endcomment -%}
+{% include override-color.html accent_color="#f05" %}
+
+{% include copy-code.html %}
