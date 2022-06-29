@@ -117,3 +117,40 @@ You can also obtain this information at any time by running the following comman
 `npx @dcl/opscli pointer-consistency --pointer '0,0'`
 
 > Note: Use the coordinates of your scene instead of `0,0`. If your scene has multiple parcels, any one of its parcels will produce the same output. If the coordinates start with a negative number, add a `\` at the start of the coordinates to prevent the `-` character from being misinterpreted by the command line.
+
+## Automatic deployments
+
+If you regularly make changes to your scene's content and want to implement a streamlined publication pipeline, you can automate the deployment of your scene via a GitHub action.
+
+For this, you must first store your scene in a GitHub project. You can then set a [GitHub action](https://docs.github.com/en/actions) with the following script, which runs every time there's a merge to the `main` branch. The script installs any dependencies, builds the project and then deploys it to Decentraland.
+
+```yaml
+name: Deploy to DCL PROD
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DCL_PRIVATE_KEY: ${{ secrets.DCL_PRIVATE_KEY }}
+
+jobs:
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install npm packages
+      run: |
+        npm install
+    - name: Build scene
+      run: |
+        npm run build:ci
+    - name: Deploy scene
+      run: |
+        npm run deploy:prod
+```
+
+> Important: For this process to run, you must set a wallet's private key as an environment variable in GitHub, this is used to sign the deployment. As always, be very careful with keeping public keys secure. Do NOT use the public key of the account that actually owns the land tokens, as that would have very big risks. Instead, delegate operator rights to a disposable wallet that owns no valuable tokens. If this private key is ever leaked somehow, you can easily revoke those operator rights from the account and set up a new wallet.
