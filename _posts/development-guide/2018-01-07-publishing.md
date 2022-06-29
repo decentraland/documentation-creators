@@ -107,12 +107,13 @@ If you're working in a confidential project that you don't want to unveil until 
 
 Once you deployed your scene, these changes will take a few minutes to be propagated throughout the various content servers in the network. If you enter Decentraland right after deploying, you might still see the previous version of your content, depending of what realm you enter.
 
-To confirm that the new version of your content has been propagated throughout all of the servers in the network, run the following command:
+After you sign to authorize the deployment of your scene, the signing dapp will start displaying confirmations that the new version of your content has been propagated throughout all of the servers in the network, 
+
+You'll see a list of each of the servers that make up Decentraland's content network. For each server, it specifies the timestamp of the last uploaded change on that parcel. Each one of these servers refers to a different realm, you can reference how these server names map to realm names in the [catalyst monitor screen](https://catalyst-monitor.vercel.app/).
+
+
+You can also obtain this information at any time by running the following command on the command line console:
 
 `npx @dcl/opscli pointer-consistency --pointer '0,0'`
 
-> Note: Use the coordinates of your scene instead of `0,0`. If your scene has multiple parcels, any one of its parcels will produce the same output.
-
-The output of this command lists each of the servers that make up Decentraland's content network. For each server, it specifies the timestamp of the last uploaded change on that parcel. Each one of these servers refers to a different realm, you can reference how these server names map to realm names in the [catalyst monitor screen](https://catalyst-monitor.vercel.app/).
-
-
+> Note: Use the coordinates of your scene instead of `0,0`. If your scene has multiple parcels, any one of its parcels will produce the same output. If the coordinates start with a negative number, add a `\` at the start of the coordinates to prevent the `-` character from being misinterpreted by the command line.
