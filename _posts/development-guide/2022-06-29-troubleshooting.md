@@ -16,15 +16,19 @@ Your operating system doesn't allow you edit permissions on the folder where you
 
 Useful resources:
 
-- https://letscodepare.com/blog/npm-resolving-eacces-permissions-denied
-- https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
+- [docs.npmjs](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
+- [letscodepare](https://letscodepare.com/blog/npm-resolving-eacces-permissions-denied)
+
+### Issue: Can't run a particular scene preview, error says **Error: Error while building the project**
+
+If you're running a scene that was shared with you, make sure that this scene wasn't shared containing a `node_modules` or `bin` folder, or a `package-lock.json` file. These files contain dependencies that use versions that are specific to your OS and machine, they should be generated when running the scene for the first time. Delete these folders & file manually, then run `dcl start` again.
 
 
 ### Issue: Running `dcl start` runs, no error message, but no browser window opens and no URL in the output to open the preview
 
 Make sure your Node version is up to date. It must be 16 or newer.
 
-### Issue: Running `dcl start` opens a browser tab, but the loading screen never finishes loading, or I see an error message that says "critical error".
+### Issue: Running `dcl start` opens a browser tab, but the loading screen never finishes loading, or I see a red error banner that says "critical error".
 
 - Make sure you have the latest version of the Decentraland SDK installed in your project. Run:
 
@@ -92,13 +96,26 @@ As an alternative, you can run `dcl deploy --skip-build` to skip the running of 
 
 - See [Verify Deployment Success]({{ site.baseurl }}{% post_url /development-guide/2018-01-04-preview-scene %}#verify-deployment-success) for instructions on how you can ensure that the content was properly propagated to all servers.
 
-
-### Issue: Once deployed, my scene looks different or is missing something
+### Issue: Once deployed, some 3d models are missing
 
 - Make sure the 3d models are all within the scene boundaries, even their bounding boxes. When running in preview, any 3d models that extend beyond the scene boundaries are marked in red and their bounding boxes are marked. In the deployed scene, these models aren't rendered at all, as they could be intruding into the parcels of your neighbors.
+
+
+### Issue: Once deployed, my 3d models look different
+
 
 - If the textures look different, keep in mind that textures in 3d models are capped to a maximum size of 512x512 pixels. This conversion is carried out to ensure that Decentraland runs smoothly for everyone.
 
 - If models look different, there could be an issue with the conversion of the models to asset bundles. Read more about asset bundle compression [here]({{ site.baseurl }}{% post_url /development-guide/2021-01-11-performance-optimization %}#asset-bundle-conversion). 
 
-To validate this, try running the scene with the URL parameter `&DISABLE_ASSET_BUNDLES`. If the models look fine with this flag, the issue must be related to a bug in the conversion of the model.
+	To validate this, try running the scene with the URL parameter `&DISABLE_ASSET_BUNDLES`. If the models look fine with this flag, the issue must be related to a bug in the conversion of the model.
+
+	Note that the generation of compressed asset-bundle versions of your models is a process that takes the servers time (about an hour). You can check if the models are being loaded as compressed asset bundles or not by accessing the scene via the following URL:  `https://play.decentraland.zone/?renderer-branch=feat%2Fab-view`. Compressed models are tinted green, non-compressed are tinted red.
+
+### Issue: My scene has poor FPS in production, even though it runs smoothly in preview.
+
+Your scene's performance could be affected by neighboring scenes that follow bad practices, as they also run in parallel.  You can validate that this is the case by opening the settings and setting the line of sight to a minimum, so that only 1 parcel around your current scene is loaded.
+
+You can reduce the line of sight even further by running your scene with the parameter `&LOS=0`, to not load any surrounding scenes at all.
+
+If you just deployed your scene, the burden when loading the scene might also be reduced once the servers convert the 3d models in the scene to compressed asset bundles. You can check if the models are being loaded as compressed asset bundles or not by accessing the scene via the following URL:  `https://play.decentraland.zone/?renderer-branch=feat%2Fab-view`. Compressed models are tinted green, non-compressed are tinted red.
