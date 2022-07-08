@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/debug-in-preview/
+slug: /creator/development-guide/debug-in-preview/
 ---
 
 

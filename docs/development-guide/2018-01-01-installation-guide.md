@@ -9,6 +9,7 @@ redirect_from:
 categories:
   - development-guide
 type: Document
+slug: /creator/development-guide/installation-guide/
 ---
 
 To build scenes for Decentraland you will need to install the Command Line Interface (CLI).

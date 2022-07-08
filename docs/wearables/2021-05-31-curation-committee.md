@@ -6,7 +6,8 @@ categories:
   - Decentraland
 type: Document
 redirect_from:
-  - /wearables/curation-comittee/
+  - /wearables/curation-committee/
+slug: /creator/wearables/curation-committee/
 ---
 
 The Wearables Curation Committee is a group of individuals elected by the DAO who are responsible for reviewing and approving wearables submitted by the Decentraland community. The current Curation Committee includes three members, but it can be expanded to include more. Each member holds a key in a multisig wallet that is used to vote on the approval or rejection of each item submitted via the Wearables Editor.

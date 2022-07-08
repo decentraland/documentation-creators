@@ -8,6 +8,7 @@ categories:
 type: Document
 redirect_from:
   - /3d-modeling/materials/
+slug: /creator/3d-modeling/materials/
 ---
 
 Materials are embedded into a _.gltf_ or _.glb_ file.

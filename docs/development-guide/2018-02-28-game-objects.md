@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/game-objects
+slug: /creator/development-guide/game-objects/
 ---
 
 As your scene becomes more complicated, it's useful to put some of the logic into separate game object files. By doing this, you can keep the main code for the scene clean and simple to read, while encapsulating reusable parts that control several entities in the scene.

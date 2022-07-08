@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /builder/mmanage-scenes/
+slug: /creator/builder/manage-scenes/
 ---
 
 ## Export a scene

@@ -9,6 +9,7 @@ redirect_from:
   - /blockchain-interactions/display-a-certified-nft
   - /blockchain-integration/display-a-certified-nft
   - /development-guide/display-a-certified-nft/
+slug: /creator/development-guide/display-a-certified-nft/
 ---
 
 You can display a 2D NFT (Non-Fungible Token) that you own in your Decentraland scenes.

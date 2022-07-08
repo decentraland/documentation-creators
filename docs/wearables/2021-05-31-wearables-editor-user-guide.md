@@ -7,6 +7,7 @@ description: How to use the Decentraland Wearables Editor
 categories:
   - Decentraland
 type: Document
+slug: /creator/wearables/wearables-editor-user-guide/
 ---
 
 ### What is the Wearables Editor?

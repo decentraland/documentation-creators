@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/deploying-your-own-transactions-server/
+slug: /creator/development-guide/deploying-your-own-transactions-server/
 ---
 
 The [transactions-server](https://github.com/decentraland/transactions-server/tree/v1) is a proxy server that relays transactions to [Biconomy](https://www.biconomy.io/). It receives a signed transaction from the client that it's in turn sent to the appropiate network behind the scenes. This allows the server's owner to facilitate it's users with costless transactions

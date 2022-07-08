@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/async-functions/
+slug: /creator/development-guide/async-functions/
 ---
 
 ## Overview

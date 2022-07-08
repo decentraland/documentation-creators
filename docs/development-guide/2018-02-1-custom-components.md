@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/custom-components/
+slug: /creator/development-guide/custom-components/
 ---
 
 ## Custom components

@@ -8,6 +8,7 @@ type: Document
 redirect_from:
   - /blockchain-integration/second-layer
   - /development-guide/second-layer/
+slug: /creator/development-guide/second-layer/
 ---
 
 ## About second layer solutions

@@ -8,6 +8,7 @@ redirect_from:
 categories:
   - design-experience
 type: Document
+slug: /creator/design-experience/mvp-guidelines/
 ---
 
 The purpose of this document is to help guide you through the process of building the first iterations of scenes in Decentraland. We’ll refer to these as a Minimum Viable Product (MVP).

@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/external-links/
+slug: /creator/development-guide/external-links/
 ---
 
 You can add links from your scene out to other content, either to other scenes or to external websites.

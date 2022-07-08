@@ -8,6 +8,7 @@ redirect_from:
   - /documentation/scene-files/
   - /development-guide/scene-files/
 type: Document
+slug: /creator/development-guide/scene-files/
 ---
 
 After [creating a new scene](https://docs.decentraland.org/#create-your-first-scene) using the CLI, the scene folder will have a series of files with default content.

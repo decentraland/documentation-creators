@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/performance-optimization/
+slug: /creator/development-guide/performance-optimization/
 ---
 
 There are several aspects you can optimize in your scenes to ensure the best possible experience for players who visit them. This document covers some best practices that can make a big difference in how fast your scene loads and how smoothly it runs for players that are on it or on neighboring scenes.

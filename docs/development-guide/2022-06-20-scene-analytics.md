@@ -6,7 +6,8 @@ categories:
   - development-guide
 type: Document
 redirect_from:
-  - /development-guide/scene-analytics/  
+  - /development-guide/scene-analytics/
+slug: /creator/development-guide/scene-analytics/
 ---
 
 

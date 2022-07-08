@@ -19,6 +19,7 @@ redirect_from:
 categories:
   - development-guide
 type: Document
+slug: /creator/development-guide/coding-scenes/
 ---
 
 ## The development tools

@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/network-connections/
+slug: /creator/development-guide/network-connections/
 ---
 
 Your scene can leverage external services that expose APIs, you can use this to obtain updated price data, weather data or any other kind of information exposed by an API.

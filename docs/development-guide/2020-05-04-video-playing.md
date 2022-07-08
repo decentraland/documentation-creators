@@ -8,6 +8,7 @@ type: Document
 redirect_from:
   - /development-guide/video-streaming
   - /development-guide/video-playing
+slug: /creator/development-guide/video-playing/
 ---
 
 There are two different ways you can show a video in a scene. One is to stream the video from an external source, the other is to pack the video file with the scene and play it from there.

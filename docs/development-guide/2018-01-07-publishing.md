@@ -10,6 +10,7 @@ redirect_from:
 categories:
   - development-guide
 type: Document
+slug: /creator/development-guide/publishing/
 ---
 
 ## Before you begin

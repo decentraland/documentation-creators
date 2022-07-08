@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guides/troubleshooting/
+slug: /creator/development-guide/troubleshooting/
 ---
 
 

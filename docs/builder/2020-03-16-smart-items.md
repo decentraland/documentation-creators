@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /builder/smart-items/
+slug: /creator/builder/smart-items/
 ---
 
 Smart items are Builder items that come with their own built-in interactive behavior.

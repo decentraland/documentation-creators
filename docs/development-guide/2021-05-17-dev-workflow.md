@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/dev-workflow/
+slug: /creator/development-guide/dev-workflow/
 ---
 
 This document outlines the recommended steps involved in developing a scene for Decentraland, going from testing in the local environment to deploying to production.

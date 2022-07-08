@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/move-entities
+slug: /creator/development-guide/move-entities/
 ---
 
 To move, rotate or resize an entity in your scene, change the _position_, _rotation_ and _scale_ values stored in an entity's `Transform` component incrementally, frame by frame. This can be used on primitive shapes (cubes, spheres, planes, etc) as well as on 3D models (glTF).

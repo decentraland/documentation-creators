@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/special-types/
+slug: /creator/development-guide/special-types/
 ---
 
 ## Vectors

@@ -9,6 +9,7 @@ redirect_from:
   - /development-guide/event-handling/
   - /development-guide/click-events/
 type: Document
+slug: /creator/development-guide/click-events/
 ---
 
 Decentraland accepts events from pointer clicks, a primary button and a secondary button.

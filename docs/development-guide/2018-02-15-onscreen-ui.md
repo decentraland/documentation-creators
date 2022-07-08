@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/onscreen-ui/
+slug: /creator/development-guide/onscreen-ui/
 ---
 
 There are several special component types that are meant for using in a 2D screen space as part of the UI, instead of in the 3D world space. These components are displayed fixed on the player's screen.

@@ -8,6 +8,7 @@ redirect_from:
   - /documentation/entity-positioning/
   - /development-guide/entity-positioning/
 type: Document
+slug: /creator/development-guide/entity-positioning/
 ---
 
 You can set the _position_, _rotation_ and _scale_ of an entity by using the `Transform` component. This can be used on any entity, which can also a primitive shape component (cube, sphere, plane, etc) or a 3D model component (`GLTFShape`).

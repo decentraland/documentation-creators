@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/debug-in-prod/
+slug: /creator/development-guide/debug-in-prod/
 ---
 
 When running a scene that's already deployed to land in Decentraland, there are a number of things you can try out to debug it.

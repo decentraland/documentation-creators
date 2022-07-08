@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/poap-tokens/
+slug: /creator/development-guide/poap-tokens/
 ---
 
 [Proof Of Attendance Protocol (POAP)](https://app.poap.xyz) tokens are tokens on the [Gnosis Chain](https://www.xdaichain.com/) (Formerly xDai) Ethereum side-chain that serve as evidence of having been to an event. These tokens have become quite popular in Decentraland events. Scenes can gift these tokens to players that visit an event, or to players that achieve a special challenge in a scene.

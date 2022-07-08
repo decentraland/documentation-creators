@@ -8,6 +8,7 @@ redirect_from:
 categories:
   - development-guide
 type: Document
+slug: /creator/development-guide/scene-limitations/
 ---
 
 In order to improve performance in the metaverse, we have established a set of limits that every scene must follow. If a

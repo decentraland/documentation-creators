@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from: 
   - /design-experience/design-games/
+slug: /creator/design-experience/design-games/
 ---
 
 This document covers some key points to consider when designing a game for Decentraland. Considerations such as the adjacency of other scenes and the distributed ownership of the LAND make Decentraland a unique place that requires you to reconsider assumptions you may have from previous games.

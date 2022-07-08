@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/materials/
+slug: /creator/development-guide/materials/
 ---
 
 ## Materials

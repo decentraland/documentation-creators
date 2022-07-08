@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/avatar-modifiers/
+slug: /creator/development-guide/avatar-modifiers/
 ---
 
 ## Avatar Modifiers

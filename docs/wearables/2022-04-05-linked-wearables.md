@@ -7,6 +7,7 @@ description: Wearable representations of 3rd party tokens
 categories:
   - Decentraland
 type: Document
+slug: /creator/wearables/linked-wearables/
 ---
 
 ### Table of Contents

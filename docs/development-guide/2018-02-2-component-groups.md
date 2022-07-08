@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/component-groups/
+slug: /creator/development-guide/component-groups/
 ---
 
 Each component group keeps track of a list of entities that have all the required [components]({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %}).

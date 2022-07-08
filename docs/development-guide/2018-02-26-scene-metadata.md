@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/scene-metadata/
+slug: /creator/development-guide/scene-metadata/
 ---
 
 All scenes have a `scene.json` file where you can set metadata for the scene. Some fields in this file are predefined with information that's necessary for the Decentraland client.

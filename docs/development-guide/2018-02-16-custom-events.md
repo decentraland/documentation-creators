@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/custom-events/
+slug: /creator/development-guide/custom-events/
 ---
 
 Sometimes it's useful to decouple the different parts of your scene's code and make them interact with each other via sending events.

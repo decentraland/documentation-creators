@@ -9,6 +9,7 @@ redirect_from:
 categories:
   - development-guide
 type: Document
+slug: /creator/development-guide/deploy-third-party/
 ---
 
 If you don't own parcels in Decentraland or are not ready to [deploy]({{ site.baseurl }}{% post_url /development-guide/2018-01-07-publishing %}) your scene to Decentraland, you can upload your scene preview to run as an app in a free server.

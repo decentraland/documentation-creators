@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/move-player/
+slug: /creator/development-guide/move-player/
 ---
 
 To change the player's position in the scene, use the `movePlayerTo()` function. This function takes two arguments:

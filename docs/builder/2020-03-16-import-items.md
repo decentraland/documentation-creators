@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /builder/import-items/
+slug: /creator/builder/import-items/
 ---
 
 You can import your own 3D models into the Builder. This allows you to pick models from a wide selection of free sources on the internet, or to create your own custom models.
