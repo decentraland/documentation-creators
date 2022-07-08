@@ -1,7 +1,6 @@
 ---
 date: 2021-05-31
 title: Curation Committee
-redirect_from:
 description: A description and discussion of the Wearables Curation Committee
 categories:
   - Decentraland
