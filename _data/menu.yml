@@ -109,6 +109,12 @@
            - post: "development-guide/2018-02-11-text.md"
            - title: Special types
              post: "development-guide/2018-02-20-special-types.md"
+      - title: "Media"
+        children:
+          - title: Display an NFT
+            post: "development-guide/2018-02-01-display-a-certified-nft.md"
+          - post: "development-guide/2020-05-04-video-playing.md"
+          - post: "development-guide/2022-07-11-audio-streaming.md"
       - title: "Interactivity"
         children:
           - post: "development-guide/2018-02-14-click-events.md"
@@ -120,7 +126,7 @@
           - post: "development-guide/2020-05-18-external-links.md"
       - post: "development-guide/2018-02-15-onscreen-ui.md"
       - post: "development-guide/2018-02-22-user-data.md"
-      - post: "development-guide/2020-05-04-video-playing.md"
+
       - post: "development-guide/2022-06-20-scene-analytics.md"
       - title: SDK Libraries
         children:
@@ -154,8 +160,6 @@
             post: "development-guide/2018-02-25-async-functions.md"
       - title: Blockchain integration
         children:
-          - title: Display an NFT
-            post: "development-guide/2018-02-01-display-a-certified-nft.md"
           - title: Hand out POAP Tokens
             post: "development-guide/2022-03-17-poap-tokens.md"
           - title: Blockchain operations
