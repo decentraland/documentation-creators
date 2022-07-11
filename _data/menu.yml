@@ -126,8 +126,24 @@
           - post: "development-guide/2020-05-18-external-links.md"
       - post: "development-guide/2018-02-15-onscreen-ui.md"
       - post: "development-guide/2018-02-22-user-data.md"
-
       - post: "development-guide/2022-06-20-scene-analytics.md"
+      - title: Networking
+        children:
+          - title: Network connections
+            post: "development-guide/2018-02-24-network-connections.md"
+          - title: Multiplayer sync
+            post: "development-guide/2018-01-10-remote-scene-considerations.md"
+      - title: Blockchain integration
+        children:
+          - title: Hand out POAP Tokens
+            post: "development-guide/2022-03-17-poap-tokens.md"
+          - title: Blockchain operations
+            post: "development-guide/2018-01-07-scene-blockchain-operations.md"
+          - title: Second layer
+            post: "development-guide/2018-02-02-second-layer.md"
+          - post: "blockchain-integration/2018-01-09-create-a-dapp.md"
+          - title: Deploying your own transactions server
+            post: "development-guide/2022-05-18-deploying-your-own-transactions-server.md"
       - title: SDK Libraries
         children:
           - title: "ECS Utils library"
@@ -135,14 +151,10 @@
           - title: "Other libraries"
             url: "https://github.com/decentraland-scenes/Awesome-Repository#Libraries"
           - post: "development-guide/2022-03-15-create-libraries.md"
-      - title: Networking
-        children:
-          - title: Network connections
-            post: "development-guide/2018-02-24-network-connections.md"
-          - title: Multiplayer sync
-            post: "development-guide/2018-01-10-remote-scene-considerations.md"
       - title: Optimizing
         children:
+           - post: "development-guide/2018-01-06-scene-limitations.md"
+           - post: "development-guide/2021-01-11-performance-optimization.md"
       - title: Debugging
         children:
           - post: "development-guide/2022-06-29-debug-in-preview.md"
@@ -158,17 +170,6 @@
             post: "development-guide/2018-02-16-custom-events.md"
           - title: Async functions
             post: "development-guide/2018-02-25-async-functions.md"
-      - title: Blockchain integration
-        children:
-          - title: Hand out POAP Tokens
-            post: "development-guide/2022-03-17-poap-tokens.md"
-          - title: Blockchain operations
-            post: "development-guide/2018-01-07-scene-blockchain-operations.md"
-          - title: Second layer
-            post: "development-guide/2018-02-02-second-layer.md"
-          - post: "blockchain-integration/2018-01-09-create-a-dapp.md"
-          - title: Deploying your own transactions server
-            post: "development-guide/2022-05-18-deploying-your-own-transactions-server.md"
       - title: Publishing
         children:
           - title: Deploy a scene
