@@ -38,11 +38,11 @@ Go to [https://poap.decentraland.org](https://poap.decentraland.org)
 
 1. Create a reference to the event by passing the POAP event id.
   
-  <img src="{{ site.baseurl }}/images/media/poap-guide/poap1.png" alt="POAP Decentraland UI Start" width="250"/>
+  <img src="/images/media/poap-guide/poap1.png" alt="POAP Decentraland UI Start" width="250"/>
 
 2. Pass the POAP event Edit ID (that you can find in the email sent by POAP) and the Decentraland coordinates where the POAP can be claimed.
 
-  <img src="{{ site.baseurl }}/images/media/poap-guide/poap2.png" alt="POAP Decentraland UI Edit" width="250"/>
+  <img src="/images/media/poap-guide/poap2.png" alt="POAP Decentraland UI Edit" width="250"/>
 
   > Note: A player **MUST** be in Decentraland standing on one of the provided coordinates to be allowed to claim your POAP.
 

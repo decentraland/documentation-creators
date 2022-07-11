@@ -95,7 +95,7 @@ To make the `@latest` flag point to your latest commits, you'll need to make a *
 
 1. Open your project's GitHub page. Open the **Releases** link, on the right margin of the page.
 
-	![]({{ site.baseurl }}/images/media/release-versions.png)
+	![](/images/media/release-versions.png)
 
 2. Click **Draft new release**. 
 3. On **Chose tag** write a name for your new version, for example "1.1.0". Also write a name on **Release Title**. This is often the same name, "1.1.0".
@@ -143,7 +143,7 @@ Try your best to make your library easy to use for other creators. Our assumptio
 
   Users of this library see these hints displayed as they type the `clamp()` function:
 
-  ![]({{ site.baseurl }}/images/media/library-hints.png)
+  ![](/images/media/library-hints.png)
 
 - Always declare types. Don't leave people guessing what object structure they'll have to consume.
 - Keep your library light and focused on one functionality. When a Decentraland scene is compiled, all of the code in all of its libraries gets packaged with it, even code that is never called by the scene. For this reason, it's best to avoid creating large bulky libraries. It's better to have lean libraries that let creators only use what they really need.

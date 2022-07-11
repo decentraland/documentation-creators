@@ -50,7 +50,7 @@ Every smart item has an `asset.json` file. This is a manifest that exposes how t
 
 The `asset.json` file contains an array of parameters that can be configured via UI. The corresponding UI is generated in the Builder, automatically taking care of spacial arrangement and formatting of these menu items.
 
-![]({{ site.baseurl }}/images/media/smart-item-params.png)
+![](/images/media/smart-item-params.png)
 
 Every parameter must have:
 
@@ -90,7 +90,7 @@ Type _actions_ refers to an action in this or another smart item. When this type
 
 > Note: Decorators can use the plus sign to add as many actions as they want to one single _actions_ field.
 
-![]({{ site.baseurl }}/images/media/smart-item-actions.png)
+![](/images/media/smart-item-actions.png)
 
 Type `entity` refers to another item. When this type is used, the field will present a single dropdown to select a smart item.
 
@@ -104,7 +104,7 @@ Type `entity` refers to another item. When this type is used, the field will pre
 
 > Note: Decorators can add a single entity in fields of type _entity_.
 
-![]({{ site.baseurl }}/images/media/smart-item-entity-field.png)
+![](/images/media/smart-item-entity-field.png)
 
 Type `textarea` refers to a multi-line string, that appears in the UI as a text box.
 
@@ -196,7 +196,7 @@ Actions have a `label` that is shown in the dropdown menus, and an `id` that let
   ]
 ```
 
-![]({{ site.baseurl }}/images/media/smart-item-select-action.png)
+![](/images/media/smart-item-select-action.png)
 
 Actions can also have `parameters` that you can use to pass information with the action event. These parameters follow the same syntax, types and conventions as explained for the item parameters.
 
@@ -216,7 +216,7 @@ Actions can also have `parameters` that you can use to pass information with the
   ]
 ```
 
-![]({{ site.baseurl }}/images/media/smart-item-action-params.png)
+![](/images/media/smart-item-action-params.png)
 
 ## Item code
 

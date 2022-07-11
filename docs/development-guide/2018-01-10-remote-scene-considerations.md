@@ -172,7 +172,7 @@ Once the server is running, either remotely or locally, you can run `dcl start` 
 
 Once the scene preview is running, you can open multiple browser tabs pointing at the same local address. Each tab will instantiate a separate player in the same scene, these players will share the same scene state as the scene changes.
 
-See [preview a scene]({{ site.baseurl }}{% post_url /development-guide/2018-01-04-preview-scene %}) for more details.
+See [preview a scene](/creator/development-guide/preview-scene) for more details.
 
 #### Separate realms
 
@@ -180,7 +180,7 @@ Players in decentraland exist in many separate _realms_. Players in different re
 
 If your scene sends data to a 3rd party server to sync changes between players in real time, then it's important that changes are only synced between players that are on the same realm. You should handle all changes that belong to one realm as separate from those on a different realm. Otherwise, players will see things change in a spooky way, without anyone making the change.
 
-See how to obtain the realm for each player in [get player data]({{ site.baseurl }}{% post_url /development-guide/2018-02-22-user-data %})
+See how to obtain the realm for each player in [get player data](/creator/development-guide/2018-02-22-user-data)
 
 #### Multiplayer persistance
 

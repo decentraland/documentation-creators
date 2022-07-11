@@ -10,9 +10,9 @@ redirect_from:
 slug: /creator/development-guide/component-groups/
 ---
 
-Each component group keeps track of a list of entities that have all the required [components]({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %}).
+Each component group keeps track of a list of entities that have all the required [components](/creator/development-guide/entities-components).
 
-![]({{ site.baseurl }}/images/media/ecs-big-picture-w-compgroup.png)
+![](/images/media/ecs-big-picture-w-compgroup.png)
 
 The engine automatically updates this list every time that:
 
@@ -29,7 +29,7 @@ After the group is created, you don't need to add or remove entities manually fr
 const myGroup = engine.getComponentGroup(Transform)
 ```
 
-[Systems]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %}) typically iterate over the entities in these groups in their update method, performing the same operations on each. Having a predefined group of valid entities is a great way to save resources, specially for functions that run on every frame like `update()`. If on every frame your system would have to iterate over every single entity in the scene looking for the ones it needs, that would be very time consuming.
+[Systems](/creator/development-guide/systems) typically iterate over the entities in these groups in their update method, performing the same operations on each. Having a predefined group of valid entities is a great way to save resources, specially for functions that run on every frame like `update()`. If on every frame your system would have to iterate over every single entity in the scene looking for the ones it needs, that would be very time consuming.
 
 You can access the entities in a component group in the following way: if the group name is `myGroup`, calling `myGroup.entities` returns an array containing all the entities in it.
 
@@ -52,7 +52,7 @@ When creating a component group, specify what components need to be present in e
 const myGroup = engine.getComponentGroup(Transform, Physics, NextPosition)
 ```
 
-> Tip: If your scene includes entities that have all the required components but that don't need to be in your component group, create a custom component to act as a [flag]({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %}#components-as-flags). This component doesn't need to have any properties in it. Add this component to the entities that you want the component group to handle.
+> Tip: If your scene includes entities that have all the required components but that don't need to be in your component group, create a custom component to act as a [flag](/creator/development-guide/entities-components#components-as-flags). This component doesn't need to have any properties in it. Add this component to the entities that you want the component group to handle.
 
 ## Use component groups in a system
 

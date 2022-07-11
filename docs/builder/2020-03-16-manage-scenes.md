@@ -14,11 +14,11 @@ slug: /creator/builder/manage-scenes/
 
 While editing a scene, press the _Download scene_ icon to download the contents of the scene as a _.zip_ file. In the scene selector screen, you can also press the _three dots_ icon and select _Download scene_.
 
-![]({{ site.baseurl }}/images/media/builder-export.png)
+![](/images/media/builder-export.png)
 
 You can then share this scene with another Builder user, or edit the scene with more freedom by using the Decentraland SDK.
 
-See [SDK 101]({{ site.baseurl }}{% post_url /development-guide/2020-03-16-SDK-101 %}) if you're not yet familiar with coding with the Decentraland SDK.
+See [SDK 101](/creator/development-guide/sdk-101) if you're not yet familiar with coding with the Decentraland SDK.
 
 ## Import a scene
 

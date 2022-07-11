@@ -241,7 +241,7 @@ Often, _.glTF_ 3D models are made up of multiple meshes, that each have an indiv
 
 To see how the meshes inside the model are named, you must open the 3D model with an editing tool, like [Blender](https://www.blender.org/) for example.
 
-<img src="{{ site.baseurl }}/images/media/mesh-names.png" alt="Mesh internal names in an editor" width="250"/>
+<img src="/images/media/mesh-names.png" alt="Mesh internal names in an editor" width="250"/>
 
 > Tip: You can also learn the name of the clicked mesh by logging it and reading it off console.
 
@@ -299,7 +299,7 @@ The `subscribe()` method takes four arguments:
 - `useRaycast`: Boolean to define if raycasting will be used. If `false`, the button event will not contain information about any `hit` objects that align with the pointer at the time of the event. Avoid setting this field to `true` when information about hit objects is not required, as it involves extra calculations.
 - `fn`: The function to execute each time the event occurs.
 
-> Note: Other keys on the PC keyboard aren't tracked for future cross-platform compatibility, as this limited set of keys can be mapped to a joystick. For detecting key-strokes when writing text, check the [UIInputBox]({{ site.baseurl }}{% post_url /development-guide/2018-02-15-onscreen-ui %}).
+> Note: Other keys on the PC keyboard aren't tracked for future cross-platform compatibility, as this limited set of keys can be mapped to a joystick. For detecting key-strokes when writing text, check the [UIInputBox](/creator/development-guide/onscreen-ui).
 
 ```ts
 // Instance the input object
@@ -338,7 +338,7 @@ Raycasting is not available when detecting basic movement keys. It's only availa
 
 The ray of a global button event only detects entities that have a collider mesh. Primitive shapes have a collider mesh on by default, 3D models need to have one built into them.
 
-> Tip: See [Colliders]({{ site.baseurl }}{% post_url /3d-modeling/2018-01-12-colliders %}) for details on how to add collider meshes to a 3D model.
+> Tip: See [Colliders](/creator/3d-modeling/colliders) for details on how to add collider meshes to a 3D model.
 
 ```ts
 input.subscribe("BUTTON_DOWN", ActionButton.POINTER, true, (e) => {

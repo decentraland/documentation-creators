@@ -38,7 +38,7 @@ The Decentraland “avatar system” is the broad collection of different body c
 
 The basic form of an avatar. Wearables can be assigned to one, or both, body shapes. Currently, there are two body shapes: A or B.
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-1.png)
+![](/images/media/creating-wearables-images/creating-wearables-1.png)
 
 #### Head
 
@@ -56,25 +56,25 @@ The Eye mesh functions as a transparency mask, and is used to create different e
 **Mouth**  
 The mouth mesh functions as a transparency mask, and is used to create different mouth styles.
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-2.png)
+![](/images/media/creating-wearables-images/creating-wearables-2.png)
 
 #### Upper Body
 
 The upper body, or torso, of an avatar includes the arms and hands. All upper body wearables are applied to the entire torso.
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-3.png)
+![](/images/media/creating-wearables-images/creating-wearables-3.png)
 
 #### Lower Body
 
 The lower body includes the pelvis, legs, and ankles of an avatar.
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-4.png)
+![](/images/media/creating-wearables-images/creating-wearables-4.png)
 
 #### Feet
 
 Just the feet! All boots, shoes, sandals, socks, etc. are applied to the feet, not the lower body.
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-5.png)
+![](/images/media/creating-wearables-images/creating-wearables-5.png)
 
 ### Wearable Categories
 
@@ -131,31 +131,31 @@ You’ll notice that each model contains 7 different meshes related to an armatu
 
 You’ll also notice that each category has caps, making them “water tight”. These caps exist to prevent unsightly glitches if there are any animation clipping problems due to bad skin weighting. It’s best to leave these caps on.
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-6.jpg)
+![](/images/media/creating-wearables-images/creating-wearables-6.jpg)
 
 There are two basic materials for avatar models. One is the material used for the wearable itself and the other one is used for the skin.
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-7.png)
+![](/images/media/creating-wearables-images/creating-wearables-7.png)
 
 Each base mesh comes with its own skin texture.
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-8.png)
+![](/images/media/creating-wearables-images/creating-wearables-8.png)
 _Skin for Avatar Shape A_
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-9.png)
+![](/images/media/creating-wearables-images/creating-wearables-9.png)
 _Skin for Avatar Shape B_
 
 You’ll notice that each skin texture is rendered grayscale in your editor. This allows us to tint the skin later in the avatar editor according to the user’s preference.
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-10.png)
+![](/images/media/creating-wearables-images/creating-wearables-10.png)
 
 **Important: always preserve the UV mapping for any body part left exposed by a wearable, like the bottom of the legs left exposed by shorts and skirts. We want to leave any skin material meshes unmodified so that the user's skin tone is rendered correctly.**
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-11.png)
+![](/images/media/creating-wearables-images/creating-wearables-11.png)
 
 We want to leave the skin mesh alone and use the default AvatarWearable_MAT texture provided in the example files whenever possible to select colors for our wearables. This will guarantee that your wearables are performant. However, you can create custom textures for our wearables! It’s always best to use a single, very small, texture file for each wearable.
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-12.png)
+![](/images/media/creating-wearables-images/creating-wearables-12.png)
 
 #### Eyebrows, Eyes and Mouth
 
@@ -163,39 +163,39 @@ These meshes work with a transparent shader so you don’t have to do anything a
 
 Here are some example png textures:
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-13.png)
+![](/images/media/creating-wearables-images/creating-wearables-13.png)
 _Eyes_
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-14.png)
+![](/images/media/creating-wearables-images/creating-wearables-14.png)
 _Eyebrows_
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-15.jpg)
+![](/images/media/creating-wearables-images/creating-wearables-15.jpg)
 _Eyebrows_
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-16.png)
+![](/images/media/creating-wearables-images/creating-wearables-16.png)
 _Mouth_
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-17.jpg)
+![](/images/media/creating-wearables-images/creating-wearables-17.jpg)
 _Mouth_
 
 **Nodes:**  
 To visualize the final result you’ll need to use these nodes (in Blender):
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-18.png)
+![](/images/media/creating-wearables-images/creating-wearables-18.png)
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-19.png)
+![](/images/media/creating-wearables-images/creating-wearables-19.png)
 
 **Masks:**  
 You will notice that the Avatar Editor has different color options users can choose from when selecting different wearables.
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-20.png)
+![](/images/media/creating-wearables-images/creating-wearables-20.png)
 
 These color choices are applied to a specific mask in the wearable.
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-21.png)
+![](/images/media/creating-wearables-images/creating-wearables-21.png)
 _Eyes Mask_
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-22.png)
+![](/images/media/creating-wearables-images/creating-wearables-22.png)
 _Eyes Base_
 
 The black area in the image on the left (Eyes Mask) indicates the area of the texture on the right (Eyes Base) that will be colored. It’s important to remember that irises always have a grey band scale (if the iris is pure black, the tint isn't going to work).
@@ -206,7 +206,7 @@ There are two important things to remember when creating custom hair wearables.
 
 First, try to follow the shape of the head. You can always refer to the head mesh provided in the example files if you need a place to start.
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-23.png)
+![](/images/media/creating-wearables-images/creating-wearables-23.png)
 
 Second, if you want users to be able to change the color of your custom hair or facial hair using the avatars editor, then you must paint the hair in grayscale. Lower shades of gray will appear darker and higher shades of gray will appear brighter, but always in the color selected by the user in the avatar editor.
 
@@ -218,11 +218,11 @@ When skin weighting our new wearables, there are several considerations we need 
 
 Each asset must be weighted to the full skeleton. For example, an upper body asset will look like this when applying skin weights:
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-24.png)
+![](/images/media/creating-wearables-images/creating-wearables-24.png)
 
 Wearables that meet at intersections between body parts must be fully weighted to the same bone. For example, in these two green zones, the vertices in the neck need to be fully weighted to the “Neck” bone only.
 
-![]({{ site.baseurl }}/images/media/creating-wearables-images/creating-wearables-25.png)
+![](/images/media/creating-wearables-images/creating-wearables-25.png)
 
 The “key” bones to use when skin weighting are:
 

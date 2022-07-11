@@ -73,7 +73,7 @@ Third Parties will need to share details about their project, collection, and de
 
 The passage threshold to become approved is 4 million Voting Power and the Voting Period is 1 week. Resubmission is allowed.
 
-![]({{ site.baseurl }}/images/media/linkedw-proposal.png)
+![](/images/media/linkedw-proposal.png)
 
 After the DAO has approved the proposal, a group of Third Party managers will be assigned to operate with all of the Linked Wearables features.
 
@@ -99,11 +99,11 @@ To create a new Linked Wearable follow these steps:
 
 1. Create a new Linked Wearables Collection.
 
-   ![]({{ site.baseurl }}/images/media/linkedw-collection.png)
+   ![](/images/media/linkedw-collection.png)
 
 2. Choose a name for the collection and an ID.
 
-   ![]({{ site.baseurl }}/images/media/linkedw-name-collection.png)
+   ![](/images/media/linkedw-name-collection.png)
 
 We strongly recommend that you choose a name that is unique and descriptive for the collection and as the ID or URN of the collection, **the address of the NFT contract that will be mapped to the Linked Wearables**.
 Using the NFT address as the ID of your collection will prove to be helpful when creating the API.
@@ -116,11 +116,11 @@ To do so, follow these steps:
 
 1. Click on the _New items_ button.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/new-items-collection.png)
+   ![](/images/media/linked-wearables/new-items-collection.png)
 
 2. Select the _Singe items_ option.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/multiple-items-upload.png)
+   ![](/images/media/linked-wearables/multiple-items-upload.png)
 
 3. Follow the steps to upload and configure your wearable as it is described in the _Uploading an item_ section in the [wearables editor user guide]({{ site.baseurl }}{% post_url /wearables/2021-05-31-wearables-editor-user-guide %}).
 
@@ -251,35 +251,35 @@ Once all the files are ready, to upload the wearables in bulk, follow these step
 
 1. Click on the _New items_ button.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/new-items-collection.png)
+   ![](/images/media/linked-wearables/new-items-collection.png)
 
 2. Select the _Multiple items_ option.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/multiple-items-upload.png)
+   ![](/images/media/linked-wearables/multiple-items-upload.png)
 
 3. Click on the _Browse yor computer_ link to open your file manager and elect all the zips containing your wearables.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/multiple-files-select-in-bulk.png)
+   ![](/images/media/linked-wearables/multiple-files-select-in-bulk.png)
 
 4. Review if all the files are correct or if they need to be fixed. In this case, the model of the wearable isn't set or the `wearable.json` file has an incorrectly set representation.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/multiple-files-with-errors.png)
+   ![](/images/media/linked-wearables/multiple-files-with-errors.png)
 
 5. Fix any errors by clicking the _Add more_ button and re-uploading the failed files with the same name or by dismissing the errors using the trash icon on the top right section of the modal.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/multiple-files-upload-correct-file.png)
+   ![](/images/media/linked-wearables/multiple-files-upload-correct-file.png)
 
 6. Upload all wearables by clicking _Upload items_.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/multiple-files-without-errors.png)
+   ![](/images/media/linked-wearables/multiple-files-without-errors.png)
 
 7. Be patient, this might take a while!
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/multiple-files-uploading.png)
+   ![](/images/media/linked-wearables/multiple-files-uploading.png)
 
 8. Success! Your items are now available in your collection.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/multiple-files-upload-success.png)
+   ![](/images/media/linked-wearables/multiple-files-upload-success.png)
 
 Common errors that must be avoided when uploading batched items:
 
@@ -299,11 +299,11 @@ To be able to see a wearable in world, follow these steps:
 
 1. Click on the meatballs menu (three horizontal dots) on the right of the item that you want to see in world. A dropdown will appear. Select _See in world_.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/see-in-world-button.png)
+   ![](/images/media/linked-wearables/see-in-world-button.png)
 
 2. The Decentraland World will open. Navigate to your backpack to see the wearable.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/see-in-world-item.png)
+   ![](/images/media/linked-wearables/see-in-world-item.png)
 
 ## Editing the collection name
 
@@ -313,11 +313,11 @@ To edit the name of a Linked Wearable Collection follow these steps:
 
 1. Move the mouse over the collection name and click on the red pencil icon that appears on hover.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/edit-collection-name.png)
+   ![](/images/media/linked-wearables/edit-collection-name.png)
 
 2. Choose a new name for the collection and click on the save button.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/edit-collection-name-modal.png)
+   ![](/images/media/linked-wearables/edit-collection-name-modal.png)
 
 ## Editing the collection ID or URN
 
@@ -327,11 +327,11 @@ To edit the ID or URN of a Linked Wearable Collection follow these steps:
 
 1. Click on the meatballs menu (three horizontal dots) on the far right of the set of buttons. A dropdown will appear. Select _Edit URN_.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/edit-collection-urn.png)
+   ![](/images/media/linked-wearables/edit-collection-urn.png)
 
 2. Write the new ID or URN for the collection and click _Save_.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/edit-collection-urn-modal.png)
+   ![](/images/media/linked-wearables/edit-collection-urn-modal.png)
 
 The ID or URN of the collection **MUST be unique**, changing it to an existent one will fail.
 
@@ -343,11 +343,11 @@ To delete Linked Wearable Collection follow these steps:
 
 1. Click on the meatballs menu (three horizontal dots) on the far right of the set of buttons. A dropdown will appear. Select _Delete_.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/delete-collection.png)
+   ![](/images/media/linked-wearables/delete-collection.png)
 
 2. A Confirmation modal will appear, if you wish to proceed, click _Ok_, otherwise click on _Cancel_.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/delete-collection-confirmation-modal.png)
+   ![](/images/media/linked-wearables/delete-collection-confirmation-modal.png)
 
 ## Editing a single wearable
 
@@ -355,7 +355,7 @@ To edit a single wearable, follow these steps:
 
 1. Click on the meatballs menu (three horizontal dots) on the right of the item that you want to see in world. A dropdown will appear. Select _Open in editor_.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/edit-single-wearable.png)
+   ![](/images/media/linked-wearables/edit-single-wearable.png)
 
 2. Edit the wearable as standard wearables are edited. Follow the _Editing items_ section in the [wearables editor user guide]({{ site.baseurl }}{% post_url /wearables/2021-05-31-wearables-editor-user-guide %}).
 
@@ -365,11 +365,11 @@ Wearables can have their ID or URN changed manually by following the steps below
 
 1. Click on the meatballs menu (three horizontal dots) on the right of the item that you want to see in world. A dropdown will appear. Select _Edit URN_.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/edit-urn-wearable.png)
+   ![](/images/media/linked-wearables/edit-urn-wearable.png)
 
 2. Use the _Edit URN_ modal to write the new URN.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/edit-urn-wearable-modal.png)
+   ![](/images/media/linked-wearables/edit-urn-wearable-modal.png)
 
 To consider when updating the ID or URN of a wearable:
 
@@ -425,35 +425,35 @@ Once the ZIP files are ready, follow these steps to edit the items in bulk:
 
 1. Click on the meatballs menu (three horizontal dots) on the far right of the set of buttons. A dropdown will appear. Select _Edit in bulk_.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/edit-multiple-files-bulk-button.png)
+   ![](/images/media/linked-wearables/edit-multiple-files-bulk-button.png)
 
 2. A modal similar to de one in the _Uploading models in bulk_ will appear. Click on the _Browse your computer_ link to open your file manager.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/edit-multiple-files-modal.png)
+   ![](/images/media/linked-wearables/edit-multiple-files-modal.png)
 
 3. Select all the ZIP files of the items that will be edited.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/multiple-files-select-in-bulk.png)
+   ![](/images/media/linked-wearables/multiple-files-select-in-bulk.png)
 
 4. Review if all the files are correct or if they need to be fixed. In this case, the model of the wearable isn't set or the `wearable.json` file has an incorrectly set representation.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/edit-multiple-files-with-errors.png)
+   ![](/images/media/linked-wearables/edit-multiple-files-with-errors.png)
 
 5. Fix any errors by clicking the _Add more_ button and re-uploading the failed files with the same name or by dismissing the errors using the trash icon on the top right section of the modal.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/multiple-files-upload-correct-file.png)
+   ![](/images/media/linked-wearables/multiple-files-upload-correct-file.png)
 
 6. Upload all wearables by clicking _Upload items_.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/edit-multiple-files-without-errors.png)
+   ![](/images/media/linked-wearables/edit-multiple-files-without-errors.png)
 
 7. Be patient, this might take a while!
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/edit-multiple-files-uploading.png)
+   ![](/images/media/linked-wearables/edit-multiple-files-uploading.png)
 
 8. Success! Your items are now available in your collection.
 
-   ![]({{ site.baseurl }}/images/media/linked-wearables/edit-multiple-files-success.png)
+   ![](/images/media/linked-wearables/edit-multiple-files-success.png)
 
 # Submitting your Linked Wearables
 
@@ -472,7 +472,7 @@ To publish your wearables, you need to:
 
 1. Select the items to be published and wait for the Curators Committee to approve them
 
-   ![]({{ site.baseurl }}/images/media/linkedw-publish.png)
+   ![](/images/media/linkedw-publish.png)
 
 ## Curation
 
@@ -490,7 +490,7 @@ Your collection is a Programmatic Collection if each 3D model was not crafted in
 
 Third Parties that make a **collection for Linked Wearables** programmatically (3D models to upload), will need to include this information in their Linked Wearables Registry proposal.
 
-![]({{ site.baseurl }}/images/media/linkedw-programatic.png)
+![](/images/media/linkedw-programatic.png)
 
 For programmatic collections, not all items have to be curated individually. The number of items to be curated in each collection depends on the collection’s size, this was defined by the DAO in [this proposal](https://governance.decentraland.org/proposal/?id=f69c4d40-aaaf-11ec-87a7-6d2a41508231).
 
@@ -616,7 +616,7 @@ Note that the URNs in the examples use `matic` for the protocol. This means that
 
 The purpose of the API is to map an owner of an NFT with a wearable (or multiple wearables) submitted to Decentraland and this mapping is done through the ID or URN of the wearable which can be found on each item detail page:
 
-![]({{ site.baseurl }}/images/media/linked-wearables/item-urn.png)
+![](/images/media/linked-wearables/item-urn.png)
 
 # Closing up
 
@@ -636,7 +636,7 @@ These are the steps that Third Parties need to follow, in summary:
    2. Create or upload your wearables either by [uploading them one by one](#creating-linked-wearables-one-by-one) or [in bulk](#creating-linked-wearables-in-bulk).
    3. Use the **URN** of the wearables in the Builder to build your API. We recommend that your URN or ID to be set as the token id of the NFT that will be represented by the wearable.
 
-   ![]({{ site.baseurl }}/images/media/linkedw-submit.png)
+   ![](/images/media/linkedw-submit.png)
 
 4. [Build the API](#building-the-api).
 5. [Wait for the Curators Committee to approve the items in your collection](#curation).

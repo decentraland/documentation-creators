@@ -19,7 +19,7 @@ slug: /creator/development-guide/entities-components/
 
 Decentraland scenes are built around [_entities_, _components_ and _systems_](https://en.wikipedia.org/wiki/Entity%E2%80%93component%E2%80%93system). This is a common pattern used in the architecture of several game engines, that allows for easy composability and scalability.
 
-![]({{ site.baseurl }}/images/media/ecs-big-picture.png)
+![](/images/media/ecs-big-picture.png)
 
 ## Overview
 
@@ -31,11 +31,11 @@ If you're familiar with web development, think of entities as the equivalent of 
 
 > Note: In previous versions of the SDK, the _scene state_ was stored in an object that was separate from the entities themselves. As of version 5.0, the _scene state_ is directly embodied by the components that are used by the entities in the scene.
 
-<img src="{{ site.baseurl }}/images/media/ecs-components.png" alt="Armature" width="400"/>
+<img src="/images/media/ecs-components.png" alt="Armature" width="400"/>
 
 Components like `Transform`, `Material` or any of the _shape_ components are closely tied in with the rendering of the scene. If the values in these components change, that alone is enough to change how the scene is rendered in the next frame.
 
-Components are meant to store data about their parent entity. They only store this data, they shouldn't modify it themselves. All changes to the values in the components are carried out by [Systems]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %}). Systems are completely decoupled from the components and entities themselves. Entities and components are agnostic to what _systems_ are acting upon them.
+Components are meant to store data about their parent entity. They only store this data, they shouldn't modify it themselves. All changes to the values in the components are carried out by [Systems](/creator/development-guide/systems). Systems are completely decoupled from the components and entities themselves. Entities and components are agnostic to what _systems_ are acting upon them.
 
 See [Component Reference](https://github.com/decentraland/ecs-reference) for a reference of all the available constructors for predefined components.
 
@@ -64,7 +64,7 @@ engine.addEntity(box)
 
 When you create a new entity, you're instancing an object and storing it in memory. A newly created entity isn't _rendered_ and it won't be possible for a player to interact with it until it's added to the _engine_.
 
-The engine is the part of the scene that sits in the middle and manages all of the other parts. It determines what entities are rendered and how players interact with them. It also coordinates what functions from [systems]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %}) are executed and when.
+The engine is the part of the scene that sits in the middle and manages all of the other parts. It determines what entities are rendered and how players interact with them. It also coordinates what functions from [systems](/creator/development-guide/systems ) are executed and when.
 
 ```ts
 // Create an entity
@@ -79,7 +79,7 @@ engine.addEntity(box)
 
 In the example above, the newly created entity isn't viewable by players on your scene until it's added to the engine.
 
-> Note: Entities aren't added to [Component groups]({{ site.baseurl }}{% post_url /development-guide/2018-02-2-component-groups %}) either until they are added to the engine.
+> Note: Entities aren't added to [Component groups](/creator/development-guide/component-groups) either until they are added to the engine.
 
 It’s sometimes useful to preemptively create entities and not add them to the engine until they are needed. This is especially true for entities that have elaborate geometries that might otherwise take long to load.
 
@@ -102,7 +102,7 @@ Entities that have been added to the engine can also be removed from it. When an
 engine.removeEntity(box)
 ```
 
-Note: Removed entities are also removed from all [Component groups]({{ site.baseurl }}{% post_url /development-guide/2018-02-2-component-groups %}).
+Note: Removed entities are also removed from all [Component groups](/creator/development-guide/component-groups).
 
 If your scene has a pointer referencing a removed entity, it will remain in memory, allowing you to still access and change its component's values and add it back.
 
@@ -112,7 +112,7 @@ If a removed entity has child entities, all children of that entity are removed 
 
 An entity can have other entities as children. Thanks to this, we can arrange entities into trees, just like the HTML of a webpage.
 
-<img src="{{ site.baseurl }}/images/media/ecs-nested-entities.png" alt="nested entities" width="400"/>
+<img src="/images/media/ecs-nested-entities.png" alt="nested entities" width="400"/>
 
 To set an entity as the parent of another, simply use `.setParent()`:
 

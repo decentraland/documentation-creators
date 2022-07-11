@@ -38,7 +38,7 @@ Our SDK includes the following components:
 - **The Decentraland Editor**: Use it to create and preview Decentraland scenes. You don't need to download any software to your machine, the editor runs entirely on your browser.
 -->
 
-- **The Decentraland CLI** (Command Line Interface): Use it to [generate]({{ site.baseurl }}{% post_url /development-guide/2018-01-02-coding-scenes %}) new Decentraland scenes locally on your own machine, preview them and upload them to the content server.
+- **The Decentraland CLI** (Command Line Interface): Use it to [generate](/creator/development-guide/coding-scenes) new Decentraland scenes locally on your own machine, preview them and upload them to the content server.
 - **The Decentraland ECS**: A TypeScript package containing the library of helper methods that allows you to create interactive experiences. Use it to create and manipulate objects in the scene and also to facilitate in-world transactions between players or other applications. ( [latest ECS reference](https://github.com/decentraland/ecs-reference/blob/master/docs-latest/decentraland-ecs.md))
 
 - **Scene examples**: Take inspiration and coding best practices from the [scene examples](https://github.com/decentraland-scenes/Awesome-Repository#examples).
@@ -51,7 +51,7 @@ You must have the following:
 
 - **npm** (Node package manager): Used in the terminal to handle scene dependencies, required to install the Decentraland CLI. [Download link](nodejs.org)
 
-- **The Decentraland CLI**: Used to build, preview and upload scenes. See [Installation guide]({{ site.baseurl }}{% post_url /development-guide/2018-01-01-installation-guide %})
+- **The Decentraland CLI**: Used to build, preview and upload scenes. See [Installation guide](/creator/development-guide/installation-guide)
 
 - **A source code editor**: Helps you create scenes a lot faster and with less errors. A source code editor marks syntax errors, autocompletes while you write and even shows you smart suggestions that depend on the context that you're in. You can also click on an object in the code to see the full definition of its class and what attributes it supports. We recommend [Visual Studio Code](https://code.visualstudio.com/) or [Atom](https://atom.io/).
 
@@ -80,13 +80,13 @@ We are developing the web client that will allow players to explore Decentraland
 
 Three dimensional scenes in Decentraland are based on an [Entity-Component-System](https://en.wikipedia.org/wiki/Entity%E2%80%93component%E2%80%93system) architecture, where everything in a scene is an _entity_, and each entity can include _components_ that determine its characteristics.
 
-<img src="{{ site.baseurl }}/images/media/ecs-components.png" alt="nested entities" width="400"/>
+<img src="/images/media/ecs-components.png" alt="nested entities" width="400"/>
 
 Entities are nested inside other entities to form a tree structure. If you're familiar with web development, you might find it useful to think of entities as elements in a DOM tree and of components as the attributes of each of these elements.
 
-<img src="{{ site.baseurl }}/images/media/ecs-nested-entities.png" alt="nested entities" width="400"/>
+<img src="/images/media/ecs-nested-entities.png" alt="nested entities" width="400"/>
 
-See [Entities and components]({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %}) for an in-depth look of both these concepts and how they're used by Decentraland scenes.
+See [Entities and components](/creator/development-guide/entities-components) for an in-depth look of both these concepts and how they're used by Decentraland scenes.
 
 ## The game loop
 
@@ -104,7 +104,7 @@ We call each iteration over the loop a _frame_. Decentraland scenes are rendered
 
 In each frame, the scene is updated; then the scene is re-rendered, based on the updated values.
 
-In Decentraland scenes, there is no explicitly declared game loop, but rather the `update()` functions on the [Systems]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %}) of the scene make up the game loop.
+In Decentraland scenes, there is no explicitly declared game loop, but rather the `update()` functions on the [Systems](/creator/development-guide/systems) of the scene make up the game loop.
 
 The compiling and rendering of the scene is carried out in the backend, you don't need to handle that while developing your scene.
 
@@ -116,21 +116,21 @@ _Systems_ are what make a static scene dynamic, allowing things to change over t
 
 Each System has an `update()` method that's executed on every frame of the game loop, following the [_update pattern_](http://gameprogrammingpatterns.com/update-method.html).
 
-See [Systems]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %}) for more details about how systems are used in a scene.
+See [Systems](/creator/development-guide/systems) for more details about how systems are used in a scene.
 
 ## Component groups
 
-[Component groups]({{ site.baseurl }}{% post_url /development-guide/2018-02-2-component-groups %}) keep track of all entities in the scene that have certain components in them. Once a component group is created, it automatically keeps its list up to date with each new entity or component that is added or removed.
+[Component groups](/creator/development-guide/component-groups) keep track of all entities in the scene that have certain components in them. Once a component group is created, it automatically keeps its list up to date with each new entity or component that is added or removed.
 
 If you attempt to update all the entities in the scene on every frame, that could have a significant cost in performance. By referring only to the entities in a component group, you ensure you're only dealing with those that are relevant.
 
-Component groups can be referenced by the functions in a [system]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %}). Typically an `update()` function will loop over the entities in the component group, performing the same actions on each.
+Component groups can be referenced by the functions in a [system](/creator/development-guide/systems). Typically an `update()` function will loop over the entities in the component group, performing the same actions on each.
 
 ## Putting it all together
 
 The _engine_ is what sits in between _entities_, _components_ and _component groups_ on one hand and _systems_ on the other. It calls system's functions, updates groups when entities are added, etc.
 
-![]({{ site.baseurl }}/images/media/ecs-big-picture.png)
+![](/images/media/ecs-big-picture.png)
 
 All of the values stored in the components in the scene represent the scene's state at that point in time. With every frame of the game loop, the engine runs the `update()` function of each of the systems to update the values stored in the components.
 

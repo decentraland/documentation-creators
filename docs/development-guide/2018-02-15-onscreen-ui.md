@@ -23,7 +23,7 @@ The default Decentraland explorer UI includes a chat widget, a map, and other el
 To add a screenspace UI to your scene, you must create a `UICanvas` component, this component doesn't need to belong to any Entities to work. All the visible UI elements that you want the player to see are added as additional objects that are children of this parent component.
 
 <!--
-![]({{ site.baseurl }}/images/media/UI-basic.png)
+![](/images/media/UI-basic.png)
 -->
 
 ```ts
@@ -43,7 +43,7 @@ There are several different types of UI elements you can add to the screenspace:
 
 - Images: Add a `UIImage` component to display any image. Use the `source` field to point to the path of the image.
 
-- Text: Add a `UIText`component to display text. The properties you can set are the same as in a `TextShape` component. See [text]({{ site.baseurl }}{% post_url /development-guide/2018-02-11-text %}).
+- Text: Add a `UIText`component to display text. The properties you can set are the same as in a `TextShape` component. See [text](/creator/development-guide/text).
 
 <!--
 - Buttons: Add a `UIButton` to add a clickable button. The button offers some visual feedback when players mouse over it and when they click it.
@@ -90,7 +90,7 @@ To determine the z position of UI elements, the UI uses the parenting hierarchy 
 Certain UI elements are there to help you organize how you place other elements.
 
 <!--
-![]({{ site.baseurl }}/images/media/UI-rectangle.png)
+![](/images/media/UI-rectangle.png)
 -->
 
 For this, you can use the `UIContainerStack` and the `UIContainerRect`.
@@ -160,7 +160,7 @@ Setting an element's opacity also affects all of its children. If you don't want
 
 ## Text
 
-The `UIText` component lets you add text. It has properties that are similar to the `TextShape` component. See [text]({{ site.baseurl }}{% post_url /development-guide/2018-02-11-text %}).
+The `UIText` component lets you add text. It has properties that are similar to the `TextShape` component. See [text](/creator/development-guide/text).
 
 - `value`: The string to display.
 - `color`: `Color4` For the text color.
@@ -235,7 +235,7 @@ You can use an image atlas to store multiple images and icons in a single image 
 
 Below is an example of an image atlas with multiple icons arranged into a single file.
 
-![]({{ site.baseurl }}/images/media/UI-atlas.png)
+![](/images/media/UI-atlas.png)
 
 The `UIImage` component has the following fields to crop a sub-section of the original image:
 
@@ -244,7 +244,7 @@ The `UIImage` component has the following fields to crop a sub-section of the or
 - `sourceWidth`: the width, in pixels, of the selected area
 - `sourceHeight`: the height, in pixels, of the selected area
 
-When constructing a `UIImage` component, you must pass a `Texture` component as an argument. Read more about `Texture` components in [materials]({{ site.baseurl }}{% post_url /development-guide/2018-02-7-materials %}).
+When constructing a `UIImage` component, you must pass a `Texture` component as an argument. Read more about `Texture` components in [materials](/creator/development-guide/materials).
 
 ```ts
 let imageAtlas = "images/image-atlas.jpg"
@@ -305,7 +305,7 @@ clickableImage.onClick = new OnClick(() => {
 ```
 
 <!--
-![]({{ site.baseurl }}/images/media/UI-clicks.png)
+![](/images/media/UI-clicks.png)
 -->
 
 > Note: To click on a UI component, players must first unlock the cursor from the view control. They do this by clicking the _right mouse button_ or hitting `Esc`.

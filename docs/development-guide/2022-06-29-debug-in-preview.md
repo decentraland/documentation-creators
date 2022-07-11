@@ -105,7 +105,7 @@ npm info decentraland-ecs@6.6.7
 
 While viewing the preview, you can press `c` to view any collision meshes loaded in the glTF models of the scene. These are usually invisible, but determine where an avatar can move through, and where it can't.
 
-![]({{ site.baseurl }}/images/media/collision-meshes.png)
+![](/images/media/collision-meshes.png)
 
 Collision meshes can be added to any model in an external 3D modeling tool like Blender. Large models like houses often include these, they are usually a lot simpler geometrically than the original shape, as this implies much less computational requirements. Stairs typically use a simplified collision mesh like a ramp to make it easier to climb. See [colliders]({{ site.baseurl }}{% post_url /3d-modeling/2018-01-12-colliders %}) for more details.
 
@@ -128,7 +128,7 @@ The in-world time of day has a big impact on how 3d models look. The color of th
 Check that your scene looks good at all times of day by switching the game clock to different values. Open the settings panel, and in the **General** tab set the **skybox time** to any time you prefer. If this slider is grayed out, make sure that the **Dynamic skybox** option is disabled.
 
 <figure>
-    <img src="{{ site.baseurl }}/images/media/dynamic-skybox.png" alt="Dynamic skybox" width="300"/>
+    <img src="/images/media/dynamic-skybox.png" alt="Dynamic skybox" width="300"/>
     <figcaption>In-world instructions</figcaption>
 </figure>
 

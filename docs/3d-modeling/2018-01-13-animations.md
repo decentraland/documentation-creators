@@ -25,7 +25,7 @@ In a Decentraland scene, you can use `weight` to blend several animations or to 
 
 > Tip: Instead of creating your own animations, you can also download generic animations and apply them to your model. For example, for 3D characters with human-like characteristics, you can download free or paid animations from [Mixamo](https://www.mixamo.com/#/).
 
-This document covers how to add animations into a 3D model. See [handle animations]({{ site.baseurl }}{% post_url /development-guide/2018-02-13-3d-model-animations %}) for instructions on how to activate and handle animations in a scene.
+This document covers how to add animations into a 3D model. See [handle animations](/creator/development-guide/3d-model-animations) for instructions on how to activate and handle animations in a scene.
 
 ## How to create an animation
 
@@ -33,25 +33,25 @@ You can use a tool like Blender to create animations for a 3D model.
 
 1.  Create an armature, following the shape of your model and the parts you wish to move. You do this by adding an initial bone and then extruding all other bones from the vertices of that one. Bones in the armature define the points that can be articulated. The armature must be positioned overlapping the mesh.
 
-    <img src="{{ site.baseurl }}/images/media/armature_hummingbird1.png" alt="Armature" width="300"/>
+    <img src="/images/media/armature_hummingbird1.png" alt="Armature" width="300"/>
 
 2.  Make both the armature and the mesh child assets of the same object.
 
 3.  Check that the mesh moves naturally when rotating its bones in the ways you plan to move it. If parts of the mesh get stretched in undesired ways, use weight paint to change what parts of the model are affected by each bone in the armature.
 
-    <img src="{{ site.baseurl }}/images/media/animations_hummingbird_wp1.png" alt="Weight paint view for one bone" width="300"/>
+    <img src="/images/media/animations_hummingbird_wp1.png" alt="Weight paint view for one bone" width="300"/>
 
-    <img src="{{ site.baseurl }}/images/media/animations_hummingbird_wp2.png" alt="Weight paint view for another bone" width="300"/>
+    <img src="/images/media/animations_hummingbird_wp2.png" alt="Weight paint view for another bone" width="300"/>
 
 > Note: There's a reported bug with Babylon.js that prevents some faces of a mesh from being rendered when they're not related to any bone in the armature. So if you paint some faces with weight 0 and then animate the model, you might see these faces dissappear. To solve this, we recommend making sure that each face is related to at least one bone of the armature and painted with a weight of at least 0.01.
 
 4.  Move the armature to a desired pose, all bones can be rotated or scaled. Then lock the rotation and scale of the bones you wish to control with this animation.
 
-    <img src="{{ site.baseurl }}/images/media/armature_hummingbird2.png" alt="Shifted armature" width="300"/>
+    <img src="/images/media/armature_hummingbird2.png" alt="Shifted armature" width="300"/>
 
 5.  Switch to a different frame in the animation, position the armature into a new pose and lock it again. Repeat this process for all the key frames you want to set to describe the animation.
 
-    <img src="{{ site.baseurl }}/images/media/armature_hummingbird_animation.png" alt="Frames in animation" width="450"/>
+    <img src="/images/media/armature_hummingbird_animation.png" alt="Frames in animation" width="450"/>
 
 6.  By default all frames in between the ones you defined will transition linearly from one pose to the next. You can also configure these transitions to behave exponentially, ease-in, bounce, etc.
 
@@ -63,23 +63,23 @@ Vertex animations, also known as morph-targets, aren't currently supported by De
 
 To export a model with several embedded animations in Blender, you must create multiple _actions_ from the _Dope-Sheet_.
 
-<img src="{{ site.baseurl }}/images/media/blender-dope-sheet.png" alt="Open dope sheet" width="250"/>
+<img src="/images/media/blender-dope-sheet.png" alt="Open dope sheet" width="250"/>
 
 You can also edit the animation from the Dope-Sheet view, for example you can adjust the distance between two key frames.
 
 To preview the different actions, open the _Action Editor_ (only accessible once you're in the Dope Sheet).
 
-<img src="{{ site.baseurl }}/images/media/blender-action-editor.png" alt="Open action editor" width="250"/>
+<img src="/images/media/blender-action-editor.png" alt="Open action editor" width="250"/>
 
 In order to export multiple animations, you need to stash all the actions using the _NLA Editor_. We recommend opening the NLA editor on a separate editor tab while keeping the Dope sheet also open.
 
-<img src="{{ site.baseurl }}/images/media/blender-nla-editor.png" alt="Open NLA editor" width="250"/>
+<img src="/images/media/blender-nla-editor.png" alt="Open NLA editor" width="250"/>
 
 In the NLA Editor, select each action that you want to embed in the glTF model and click _Stash_.
 
-<img src="{{ site.baseurl }}/images/media/blender-nla-editor2.png" alt="Stash actions into glTF model" width="600"/>
+<img src="/images/media/blender-nla-editor2.png" alt="Stash actions into glTF model" width="600"/>
 
-When adding the model to your Decentraland scene, you must activate animations by configuring the _gltf-model_ entity. See [3D model animations]({{ site.baseurl }}{% post_url /development-guide/2018-02-13-3d-model-animations %}) for instructions.
+When adding the model to your Decentraland scene, you must activate animations by configuring the _gltf-model_ entity. See [3D model animations](/creator/development-guide/2018-02-13-3d-model-animations) for instructions.
 
 ## Best practices for animations
 
