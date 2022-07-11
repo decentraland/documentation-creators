@@ -27,20 +27,20 @@ Open the [Builder](https://builder.decentraland.org) and try it out!
 
 Take a look at our [video tutorials](https://www.youtube.com/playlist?list=PLAcRraQmr_GPi-8qgv17ewdGl50OHuOhH)
 
-Or read the [documentation]({{ site.baseurl }}{% post_url /builder/2020-03-16-builder-101 %})
+Or read the [documentation](/creator/builder/builder-101)
 
 # The SDK
 
-Follow the [SDK 101]({{ site.baseurl }}{% post_url /development-guide/2020-03-16-SDK-101 %}) tutorial for a quick crash course.
+Follow the [SDK 101](/creator/development-guide/sdk-101) tutorial for a quick crash course.
 
 Take a look at the [escape room video tutorial series](https://hardlydifficult.github.io/dcl-escape-room-tutorial/).
 
-Or read the [documentation]({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %})
+Or read the [documentation](/creator/development-guide/entities-components)
 
 ## Shortcuts
 
 <div class="shortcuts">
-  <a href="{{ site.baseurl }}{% post_url /development-guide/2018-01-02-coding-scenes %}">
+  <a href="/creator/development-guide/coding-scenes">
     <div>
       <div class="image"><img src="/images/home/1.png"/></div>
       <div class="title">Coding scenes</div>
@@ -94,6 +94,6 @@ Also see [tutorials](https://github.com/decentraland-scenes/Awesome-Repository#T
 
 ## Other useful information
 
-- [Design constraints for games]({{ site.baseurl }}{% post_url /design-experience/2018-01-08-design-games %})
-- [3D modeling]({{ site.baseurl }}{% post_url /3d-modeling/2018-01-09-3d-models %})
-- [Scene limitations]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})
+- [Design constraints for games](/creator/design-experience/design-games)
+- [3D modeling](/creator/3d-modeling/3d-models)
+- [Scene limitations](/creator/development-guide/scene-limitations)

@@ -35,7 +35,7 @@ By default, Decentraland Wearables are minted on the Polygon/Matic sidechain so 
 - Tiara (a crown, or other accessory that sits on top of the head)
 - Top-head (e.g. a halo, or other effect applied to the head)
 
-For a detailed description of each category, and how items within each category interact or replace one another, see [Creating Wearables]({{ site.baseurl }}{% post_url /wearables/2021-05-31-creating-wearables %}).
+For a detailed description of each category, and how items within each category interact or replace one another, see [Creating Wearables](/creator/wearables/creating-wearables).
 
 ### Collections & Items
 
@@ -57,10 +57,10 @@ The following documentation only covers the **Wearables Editor**: the tool used 
 
 For documentation covering other aspects of wearables, see the following resources:
 
-- [Creating Wearables]({{ site.baseurl }}{% post_url /wearables/2021-05-31-creating-wearables %})
-- [Publishing Wearables]({{ site.baseurl }}{% post_url /wearables/2021-05-31-publishing-wearables %})
-- [Curation Committee]({{ site.baseurl }}{% post_url /wearables/2021-05-31-curation-committee %})
-- [Editor User Guide]({{ site.baseurl }}{% post_url /wearables/2021-05-31-wearables-editor-user-guide %})
+- [Creating Wearables](/creator/wearables/creating-wearables)
+- [Publishing Wearables](/creator/wearables/publishing-wearables)
+- [Curation Committee](/creator/wearables/curation-committee)
+- [Editor User Guide](/creator/wearables/wearables-editor-user-guide)
 
 The following shared folder contains example wearables, base models, textures and other resources you can use:
 

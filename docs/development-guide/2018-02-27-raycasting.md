@@ -12,7 +12,7 @@ slug: /creator/development-guide/raycasting/
 
 Raycasting is a fundamental tool in game development. With raycasting, you can trace an imaginary line in space, and query if any entities are intersected by the line. This is useful for calculating lines of sight, trajectories of bullets, pathfinding algorithms and many other applications.
 
-When a player clicks or pushes the primary or secondary button, a ray is traced from the player's position in the direction they are looking, see [button events]({{ site.baseurl }}{% post_url /development-guide/2018-02-14-click-events %}) for more details about this. This document covers how to trace an invisible ray from any arbitrary position and direction, independent of player actions, which you can use in many other scenarios.
+When a player clicks or pushes the primary or secondary button, a ray is traced from the player's position in the direction they are looking, see [button events](/creator/development-guide/click-events) for more details about this. This document covers how to trace an invisible ray from any arbitrary position and direction, independent of player actions, which you can use in many other scenarios.
 
 ## PhysicsCast
 
@@ -202,7 +202,7 @@ physicsCast.hitAll(
 
 ## Recurrent raycasting
 
-If your scene does raycasting on every frame via a [system]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %}), then you should be careful about how it affects your scene's performance.
+If your scene does raycasting on every frame via a [system](/creator/development-guide/systems), then you should be careful about how it affects your scene's performance.
 
 Both the `hitAll` and `hitFirst` methods have a third argument that takes a _raycast id_. All raycast queries that share a same id are handled in a lossy queue, so that if these requests pile up over time then only the latest one to arrive is processed. This can potentially save a lot of resources and makes your scene run a lot more smoothly.
 

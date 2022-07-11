@@ -10,7 +10,7 @@ type: Document
 slug: /creator/wearables/publishing-wearables/
 ---
 
-For detailed instructions on how to submit your wearable collection for approval before publication, see the [User Guide](https://docs.decentraland.org/decentraland/wearables-editor-user-guide/). This document explains how the approval process works when publishing wearables, and what criteria is used by the Curation Committee when reviewing wearables. For detailed information on the Curation Committee, [start here]({{ site.baseurl }}{% post_url /wearables/2021-05-31-curation-committee %}).
+For detailed instructions on how to submit your wearable collection for approval before publication, see the [User Guide](https://docs.decentraland.org/decentraland/wearables-editor-user-guide/). This document explains how the approval process works when publishing wearables, and what criteria is used by the Curation Committee when reviewing wearables. For detailed information on the Curation Committee, [start here](/creator/wearables/curation-committee).
 
 ### The publication process
 

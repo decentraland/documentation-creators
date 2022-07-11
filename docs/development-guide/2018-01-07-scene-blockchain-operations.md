@@ -60,7 +60,7 @@ executeTask(async () => {
 })
 ```
 
-As shown in the example above, you should wrap the function in an `async()` function, learn more about this in [async functions](/creator/development-guide/2018-02-25-async-functions)
+As shown in the example above, you should wrap the function in an `async()` function, learn more about this in [async functions](/creator/development-guide/async-functions)
 
 The following example keeps track of provided addresses.
 

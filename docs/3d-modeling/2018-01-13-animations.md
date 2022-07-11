@@ -79,7 +79,7 @@ In the NLA Editor, select each action that you want to embed in the glTF model a
 
 <img src="/images/media/blender-nla-editor2.png" alt="Stash actions into glTF model" width="600"/>
 
-When adding the model to your Decentraland scene, you must activate animations by configuring the _gltf-model_ entity. See [3D model animations](/creator/development-guide/2018-02-13-3d-model-animations) for instructions.
+When adding the model to your Decentraland scene, you must activate animations by configuring the _gltf-model_ entity. See [3D model animations](/creator/development-guide/3d-model-animations) for instructions.
 
 ## Best practices for animations
 

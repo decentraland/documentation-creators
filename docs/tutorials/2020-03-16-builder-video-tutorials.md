@@ -11,18 +11,18 @@ type: Document
 
 This video shows you the basics of how to use the Builder.
 
-{%  include youtube.html video_id='3WdhZSZDI0A'  %}
+{%  include youtube.html video_id='3WdhZSZDI0A' 
 
 ## Importing 3D models
 
 Import your own 3D models to use in your Builder scenes.
 
-{%  include youtube.html video_id='Lk3So0UTI9c'  %}
+{%  include youtube.html video_id='Lk3So0UTI9c' 
 
 ## Using smart items
 
 Use smart items to make your scenes interactive.
 
-{%  include youtube.html video_id='CQeWBqg3UoQ'  %}
+{%  include youtube.html video_id='CQeWBqg3UoQ' 
 
-{%  include youtube.html video_id='0E5al6GAef8'  %}
+{%  include youtube.html video_id='0E5al6GAef8' 
