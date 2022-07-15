@@ -82,9 +82,8 @@ If you're building a scene to be uploaded to several adjacent parcels, you can e
 
 To run a preview scene in the Desktop native client, instead of in the web browser: 
 
-1) Make sure you have [installed the desktop client](https://decentraland.org/download/). 
 
-	> Note: The desktop client is currently only supported for Windows machines.
+1) Make sure you have downloaded and installed the [Windows](https://decentraland.org/download/) or [Mac](https://github.com/decentraland/explorer-desktop-launcher/releases/latest/download/Decentraland.dmg) desktop client.
 
 2) Run the preview with:
 
