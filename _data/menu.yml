@@ -170,6 +170,8 @@
             post: "development-guide/2018-02-16-custom-events.md"
           - title: Async functions
             post: "development-guide/2018-02-25-async-functions.md"
+          - title: Data Oriented Programing
+            post: "development-guide/2022-07-15-data-oriented-programming.md"
       - title: Publishing
         children:
           - title: Deploy a scene
