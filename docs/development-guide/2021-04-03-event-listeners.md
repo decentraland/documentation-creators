@@ -7,7 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /development-guide/event-listeners/
-slug: /creator/development-guide/event-listerners/
+slug: /creator/development-guide/event-listeners/
 ---
 
 There are several events that the scene can subscribe to, to know the actions of the player while in or near the scene.
