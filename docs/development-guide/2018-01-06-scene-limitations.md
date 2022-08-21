@@ -20,7 +20,7 @@ For a straight-forward reference of what limitations you'll have for a specific 
 
 ## Scene limitation rules
 
-Below are the maximum number of elements allowed allowed in a scene:
+Below are the maximum number of elements that a scene is allowed to render at the same time:
 
 > _n_ represents the number of parcels that a scene occupies.
 
@@ -31,11 +31,16 @@ Below are the maximum number of elements allowed allowed in a scene:
 - **Textures:** `log2(n+1) x 10` Amount of textures in the scene. It includes textures imported as part of models.
 - **Height:** `log2(n+1) x 20` Height in meters.
 
-  > Note: Only entities that are currently being rendered in the scene are counted for these limits. If your scene switches between 3D models, what matters is the rendered models at any point in time, not the total sum. Player avatars and any items brought by a player from outside the scene don't count for calculating these limits either.
+  > Important: Only entities that are currently being rendered in the scene are counted for these limits. If your scene switches between 3D models, what matters is the rendered models at any point in time, not the total sum. Player avatars and any items brought by a player from outside the scene don't count for calculating these limits either.
 
 - **File size:** `15 MB per parcel` Total size of the files uploaded to the content server. Includes 3D models and audio. Doesn't include files that aren't uploaded, such as node.js packages.
 
 - **File count:** `200 files per parcel` Total count of the files uploaded. Includes 3D models and audio. Doesn't include files that aren't uploaded, such as node.js packages.
+
+## Optimizing
+
+See [Performance Optimization]({{ site.baseurl }}{% post_url /development-guide/2021-01-11-performance-optimization %})) for tips about how you can keep your scene below these limits and make it run smoother for players.
+
 
 <!--
 

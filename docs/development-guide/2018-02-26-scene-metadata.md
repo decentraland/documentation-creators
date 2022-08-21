@@ -56,7 +56,7 @@ For example:
 
 `dcl coords 15,-26`
 
-**Muliple parcels**
+**Multiple parcels**
 
 Pass two arguments: the South-West and the North-East parcels. The South-West parcel is also set as the base parcel.
 

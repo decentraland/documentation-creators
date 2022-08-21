@@ -80,7 +80,7 @@ For example:
 
 `dcl deploy --target-content peer-ec1.decentraland.org`
 
-See [catalyst-monitor](https://catalyst-monitor.vercel.app/) for a status check of all the servers in the catalyst network. You can also copy the addresses of each one, from the top of each card.
+See [catalyst-monitor](https://decentraland.github.io/catalyst-monitor/) for a status check of all the servers in the catalyst network. You can also copy the addresses of each one, from the top of each card.
 
 - Check your scene's `package.json`. A common problem is that there's a `bundleDependencies` and also a `bundledDependencies` (extra d) section. This can sometimes result from running different Node versions on the same project. Delete `bundleDependencies`, which relates to older Node versions.
  

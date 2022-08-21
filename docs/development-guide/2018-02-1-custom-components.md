@@ -99,22 +99,6 @@ const wheel = new Entity()
 wheel.addComponent(new WheelSpin())
 ```
 
-#### Inheritance from other components
-
-You can create a component that's based on an existing one and leverage all of its existing methods and fields.
-
-The following example defines a _Velocity_ component, which inherits its fields and methods from the already existing _Vector3_ component.
-
-```ts
-@Component("velocity")
-export class Velocity extends Vector3 {
-  // x, y and z fields are inherited from Vector
-  constructor(x: number, y: number, z: number) {
-    super(x, y, z)
-  }
-}
-```
-
 #### Interchangeable components
 
 Certain components intentionally can't coexist in a single entity. For example, an entity can't have both `BoxShape` and `PlaneShape`. If you assign one using `.addComponentOrReplace()`, you overwrite the other if present.
