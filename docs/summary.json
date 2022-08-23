@@ -51,6 +51,10 @@
 				{
 					"name": "Export",
 					"slug": "/creator/builder/export"
+				},
+				{
+					"name": "Builder 101",
+					"slug": "/creator/builder/builder-101"
 				}
 			]
 		},
