@@ -71,19 +71,19 @@
 				},
 				{
 					"name": "Publishing wearables",
-					"slug": "/creator/werarables/publishing-wearables"
+					"slug": "/creator/wearables/publishing-wearables"
 				},
 				{
 					"name": "Curation committee",
-					"slug": "/creator/werarables/curation-committee"
+					"slug": "/creator/wearables/curation-committee"
 				},
 				{
 					"name": "Wearable editor user guide",
-					"slug": "/creator/werarables/wearables-editor-user-guide"
+					"slug": "/creator/wearables/wearables-editor-user-guide"
 				},
 				{
 					"name": "Linked wearables",
-					"slug": "/creator/werarables/linked-wearables"
+					"slug": "/creator/wearables/linked-wearables"
 				}
 			]
 		},
