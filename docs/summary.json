@@ -18,39 +18,6 @@
 			]
 		},
 		{
-			"name": "Builder",
-			"children": [
-				{
-					"name": "Builder 101",
-					"slug": "/creator/builder/builder-101"
-				},
-				{
-					"name": "Smart Items",
-					"slug": "/creator/builder/smart-items"
-				},
-				{
-					"name": "NFTs",
-					"slug": "/creator/builder/nfts"
-				},
-				{
-					"name": "Manage scenes",
-					"slug": "/creator/builder/manage-scenes"
-				},
-				{
-					"name": "Scene limitations",
-					"slug": "/creator/builder/scene-limitations"
-				},
-				{
-					"name": "Import items",
-					"slug": "/creator/builder/import-items"
-				},
-				{
-					"name": "Export",
-					"slug": "/creator/builder/export"
-				}
-			]
-		},
-		{
 			"name": "Wearables",
 			"children": [
 				{
@@ -391,6 +358,47 @@
 				{
 					"name": "Materials",
 					"slug": "/creator/3d-modeling/materials"
+				}
+			]
+		},
+		{
+			"name": "Builder",
+			"children": [
+				{
+					"name": "Builder 101",
+					"slug": "/creator/builder/builder-101"
+				},
+				{
+					"name": "Smart Items",
+					"slug": "/creator/builder/smart-items"
+				},
+				{
+					"name": "NFTs",
+					"slug": "/creator/builder/nfts"
+				},
+				{
+					"name": "Manage scenes",
+					"slug": "/creator/builder/manage-scenes"
+				},
+				{
+					"name": "Scene limitations",
+					"slug": "/creator/builder/scene-limitations"
+				},
+				{
+					"name": "Import items",
+					"slug": "/creator/builder/import-items"
+				},
+				{
+					"name": "Builder FAQ",
+					"slug": "/creator/builder/builder-faq"
+				},
+				{
+					"name": "Export",
+					"slug": "/creator/builder/export"
+				},
+				{
+					"name": "Builder 101",
+					"slug": "/creator/builder/builder-101"
 				}
 			]
 		},
