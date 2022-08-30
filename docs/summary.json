@@ -70,28 +70,7 @@
 						},
 						{
 							"name": "Development Workflow",
-							"slug": "/creator/development-guide/development-workflow"
-						}
-					]
-				},
-				{
-					"name": "Architecture overview",
-					"children": [
-						{
-							"name": "Entities & Components",
-							"slug": "/creator/development-guide/entities-components"
-						},
-						{
-							"name": "Systems",
-							"slug": "/creator/development-guide/systems"
-						},
-						{
-							"name": "Custom Components",
-							"slug": "/creator/development-guide/custom-components"
-						},
-						{
-							"name": "Component groups",
-							"slug": "/creator/development-guide/component-groups"
+							"slug": "/creator/development-guide/dev-workflow"
 						}
 					]
 				},
@@ -266,7 +245,7 @@
 						},
 						{
 							"name": "Create a dApp",
-							"slug": "/creator/blockchain-integration/create-a-dapp"
+							"slug": "/creator/development-guide/create-a-dapp/"
 						},
 						{
 							"name": "Deploying your own transactions server",
