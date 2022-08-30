@@ -42,7 +42,6 @@ The default `wearable.json` file looks like this:
 
 ```json
 {
-  "id": <random-id>,
   "data": {
     "replaces": [],
     "hides": [],
@@ -67,33 +66,30 @@ The default `wearable.json` file looks like this:
     ],
     "category": "eyewear"
   },
-  "image": "glasses.png",
-  "i18n": [
-    {
-      "code": "en",
-      "text": "test"
-    }
-  ],
-  "assetType": "portable-experience",
   "name": "Portable Experience Example",
-  "description": "My new Portable Experience",
-  "rarity": "mythic",
-  "thumbnail": "glasses.png",
-  "model": "glasses.glb",
-  "bodyShape": "both",
-  "collectionAddress": ""
+  "description": "This feature is in Alpha state.",
+  "rarity": "mythic"
 }
 ```
 
-The following fields are present in `wearable.json`:
+The following fields are required in `wearable.json`:
 
 - `id`: The `dcl init` command generates a random value for this ID.
-
 > NOTE: If you forked your project from an existing one, make sure the ID value is unique before publishing your wearable. Use [uuidgenerator.net](https://www.uuidgenerator.net/) to generate a new random UUID
+- `name`: The name for the wearable that users will see in the marketplace
+- `description`: The description of the wearable that users will see in the marketplace. Make sure you indicate what the smart wearable can do, as users of the marketplace will have no way to preview its functinality before buying it.
+- `rarity`: The rarity supply of the token. Possible values are:
+  - unique (1 copy)
+  - mythic (10 copies)
+  - legendary (100 copies)
+  - epic (1000 copies)
+  - uncommon (10.000 copies)
+  - common (100.000 copies)
 
+
+The following fields can also optionally be included. These settings can also be configured from the Builder UI, once you upload the smart wearable.
 
 - `data`: Includes the following
-
   - `replaces`: List of categories of other wearables that should be unequipped when equipping this wearable, in addition to the default of this category. Eg: When putting on a cape top-body, also hide feet.
   - `hides`: List of categories of other wearables that should be hidden (but not unequipped) when equipping this wearable, in addition to the default of this category.
   - `tags`: Tags used to make the wearable searchable in the marketplace.
@@ -138,18 +134,6 @@ The following fields are present in `wearable.json`:
 
     - 'skin'
 
-- `assetType`: This field is required for the preview to identify this project as a portable experience.
-- `name`: The name for the wearable that users will see in the marketplace
-- `description`: The description of the wearable that users will see in the marketplace. Make sure you indicate what the smart wearable can do, as users of the marketplace will have no way to preview its functinality before buying it.
-
-- `rarity`: The rarity supply of the token. Possible values are:
-  - unique (1 copy)
-  - mythic (10 copies)
-  - legendary (100 copies)
-  - epic (1000 copies)
-  - uncommon (10.000 copies)
-  - common (100.000 copies)
-- `thumbnail`: Image to use as thumbnail for the wearable, both in the backpack and the marketplace. This image should be at root level in your folder. The recommended required image size is 1024x1024.
 - `menuBarIcon`: Image to use on the “experiences” menu, to represent this portable experience, to represent the portable experience. This image should be at root level in your folder. The recommended image size is 256x256.
 - `model`: The 3d model to use for the wearable. This file should be at root level in your folder.
 - `bodyShape`: The avatar body type that this wearable is compatible with. Possible values:
@@ -157,6 +141,12 @@ The following fields are present in `wearable.json`:
   - female
   - both
 - `collectionAddress`: The ethereum address of the published collection of wearables. This address is assigned once publishing, it can be left blank.
+
+## The thumbnail
+
+You must include an image named `thumbnail.png` at root level in your folder. This image will be shown both in the backpack and the marketplace, to represent your wearable in 2d. The recommended required image size is 1024x1024.
+
+Chose an image that sets player expectations and properly represents your creation.
 
 ## The Preview
 
