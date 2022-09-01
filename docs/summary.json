@@ -47,6 +47,27 @@
 			]
 		},
 		{
+			"name": "Emotes",
+			"children": [
+				{
+					"name": "Emotes overview",
+					"slug": "/creator/emotes/emotes"
+				},
+				{
+					"name": "Creating emotes",
+					"slug": "/creator/emotes/creating-and-exporting-emotes"
+				},
+				{
+					"name": "The rig: basic concepts",
+					"slug": "/creator/emotes/avatar-rig"
+				},
+				{
+					"name": "Rig features",
+					"slug": "/creator/emotes/rig-features"
+				}
+			]
+		},
+		{
 			"name": "SDK",
 			"children": [
 				{
