@@ -20,8 +20,6 @@ This documentation will cover the file specifications, the basics of animation i
 | Sampling Rate | 2 or 3 (if needed) |
 | Max File Size | 1 MB |
 
-You can find a more detailed explanation of the animation specifications [**below**](https://www.notion.so/Creating-and-Exporting-Emotes-5e962e5d54a24bcb9b906748007eb4cc).
-
 ### Before Starting
 
 **Frame Rate**
