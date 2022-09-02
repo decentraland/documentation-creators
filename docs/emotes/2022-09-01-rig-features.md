@@ -1,4 +1,3 @@
-
 ---
 date: 2022-09-01
 title: The Rig - features
@@ -12,7 +11,7 @@ This documentation explains the set up for Rig 1.0, its controls, and features.
 
 ### Blend File for Rig 1.0
 
-[BaseMale_Rig_1.0.blend](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/64e2cc67-afc9-4540-ae99-b6946cc72039/BaseMale_Rig_1.0.blend)
+[BaseMale_Rig_1.0.blend](/images/emotes/BaseMale_Rig_1.0.blend)
 
 ## Rig Structure and Features
 
@@ -20,32 +19,32 @@ This documentation explains the set up for Rig 1.0, its controls, and features.
 
 These are the armature’s transforms in Object Mode with the controls’ setup. **Do not edit this in any way**. The rig should only be manipulated in Pose Mode. To avoid unwanted editing, the transforms have been locked in Object Mode.
 
-![Rig 1.0 transforms.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/dd1f4841-c79c-4608-b5a8-60baac070689/base_armature_object_mode.png)
+![Rig 1.0 transforms.](/images/emotes/base_armature_object_mode.png)
 
-Rig 1.0 transforms.
+_Rig 1.0 transforms._
 
-> **Attention!**: **Never edit the rig in Object Mode.**
+> **Warning**: **Never edit the rig in Object Mode.**
 
 
 ### Bone Orientation
 
 This is the bone orientation for Rig 1.0. As it is right now, it’s not possible to mirror behavior on the shoulders, arms, hands, or fingers.
 
-![Axes for bone orientation.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/790549e4-ee25-41d1-b48e-5d6f6b8673de/bone_orientation_rig_1.0.png)
+![Axes for bone orientation.](/images/emotes/bone_orientation_rig_1.0.png)
 
-Axes for bone orientation.
+_Axes for bone orientation._
 
-![Behavior when mirrorring poses.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3ae2c991-c9b0-479d-b9cf-93b4ab5ac01d/bone_orientation_problem.gif)
+![Behavior when mirrorring poses.](/images/emotes/bone_orientation_problem.gif)
 
-Behavior when mirrorring poses.
+_Behavior when mirrorring poses._
 
 ### Layers
 
 To avoid any accidents and to make it easier to identify the controls, this rig is organized in layers that can be accessed in the *Object Data Properties* tab in Blender. The first set of layers (on the left) has all the controls needed for avatar animation. The second set (on the right) has constraint setups and the base skeleton; there’s no need to select those. 
 
-![Object Data Properties tab.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5345c6f6-7007-4ace-84fa-8aa73a4cde9d/layers.png)
+![Object Data Properties tab.](/images/emotes/layers.png)
 
-Object Data Properties tab.
+_Object Data Properties tab._
 
 This is how it’s organized:
 
@@ -56,37 +55,37 @@ This is how it’s organized:
 - 3rd Bottom Layer: has all the lower body IK setup controls.
 - 4th Top Layer: has the finger controls.
 
-![1st Top Layer.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/abff8d76-46ea-4a4e-9e13-5bcccf4c40f8/layer1.png)
+![1st Top Layer.](/images/emotes/layer1.png)
 
-1st Top Layer.
+_1st Top Layer._
 
-![2nd Top Layer.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/04fb90dd-ae81-464a-99c9-1265e0ed3861/layer2.png)
+![2nd Top Layer.](/images/emotes/layer2.png)
 
-2nd Top Layer.
+_2nd Top Layer._
 
-![2nd Bottom Layer.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4a7f7cfe-5346-4c6f-b23d-1c03549e459a/layer2.2.png)
+![2nd Bottom Layer.](/images/emotes/layer2.2.png)
 
-2nd Bottom Layer.
+_2nd Bottom Layer._
 
-![3rd Top Layer.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2bc0b702-cf8f-4b97-9445-609ecaa4931f/layer3.png)
+![3rd Top Layer.](/images/emotes/layer3.png)
 
-3rd Top Layer.
+_3rd Top Layer._
 
-![3rd Bottom Layer.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6d19b79c-e16e-4349-9540-dbbeae7a0eb2/layer3.2.png)
+![3rd Bottom Layer.](/images/emotes/layer3.2.png)
 
-3rd Bottom Layer.
+_3rd Bottom Layer._
 
-![4th Top Layer.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8cce4f07-8601-4e5c-a7df-966de7cbea3e/layer6.png)
+![4th Top Layer.](/images/emotes/layer6.png)
 
-4th Top Layer.
+_4th Top Layer._
 
 To see all the controls together, select all of the first top four and bottom 2nd and 3rd. To work with separate groups, select just the one you need.  While going through the layers, make sure you’re selecting only *Layers*. 
 
-> **Attention!**: **Do not select *Protected Layers*.**
+> **Warning**: **Do not select *Protected Layers*.**
 
-![The first set of layers has all the controls needed for animating.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b869fad2-ba04-44e2-bb48-52695b78f505/layer4.png)
+![The first set of layers has all the controls needed for animating.](/images/emotes/layer4.png)
 
-The first set of layers has all the controls needed for animating.
+_The first set of layers has all the controls needed for animating._
 
 ### Controls and Grouping
 
@@ -99,9 +98,9 @@ Controls are non-deforming bones that drive the base skeleton. They have differe
 - Pink: left side controls
 - Orange: right side controls
 
-![All the controls and their colors.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/daddfc6b-49b4-4ed3-918d-2def04279990/controls_rig_1.0.png)
+![All the controls and their colors.](/images/emotes/controls_rig_1.0.png)
 
-All the controls and their colors.
+_All the controls and their colors._
 
 ## Custom Attributes and Setup
 
@@ -109,56 +108,52 @@ All the controls and their colors.
 
 Even though arms are usually set as FK and legs as IK, there are certain situations that will require a different setup. If the hand has to maintain a certain position, like during push ups or while climbing, the IK will be the best choice. As for the legs, while in the air, swimming or rolling, FK works best. For more flexibility and freedom in animation, this rig has an FK/IK blend in the UpperBody control, being 0 completely FK and 1 completely IK. Any other value in-between will be a blend of the two.
 
-![FK/IK blend for both arms and legs.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/62492f99-b2b0-4dab-bfeb-d1337feb26e1/ik_fk_rig_1.0.png)
+![FK/IK blend for both arms and legs.](/images/emotes/ik_fk_rig_1.0.png)
 
-FK/IK blend for both arms and legs.
+_FK/IK blend for both arms and legs._
 
-![How the FK > IK Switch works.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/414a8e92-9b2a-4d17-8cbd-b87e19d007de/IK_FK_rig_1.0.gif)
+![How the FK > IK Switch works.](/images/emotes/IK_FK_rig_1.0.gif)
 
-How the FK > IK Switch works.
+_How the FK > IK Switch works._
 
 ### Isolate Rotation FK Blend
 
 Another custom attribute in the UpperBody control is the isolate rotation, that allows you to choose if the bone will inherit its parent’s rotation or not (while in FK). While at 0, the bone won’t inherit the rotation, while at 1 it will completely follow the parent’s behavior. Any other value in between will be a blend of the two. This is an interesting tool because it causes the FK bone to maintain its position, behaving a little like an IK.
 
-![Isolate rotation attribute for arms.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d742564e-bfa7-4cbd-8a38-825922d602e3/IsoRot_rig_1.0.png)
+![Isolate rotation attribute for arms.](/images/emotes/IsoRot_rig_1.0.png)
 
-Isolate rotation attribute for arms.
+_Isolate rotation attribute for arms._
 
-![How the IsoRot attribute for the arms works.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/558f654b-15ef-4e14-bc65-7695c3f70773/IsoRot_Arms_rig_1.0.gif)
+![How the IsoRot attribute for the arms works.](/images/emotes/IsoRot_Arms_rig_1.0.gif)
 
-How the IsoRot attribute for the arms works.
+_How the IsoRot attribute for the arms works._
 
 The Head control also has this attribute. It’s really helpful for walk cycles, for example, since the head will keep its rotation even though the torso is twisting, making sure it’s always looking forward. Without this option, the animator would have to manually rotate the head every time the torso twists in order for it to be straight and look forward.
 
-![Isolate rotation attribute for the head.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f00b43a7-5df4-4228-a1d1-f1dbae868835/IsoRot_Head_rig_1.0.png)
+![Isolate rotation attribute for the head.](/images/emotes/IsoRot_Head_rig_1.0.png)
 
-Isolate rotation attribute for the head.
+_Isolate rotation attribute for the head._
 
-![How the IsoRot attribute for the head works.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/332f38d6-ed22-4832-80c2-383e08453d2f/IsoRot_Head_rig_1.0.gif)
+![How the IsoRot attribute for the head works.](/images/emotes/IsoRot_Head_rig_1.0.gif)
 
-How the IsoRot attribute for the head works.
+_How the IsoRot attribute for the head works._
 
-### **Attention!**
+> **Warning**: When animating, even if all controls have been selected and key framed, these custom attributes won’t be automatically key framed. Make sure to manually insert a keyframe in each attribute so you don’t lose the pose/motion you created or, in Blender 3.1, press I, then select Location, Rotation, Scale & Custom Properties.
 
-<aside>
-⚠️ **When animating, even if all controls have been selected and key framed, these custom attributes won’t be automatically key framed. Make sure to manually insert a keyframe in each attribute so you don’t lose the pose/motion you created or, in Blender 3.1, press I, then select Location, Rotation, Scale & Custom Properties.**
 
-</aside>
+![In previous versions of Blender, make sure to keyframe all the controls and custom attributes!](/images/emotes/custom_attributes.gif)
 
-![In previous versions of Blender, make sure to keyframe all the controls and custom attributes!](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fa9c8604-b6a6-48bd-a696-c46e96d9c8f0/custom_attributes.gif)
+_In previous versions of Blender, make sure to keyframe all the controls and custom attributes!_
 
-In previous versions of Blender, make sure to keyframe all the controls and custom attributes!
+![In Blender 3.1, to keyframe custom properties, press I, then select Location, Rotation, Scale & Custom Properties.](/images/emotes/custom_properties_rig_1.0.gif)
 
-![In Blender 3.1, to keyframe custom properties, press I, then select Location, Rotation, Scale & Custom Properties.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b1156aee-37d5-46d2-a4ca-80b57ff466c3/custom_properties_rig_1.0.gif)
-
-In Blender 3.1, to keyframe custom properties, press I, then select Location, Rotation, Scale & Custom Properties.
+_In Blender 3.1, to keyframe custom properties, press I, then select Location, Rotation, Scale & Custom Properties._
 
 Another solution for keyframing custom properties is selecting ***Keying*** under on the Timeline tab and on ***Active Keying Set*** select Location, Rotation, Scale & Custom Properties, like shown on the gif below. That way, everytime you press I, a keyframe will be created without the pop-up menu. Since some animators prefer the menu, by default, that option is not enabled. But feel free to choose the method that suits you best.
 
-![Keyframing with the Keying option.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/06ff6816-b990-4e13-aea4-73c65e9cd0e9/keyframe_custom_properties.gif)
+![Keyframing with the Keying option.](/images/emotes/keyframe_custom_properties.gif)
 
-Keyframing with the Keying option.
+_Keyframing with the Keying option._
 
 ### Reverse IK Foot Setup
 
@@ -168,27 +163,27 @@ This rig was set up in a way to give the animator freedom of foot movement witho
 
 - Foot roll: this control rotates the foot back and forth and side to side. To avoid bending too much on the heel or too much on the ball, a limit was set so the foot rig doesn’t break. When it reaches this limit, the foot will stop rotating.
 
-![Foot roll: rotate in X and it moves back and forth; rotate in Z it moves side to side.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/37a3d2a1-ba6d-40bb-8e61-0e2c5c1e1fc8/foot_roll.gif)
+![Foot roll: rotate in X and it moves back and forth; rotate in Z it moves side to side.](/images/emotes/foot_roll.gif)
 
-Foot roll: rotate in X and it moves back and forth; rotate in Z it moves side to side.
+_Foot roll: rotate in X and it moves back and forth; rotate in Z it moves side to side._
 
 - Toe tip roll: rotates the foot from the tip of the toes. It only rotates forward.
 
-![The toe tip roll only rotates in positive X.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e7657adb-ce52-4c66-9f4e-bda2f9d43264/toe_tip.gif)
+![The toe tip roll only rotates in positive X.](/images/emotes/toe_tip.gif)
 
-The toe tip roll only rotates in positive X.
+_The toe tip roll only rotates in positive X._
 
 - Toes control: rotates the toes from the ball.
 
-![Toes can be rotated in any direction.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5b725cec-be40-47dc-aa2b-39bf45055f43/toes.gif)
+![Toes can be rotated in any direction.](/images/emotes/toes.gif)
 
-Toes can be rotated in any direction.
+_Toes can be rotated in any direction._
 
 - Foot control: this is a global control that moves the foot as a whole. Since it’s the parent of all the other foot controls, it’ll keep any transforms while also being able to be grabbed and rotated.
 
-![How the foot control works.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5172f8de-860b-47fc-b6af-a20e814b6d50/foot.gif)
+![How the foot control works.](/images/emotes/foot.gif)
 
-How the foot control works.
+_How the foot control works._
 
 ### Locked Transforms
 
@@ -196,4 +191,4 @@ Some controls may have a lock symbol next to the transforms parameters, which me
 
 It is advised to keep these locked, but in case you want more freedom of movement, just click on the lock icon to unlock it.
 
-![Locked transforms in a control.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1fc1f490-1c79-4f53-b6ee-dabe645bce2c/locked_transform.png)
+![Locked transforms in a control.](/images/emotes/locked_transform.png)
