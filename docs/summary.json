@@ -308,6 +308,10 @@
 							"slug": "/creator/development-guide/move-entities"
 						},
 						{
+							"name": "Data Oriented Programming",
+							"slug": "/creator/development-guide/data-oriented-programming"
+						},
+						{
 							"name": "Game Objects",
 							"slug": "/creator/development-guide/game-objects"
 						},
