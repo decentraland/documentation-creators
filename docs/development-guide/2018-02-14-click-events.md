@@ -122,8 +122,6 @@ In the example above, the second argument of the `OnPointerDown` component has a
 - `showFeedback`: Boolean to turn the feedback on or off. It's _true_ by default.
 - `hoverText`: String to display in the UI while the player points at the entity. By default, this string spells _Interact_, unless `showFeedback` is _false_.
 
-[IMAGE]
-
 > TIP: The `hoverText` string should describe the action that happens when interacting. For example `Open`, `Activate`, `Grab`, `Select`. These strings should be as short as possible, to avoid stealing too much focus from the player.
 
 The `hoverText` of an `OnPointerUp` component is only displayed while the player is already holding down the corresponding key and pointing at the entity.
@@ -149,8 +147,6 @@ myEntity.addComponent(
   )
 )
 ```
-
-[IMAGE or GIF?]
 
 #### Max click distance
 
