@@ -170,9 +170,9 @@ For simple implementations of the POAP booth:
 3. Add the booth in your game.ts with:
 
 ```ts
-import { Dispenser } from "./booth/dispenser"
+import { createDispenser } from "./booth/dispenser"
 
-const POAPBooth = new Dispenser(
+const POAPBooth = createDispenser(
   {
     position: new Vector3(8, 0, 8),
     rotation: Quaternion.Euler(0, 0, 0),
