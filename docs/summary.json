@@ -446,7 +446,12 @@
 		},
 		{
 			"name": "Verified Partners",
-			"slug": "/creator/metaverse-agencies"
+			"children: [
+				{
+					"name": "Verified Partners",
+					"slug": "/creator/metaverse-agencies"
+				}
+			]
 		}
 	]
 }
