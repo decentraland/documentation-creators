@@ -16,19 +16,19 @@ type: Document
 
 Even though a rig is not an exact replica of the human skeleton, it is good practice to follow the position of real life bones when placing digital ones. This is done in order to guarantee believable and fluid deformation. Bone position is important because it sets the pivot point (where the movement will start from). A misplaced bone will cause bad deformation of the mesh. The images below show the difference in bone position.
 
-![head_pivot_rig_1.0.gif](/images/emotes/head_pivot_rig_1.0.gif)
+![head_pivot_rig_1.0.gif](https://github.com/decentraland/documentation-creators/blob/main/images/emotes/head_pivot_rig_1.0.gif)
 
-![head_pivot_rig_2.0.gif](/images/emotes/head_pivot_rig_2.0.gif)
+![head_pivot_rig_2.0.gif](https://github.com/decentraland/documentation-creators/blob/main/images/emotes/head_pivot_rig_2.0.gif)
 
 ### Bone Orientation
 
 The orientation of bones will define in which direction they’ll rotate, like positive X, negative Z, etc. They can be set up in many different ways as long as it’s consistent through the whole rig. For example, if the X axis is chosen for the bending forward motion of the spine, it makes sense that the same set up is used for the legs. The orientation is also important because it’ll affect mirroring behavior. That means that, usually, the right side orientation is the mirrored version of the left side’s and vice versa.
 
-![Turn on the axes to show bone orientation.](/images/emotes/bone_axis.gif)
+![Turn on the axes to show bone orientation.](https://github.com/decentraland/documentation-creators/blob/main/images/emotes/bone_axis.gif)
 
 _Turn on the axes to show bone orientation._
 
-![The axes are the directions in which the bone will rotate.](/images/emotes/bone_orientation.gif)
+![The axes are the directions in which the bone will rotate.](https://github.com/decentraland/documentation-creators/blob/main/images/emotes/bone_orientation.gif)
 
 _The axes are the directions in which the bone will rotate._
 
@@ -38,17 +38,17 @@ Deforming bones are the ones that will deform the mesh, they are responsible for
 
 Non-deforming bones are the ones that won’t deform the mesh, but they are still necessary in a robust rig and are used for the setup for [IKs, FKs](#what’s-FK-and-IK-in-a-rig) and other custom properties. Examples for non-deforming bones are controls, IK and FK bones, foot setup bones. These shouldn’t be exported, they are only used for animation purposes.
 
-![Deforming bones.](/images/emotes/deforming_bones.png)
+![Deforming bones.](https://github.com/decentraland/documentation-creators/blob/main/images/emotes/deforming_bones.png)
 
 _Deforming bones._
 
-![Non-deforming bones.](/images/emotes/non_deforming_bones.png)
+![Non-deforming bones.](https://github.com/decentraland/documentation-creators/blob/main/images/emotes/non_deforming_bones.png)
 
 _Non-deforming bones._
 
 > **Warning**: **Do not edit the base skeleton at all!**
 
-![The base skeleton.](/images/emotes/deforming.png)
+![The base skeleton.](https://github.com/decentraland/documentation-creators/blob/main/images/emotes/deforming.png)
 
 _The base skeleton._
 
@@ -60,7 +60,7 @@ Controls are basically non-deforming bones, which means they will not affect the
 
 It’s also important to notice that it’s not possible to use the controls setup in a software different from the one it was originally done in. Each software has its own logic and it’s not possible to export constraints.
 
-![Controls and their different shapes and colors.](/images/emotes/controls.png)
+![Controls and their different shapes and colors.](https://github.com/decentraland/documentation-creators/blob/main/images/emotes/controls.png)
 
 _Controls and their different shapes and colors._
 
@@ -75,11 +75,11 @@ A rig can use two different setups that will influence how it moves: FK and IK.
 
 In the forward kinematics, or FK, the parent in the hierarchy moves all the child bones under it. Let’s take the arm as an example: when the shoulder rotates, the rest of the arm will rotate as well; when the arm rotates, the forearm will follow its behavior. When animating in FK, each bone has to be rotated individually. This setup gives a lot of control over the movement and is great for arc motions, which are essential for a fluid animation.
 
-![Direction of movement in the hierarchy.](/images/emotes/FK.png)
+![Direction of movement in the hierarchy.](https://github.com/decentraland/documentation-creators/blob/main/images/emotes/FK.png)
 
 _Direction of movement in the hierarchy._
 
-![In FK, each bone has to be rotated individually.](/images/emotes/FK.gif)
+![In FK, each bone has to be rotated individually.](https://github.com/decentraland/documentation-creators/blob/main/images/emotes/FK.gif)
 
 _In FK, each bone has to be rotated individually._
 
@@ -87,10 +87,10 @@ _In FK, each bone has to be rotated individually._
 
 In inverse kinematics, or IK, the child in the hierarchy can influence the movement of its parents. In this case, taking the arm as an example again, when the hand is moved around, the rest of the arm will follow the motion. It also means that no matter how the shoulder moves, the hand will maintain its position. In this setup, a pole vector/pole target will control in which direction the bones will bend. Legs are usually in IK and that’s essential for the feet to stick to ground level while animating.
 
-![Direction of movement in hierarchy.](/images/emotes/IK.png)
+![Direction of movement in hierarchy.](https://github.com/decentraland/documentation-creators/blob/main/images/emotes/IK.png)
 
 _Direction of movement in hierarchy._
 
-![In IK, the hand will move all the arm and also maintain it’s position. The pole target drives the direction in which the elbow bends.](/images/emotes/IK.gif)
+![In IK, the hand will move all the arm and also maintain it’s position. The pole target drives the direction in which the elbow bends.](https://github.com/decentraland/documentation-creators/blob/main/images/emotes/IK.gif)
 
 _In IK, the hand will move all the arm and also maintain it’s position. The pole target drives the direction in which the elbow bends._
