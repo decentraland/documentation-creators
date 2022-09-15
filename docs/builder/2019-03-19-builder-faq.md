@@ -2,6 +2,7 @@
 date: 2019-03-19
 title: Builder FAQ
 redirect_from:
+  - /decentraland/builder-faq/
 description: Frequently Asked Questions for the Decentraland Builder
 categories:
   - Decentraland

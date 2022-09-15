@@ -3,6 +3,7 @@ date: 2021-05-31
 title: Publishing Wearables
 redirect_from:
   - /wearables/publishing-wearables/
+  - /decentraland/publishing-wearables/
 description: A description of the publication and approval process for Decentraland wearables
 categories:
   - Decentraland

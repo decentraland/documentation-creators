@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /wearables/creating-wearables/
+  - /decentraland/creating-wearables/
 slug: /creator/wearables/creating-wearables/
 ---
 

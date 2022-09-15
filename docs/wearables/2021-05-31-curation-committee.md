@@ -7,6 +7,7 @@ categories:
 type: Document
 redirect_from:
   - /wearables/curation-committee/
+  - /decentraland/curation-committee/
 slug: /creator/wearables/curation-committee/
 ---
 

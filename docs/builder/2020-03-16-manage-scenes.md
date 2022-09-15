@@ -6,7 +6,7 @@ categories:
   - builder
 type: Document
 redirect_from:
-  - /builder/mmanage-scenes/
+  - /builder/manage-scenes/
 slug: /creator/builder/manage-scenes/
 ---
 
