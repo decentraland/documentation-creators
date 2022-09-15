@@ -3,6 +3,7 @@ date: 2021-05-31
 title: Wearables Overview
 redirect_from:
   - /wearables/wearables-overview/
+  - /decentraland/wearables-overview/
 description: An overview of wearable NFTs for Decentraland
 categories:
   - Decentraland

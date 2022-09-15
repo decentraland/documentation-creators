@@ -3,6 +3,7 @@ date: 2021-05-31
 title: Wearables Editor User Guide
 redirect_from:
   - /wearables/wearables-editor-user-guide/
+  - /decentraland/wearables-editor-user-guide/
 description: How to use the Decentraland Wearables Editor
 categories:
   - Decentraland

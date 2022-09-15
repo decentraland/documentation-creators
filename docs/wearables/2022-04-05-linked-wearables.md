@@ -3,6 +3,7 @@ date: 2022-04-05
 title: Linked Wearables
 redirect_from:
   - /wearables/linked-wearables/
+  - /decentraland/linked-wearables/
 description: Wearable representations of 3rd party tokens
 categories:
   - Decentraland

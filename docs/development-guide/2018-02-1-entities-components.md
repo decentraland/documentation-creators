@@ -13,6 +13,7 @@ redirect_from:
   - /development-guide/scene-content/
   - /development-guide/entity-interfaces/
   - /development-guide/entity-components/
+  - /development-guide/entities-components/
 type: Document
 slug: /creator/development-guide/entities-components/
 ---

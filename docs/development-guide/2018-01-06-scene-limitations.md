@@ -5,6 +5,7 @@ description: How many things can I put on my scene?
 redirect_from:
   - /documentation/scene-limitations/
   - /builder/scene-limitations/
+  - /development-guide/scene-limitations/
 categories:
   - development-guide
 type: Document
