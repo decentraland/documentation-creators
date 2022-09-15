@@ -5,6 +5,7 @@ description: Features about the avatar rig and downloadable file.
 categories:
   - emotes
 type: Document
+slug: /creator/emotes/rig-features
 ---
 
 This documentation explains the set up for Rig 1.0, its controls, and features.

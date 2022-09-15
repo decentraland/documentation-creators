@@ -5,6 +5,8 @@ description: Basics about the avatar rig.
 categories:
   - emotes
 type: Document
+slug: /creator/emotes/avatar-rig
+
 ---
 
 

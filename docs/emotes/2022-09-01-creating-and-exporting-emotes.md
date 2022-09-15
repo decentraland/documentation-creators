@@ -5,6 +5,8 @@ description: Steps for creating and exporting an avatar emote.
 categories:
   - emotes
 type: Document
+slug: /creator/emotes/creating-and-exporting-emotes
+
 ---
 
 
