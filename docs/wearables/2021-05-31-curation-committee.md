@@ -10,9 +10,9 @@ redirect_from:
 slug: /creator/wearables/curation-committee/
 ---
 
-The Wearables Curation Committee is a group of individuals elected by the DAO who are responsible for reviewing and approving wearables submitted by the Decentraland community. The current Curation Committee includes three members, but it can be expanded to include more. Each member holds a key in a multisig wallet that is used to vote on the approval or rejection of each item submitted via the Wearables Editor.
+The Curation Committee is a group of individuals elected by the DAO who are responsible for reviewing and approving wearables and emotes submitted by the Decentraland community. The current Curation Committee includes three members, but it can be expanded to include more. Each member holds a key in a multisig wallet that is used to vote on the approval or rejection of each item submitted via the Wearables Editor.
 
-The approval criteria used by the committee when reviewing wearables is outlined in [Publishing Wearables](/creator/wearables/publishing-wearables).
+The approval criteria used by the committee when reviewing wearables is outlined in [Publishing Wearables](/creator/wearables/publishing-wearables), the criteria for publishing emotes is outlined in [Emotes overview](/emotes/)
 
 The current members of this committee are:
 
@@ -34,8 +34,8 @@ The current members of this committee are:
 
 ## Why does Decentraland need a Curation Committee?
 
-Wearables are a critical aspect of the avatar creation and customization experience. With the addition of the Wearables Editor, any member of the community can create their own wearables to share with other users.
+Wearables, emotes and other assets are a critical aspect of the avatar creation and customization experience. With the addition of the Editor, any member of the community can create their own wearables and emotes to share with other users.
 
-However, wearables in Decentraland still need to be moderated in order to prevent spam, abuse, duplicated content, and copyright infringements (as per Decentraland’s [Content Policy](https://decentraland.org/content), [Terms of Use](https://decentraland.org/terms), and [Code of Ethics](https://decentraland.org/ethics)).
+However, wearables and emotes in Decentraland still need to be moderated in order to prevent spam, abuse, duplicated content, and copyright infringements (as per Decentraland’s [Content Policy](https://decentraland.org/content), [Terms of Use](https://decentraland.org/terms), and [Code of Ethics](https://decentraland.org/ethics)).
 
-Wearables within the Decentraland ecosystem must also meet several technical requirements, otherwise they may not render correctly or they may adversely affect other wearables equipped at the same time. Until this approval process can be more fully automated, it is necessary for several individuals to review each wearable manually.
+Wearables within the Decentraland ecosystem must also meet several technical requirements, otherwise they may not render correctly or they may adversely affect other wearables equipped at the same time. Until this approval process can be more fully automated, it is necessary for several individuals to review each wearable manually. Emotes also have to be approved by the Committee.
