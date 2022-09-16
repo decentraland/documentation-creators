@@ -5,6 +5,9 @@ description: Play live audio streams in your scene.
 categories:
   - development-guide
 type: Document
+redirect_from:
+  - /development-guide/audio-streaming
+slug: /creator/development-guide/audio-streaming/
 ---
 
 
