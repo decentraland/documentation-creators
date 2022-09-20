@@ -5,6 +5,8 @@ description: Features about the avatar rig and downloadable file.
 categories:
   - emotes
 type: Document
+redirect_from:
+  - /emotes/rig-features
 slug: /creator/emotes/rig-features
 ---
 

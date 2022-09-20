@@ -13,16 +13,16 @@ slug: /creator/wearables/curation-committee/
 
 The Curation Committee is a group of individuals elected by the DAO who are responsible for reviewing and approving wearables and emotes submitted by the Decentraland community. The current Curation Committee includes three members, but it can be expanded to include more. Each member holds a key in a multisig wallet that is used to vote on the approval or rejection of each item submitted via the Wearables Editor.
 
-The approval criteria used by the committee when reviewing wearables is outlined in [Publishing Wearables](/creator/wearables/publishing-wearables), the criteria for publishing emotes is outlined in [Emotes overview](/emotes/)
+The approval criteria used by the committee when reviewing wearables is outlined in [Publishing Wearables](/creator/wearables/publishing-wearables), the criteria for publishing emotes is outlined in [Emotes overview](/creator/emotes/emotes/)
 
 The current members of this committee are:
 
-- Shibu, Art Director, Decentraland Foundation 
-- Juan Pablo Colasso, 3D Visual Artist 
-- Sebastian Valla, Art Director at Wonderzone 
-- Laura Uson Dolsac, Lead Artist at Polygonal Mind 
-- Malloy, Art Director at Feeka Cafe 
-- Hirotokai, 3D Artist and DCL Wearable Designer 
+- Shibu, Art Director, Decentraland Foundation
+- Juan Pablo Colasso, 3D Visual Artist
+- Sebastian Valla, Art Director at Wonderzone
+- Laura Uson Dolsac, Lead Artist at Polygonal Mind
+- Malloy, Art Director at Feeka Cafe
+- Hirotokai, 3D Artist and DCL Wearable Designer
 - Sango, 3D Artist and wearable creator from Metazoo
 - Grimey, 3D Artist and wearable creator from StudioSparkles
 - AndreusAs, 3D Artist and independent wearable creator

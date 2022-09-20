@@ -5,8 +5,9 @@ description: Steps for creating and exporting an avatar emote.
 categories:
   - emotes
 type: Document
+redirect_from:
+  - /emotes/creating-and-exporting-emotes
 slug: /creator/emotes/creating-and-exporting-emotes
-
 ---
 
 
@@ -49,7 +50,6 @@ In the rig file, other than the two windows for the viewport (front and side vie
 - ***Timeline***: This is where the timeline and playback controls are found. In here, the ***Auto Keying*** is on, which means that every time a control is manipulated it automatically creates a keyframe. You can always disable that function by clicking on the dot next to the playback controls.
 
 With this workspace, you have everything needed to start animating!
-
 
 
 ![These are the bottom windows. The top one is in the ***Graph Editor,*** the middle one in the ***Dope Sheet,*** and the bottom one is the ***Timeline.*** The top red arrow shows the ***Only Show Selected*** tool and the bottom one shows the ***Auto Keying***.](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/workspace.png)
