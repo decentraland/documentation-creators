@@ -10,8 +10,9 @@ redirect_from:
 slug: /creator/emotes/creating-and-exporting-emotes
 ---
 
-
 This documentation will cover the file specifications, the basics of animation in Blender, the proper way to export an Emote, and how to import one into the Builder.
+
+### Animation Specs Chart
 
 ### Animation Specs Chart
 
@@ -23,93 +24,140 @@ This documentation will cover the file specifications, the basics of animation i
 | Sampling Rate | 2 or 3 (if needed) |
 | Max File Size | 1 MB |
 
+You can find a more detailed explanation of the animation specifications [**below**](#the-animation-specifications).
+
 ### Before Starting
 
 **Frame Rate**
 
-Before getting started, it’s important to check the frame rate. Decentraland’s animations must have a frame rate of **30 fps**. The rig file provided probably has that set up, but since Blender’s default value is 24 fps, it is best to double check before starting (a wrong frame rate will affect the speed of the animation). That option can be found in *Output Properties* (the printer icon) under *Format*, as shown below:
+Before getting started, it’s important to check the frame rate. Decentraland’s animations must have a frame rate of **30 fps**. The rig file provided probably has that set up, but since Blender’s default value is 24 fps, it is best to double check before starting (a wrong frame rate will affect the speed of the animation). That option can be found in _Output Properties_ (the printer icon) under _Format_, as shown below:
 
 ![Make sure the framerate is set to 30 fps before starting.](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/framerate.png)
 
-_Make sure the framerate is set to 30 fps before starting._
+Make sure the framerate is set to 30 fps before starting.
 
 **Pose Mode**
 
-In Blender, a rig can be viewed in three different modes: *Object Mode*, *Edit Mode,* and *Pose Mode*. Animations can only be done in ***Pose Mode*** (in that mode, controls have colors). With the rig selected, you’ll find that option in a dropdown menu, at the top right.
+In Blender, a rig can be viewed in three different modes: _Object Mode_, _Edit Mode,_ and _Pose Mode_. Animations can only be done in _**Pose Mode**_ (in that mode, controls have colors). With the rig selected, you’ll find that option in a dropdown menu, at the top right.
 
-![Changing to Pose Mode.](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/pode_mode.gif)
+![Changing to Pose Mode.](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/changing_pose_mode.gif)
 
-_Changing to Pose Mode._
+Changing to Pose Mode.
 
 **Workspace Windows**
 
-In the rig file, other than the two windows for the viewport (front and side view), there are three more at the bottom: a ***Graph Editor***, ***a Dope Sheet***, and a ***Timeline***.
+In the rig file, other than the two windows for the viewport (front and side view), there are three more at the bottom: a _**Graph Editor**_, _**a Dope Sheet**_, and a _**Timeline**_.
 
-- ***Graph Editor***: In this editor, it is possible to edit the animation curves of each transform property of the selected controls. Those curves show how the interpolation is being calculated and they can be edited to achieve the wanted effect in the animation. Both in here and in the dope sheet the ***Only Show Selected*** tool is toggled, which means it’ll only include channels related to the selected control. This can be turned on and off by simply clicking on the arrow icon.
-- ***Dope Sheet***: Here you can edit the keyframes. This is also where you can create new animations or go through the multiple ones created. Keep in mind that in order to have access to the animation, the ***Action Editor*** must be selected. This option is right next to the *Dope Sheet* icon, in a dropdown menu.
-- ***Timeline***: This is where the timeline and playback controls are found. In here, the ***Auto Keying*** is on, which means that every time a control is manipulated it automatically creates a keyframe. You can always disable that function by clicking on the dot next to the playback controls.
+-   _**Graph Editor**_: In this editor, it is possible to edit the animation curves of each transform property of the selected controls. Those curves show how the interpolation is being calculated and they can be edited to achieve the wanted effect in the animation. Both in here and in the dope sheet the _**Only Show Selected**_ tool is toggled, which means it’ll only include channels related to the selected control. This can be turned on and off by simply clicking on the arrow icon.
+-   _**Dope Sheet**_: Here you can edit the keyframes. This is also where you can create new animations or go through the multiple ones created. Keep in mind that in order to have access to the animation, the _**Action Editor**_ must be selected. This option is right next to the _Dope Sheet_ icon, in a dropdown menu.
+-   _**Timeline**_: This is where the timeline and playback controls are found. In here, the _**Auto Keying**_ is on, which means that every time a control is manipulated it automatically creates a keyframe. You can always disable that function by clicking on the dot next to the playback controls.
 
 With this workspace, you have everything needed to start animating!
 
+![These are the bottom windows. The top one is in the Graph Editor, the middle one in the Dope Sheet, and the bottom one is the Timeline. The top red arrow shows the Only Show Selected tool and the bottom one shows the Auto Keying.](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/workspace.png)
 
-![These are the bottom windows. The top one is in the ***Graph Editor,*** the middle one in the ***Dope Sheet,*** and the bottom one is the ***Timeline.*** The top red arrow shows the ***Only Show Selected*** tool and the bottom one shows the ***Auto Keying***.](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/workspace.png)
+These are the bottom windows. The top one is in the _**Graph Editor,**_ the middle one in the _**Dope Sheet,**_ and the bottom one is the _**Timeline.**_ The top red arrow shows the _**Only Show Selected**_ tool and the bottom one shows the _**Auto Keying**_.
 
-_These are the bottom windows. The top one is in the ***Graph Editor,*** the middle one in the ***Dope Sheet,*** and the bottom one is the ***Timeline.*** The top red arrow shows the ***Only Show Selected*** tool and the bottom one shows the ***Auto Keying***._
+### **Hint!**
 
-> Tip: **Since Blender is highly customizable, this is also a good time to set up the layout that best suits you, adding, adjusting, or removing windows. Each animator has their own preferences, so feel free to edit the layout however you want!**
+<aside> 💡 **Since Blender is highly customizable, this is also a good time to set up the layout that best suits you, adding, adjusting, or removing windows. Each animator has their own preferences, so feel free to edit the layout however you want!**
+
+</aside>
 
 ### Getting Started
 
 **Starting Pose**
 
-In the rig file provided, there’s already an action, the ***Starting_Pose***. Considering that all avatar actions start from the idle pose, **we really encourage starting your animation from that pose and also using it again in the last frame**. This will make for a better transition from Idle to Emote and a more fluid animation.
+In the rig file provided, there’s already an action, the _**Starting_Pose**_. Considering that all avatar actions start from the idle pose, **we really encourage starting your animation from that pose and also using it again in the last frame**. This will make for a better transition from Idle to Emote and a more fluid animation.
 
 **Ground Reference and Animation Area**
 
-In order to avoid ground penetration during animation, a plane has been added to the file as a ground reference. Along with the animation area reference, it also helps identify the area that can be used for the animation.
+In order to avoid ground penetration during animation, a plane has been added to the file as a ground reference. Along with the animation area reference, it also helps identify the area that can be used for the animation. For reference, the samller circle on the plane has a radius of 2 meters and the larger one, 4 meters.
 
-![Ground and animation area reference.](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/ground_reference.png)
+![Ground and animation area reference.](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/animation_area_reference.png)
 
-_Ground and animation area reference._
+Ground and animation area reference.
+
+The avatar center of gravity is the CTRL_Avatar_UpperBody. The limit to move it around is 1 meter (left, right, front, back), so try to keep it inside the smaller circle during animation. Arms and legs can exceed the small circle up to the larger one. As for the height, the limit is also 1 meter. The avatar cannot move over a meter up from its original position.
+
+![Avatar centered.](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/animation_area_center.png)
+
+Avatar centered.
+
+![Max distance right.](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/animation_area_ok_right.png)
+
+Max distance right.
+
+![Max distance left.](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/animation_area_ok_left.png)
+
+Max distance left.
+
+![Max distance up.](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/animation_area_ok_up.png)
+
+Max distance up.
+
+Here are some examples of emotes that are within the boundaries.
+
+![Spotlight](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/spotlight.gif)
+
+Spotlight
+
+![Thalia Dance](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/thalia_dance.gif)
+
+Thalia Dance
+
+### Attention!
+
+<aside> 💡 **Watch out for these boundaries because crossing them might cause gameplay issues.**
+
+</aside>
 
 **Creating an Animation**
 
-To create a new animation, simply click on ***Create A New Action*** button (this will duplicate the current animation with all the keyframes) or press the X next to it, the ***Unlink Action,*** and press the ***New*** button. This way you’ll start with no keyframes at all. Make sure to always toggle ***Fake User*** (the shield icon) so your animation is saved!
+To create a new animation, simply click on _**Create A New Action**_ button (this will duplicate the current animation with all the keyframes) or press the X next to it, the _**Unlink Action,**_ and press the _**New**_ button. This way you’ll start with no keyframes at all. Make sure to always toggle _**Fake User**_ (the shield icon) so your animation is saved!
 
-![Create a new animation by duplicating the existing one or by clicking on ***Unlink Action*** and then ***New***.](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/new_anim.gif)
+![Create a new animation by duplicating the existing one or by clicking on Unlink Action and then New.](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/new_anim.gif)
 
-_Create a new animation by duplicating the existing one or by clicking on ***Unlink Action*** and then ***New***._
+Create a new animation by duplicating the existing one or by clicking on _**Unlink Action**_ and then _**New**_.
 
 **Browsing and Deleting Animations**
 
-In Blender, you can have multiple animation tracks in the same file. It is possible to browse them by clicking on the ***Browse Action*** dropdown menu. All animation with and F (***Fake User***) will be saved. To delete an animation, press ***Shift*** on the keyboard and click on the ***X***. After doing that, the animation will show a 0 next to it, which means that it will be deleted the next time you close Blender or reopen the file.
+In Blender, you can have multiple animation tracks in the same file. It is possible to browse them by clicking on the _**Browse Action**_ dropdown menu. All animation with and F (_**Fake User**_) will be saved. To delete an animation, press _**Shift**_ on the keyboard and click on the _**X**_. After doing that, the animation will show a 0 next to it, which means that it will be deleted the next time you close Blender or reopen the file.
 
 ![Browsing animations: The ones with an F will be saved, and the ones with 0 will be deleted.](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/anim_list.gif)
 
-_Browsing animations: The ones with an F will be saved, and the ones with 0 will be deleted._
+Browsing animations: The ones with an F will be saved, and the ones with 0 will be deleted.
 
-> Tip: Do not always edit the same animation track. Before making major changes, just duplicate the animation. That way you have a back up version in case you regret deleting or changing something. This is also a nice way to keep track of the progress made so far!
+### **Hint!**
+
+<aside> 💡 **Do not always edit the same animation track. Before making major changes, just duplicate the animation. That way you have a back up version in case you regret deleting or changing something. This is also a nice way to keep track of the progress made so far!**
+
+</aside>
 
 **Naming**
 
 **An animation’s name should start with a capital letter and if the name is more than one word long, the words should be separated by _.** Do not use spaces or special characters. Here are some examples of naming:
 
-- Snowfall
-- Rainbow_Dance
-- Throw_Money
-- Talk_To_Hand
+-   Snowfall
+-   Rainbow_Dance
+-   Throw_Money
+-   Talk_To_Hand
 
 ### The Animation Specifications
 
 **Length**
 
-The max length of an animation is **10 seconds** or **300  frames**. Remember to keyframe every control’s properties on the first and last frames.
+The max length of an animation is **10 seconds** or **300 frames**. Remember to keyframe every control’s properties on the first and last frames.
 
-> Warning: Channels with visibility turned off in the Graph Editor won’t be keyframed, deleted, or even shown in the Action Editor. Unless it was intentionally done that way, pay extra attention to the visibility.
+### Attention!
 
-![Make channels visible before keyframing!](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/visibility_graph_editor.gif)
+<aside> ⚠️ **Channels with visibility turned off in the Graph Editor won’t be keyframed, deleted, or even shown in the Action Editor. Unless it was intentionally done that way, pay extra attention to the visibility.**
 
-_Make channels visible before keyframing!_
+</aside>
+
+![Make channels visible before keyframing!](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/channels_visibility_graph_editor.gif)
+
+Make channels visible before keyframing!
 
 **Number of Animations**
 
@@ -117,7 +165,7 @@ The exported file can only have **one animation**. If animations were duplicated
 
 **Format**
 
-Animations should be exported as .**GLB**. The file can only contain the deforming skeleton and the animation. **Mesh, controls, and any other object should not be exported**.
+Animations should be exported as .**GLB**. The file can only contain the deforming skeleton and the animation. **Mesh, controls, and any other object should not be exported**. More details on how to export can be found [**below**](#exporting).
 
 **Sampling**
 
@@ -129,7 +177,11 @@ The drawback, however, is that the animation will start getting less and less fl
 
 Usually, a **sampling rate of 2 or 3** will do the trick. Those numbers can optimize the animation without compromising the quality.
 
-> Tip: If the number of frames of the animation can be divided by the sampling rate, that’s a good thing! It means that the final frame will be baked, preserving the transition from end to start of the animation.
+### Hint!
+
+<aside> 💡 **If the number of frames of the animation can be divided by the sampling rate, that’s a good thing! It means that the final frame will be baked, preserving the transition from end to start of the animation.**
+
+</aside>
 
 **File Size**
 
@@ -139,21 +191,21 @@ The max file size is **1 MB**. If the file is over that after exporting, try che
 
 Since we only want the armature and the animation to be exported, turn off the mesh visibility and any object other than the armature before exporting, as shown below:
 
-![Turn off the mesh visibility before exporting!](hhttps://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/mesh_visibility.gif)
+![Turn off the mesh visibility before exporting!](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/mesh_visibility.gif)
 
-_Turn off the mesh visibility before exporting!_
+Turn off the mesh visibility before exporting!
 
-To export, go to *File* > *Export* > *glTF2.0 (.glb, .gltf)*
+To export, go to _File_ > _Export_ > _glTF2.0 (.glb, .gltf)_
 
 ![export.gif](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/export.gif)
 
-For the export settings, expand ***Include*** and in ***Limit to*** toggle ***Visible Objects***. For *Transform* and *Geometry*, leave it as it is.
+For the export settings, expand _**Include**_ and in _**Limit to**_ toggle _**Visible Objects**_. For _Transform_ and _Geometry_, leave it as it is.
 
 ![export1.png](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/export1.png)
 
 ![visible_objects2.gif](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/visible_objects2.gif)
 
-Next, expand the ***Animation*** tab, expand the second ***Animation*** tab and toggle ***Export Deformation Bones Only.*** This is also where the ***Sampling Rate*** is defined.
+Next, expand the _**Animation**_ tab, expand the second _**Animation**_ tab and toggle _**Export Deformation Bones Only.**_ This is also where the _**Sampling Rate**_ is defined.
 
 ![export2.png](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/export2.png)
 
@@ -163,12 +215,44 @@ That’s it for exporting the animation!
 
 ### Import into the Builder
 
-When all the files are ready to go you can import them to the builder to test the animation! Go to [https://builder.decentraland.org/](https://builder.decentraland.org/) and import the item you want to test.
+When all the files are ready to go you can import them to the builder to test the animation! Go to [](https://builder.decentraland.org/)[https://builder.decentraland.org/](https://builder.decentraland.org/) and import the item you want to test. You’ll be asked to choose a thumbnail and define the rarity of your emote.
 
-![Screen Shot 2022-08-04 at 12.39.58.png](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/Screen_Shot_2022-08-04_at_12.39.58.png)
+![Screen Shot 2022-08-04 at 12.39.58.png](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/screen_shot_2022-08-04_at_12.39.58.png)
+
+### Attention!
+
+<aside> 💡 **Make sure to choose the thumbnail that show a key pose of the emote and centered in the frame. It has be clear to other users what the emote is about, otherwise it’s up to the curator to reject the collection.**
+
+</aside>
 
 Once it is imported, click on this eye icon to visualize it!
 
 ![visulize.png](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/visulize.png)
 
 You can also add a description and tags to the emote. **The overrides and hides section must be empty.**
+
+### References
+
+If you’re still not sure where to start or need some reference or inspiration, here are some animation clips to help you with that. These can be some nice studying material!
+
+[Idle.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/idle.glb)
+
+[Jump.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/jump.glb)
+
+[Walk.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/walk.glb)
+
+[Run.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/run.glb)
+
+[Pose_Jump.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/pose_jump.glb)
+
+[Pose_Spin.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/pose_spin.glb)
+
+[Thalia.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/thalia.glb)
+
+[Spotlight.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/spotlight.glb)
+
+[Fashionista.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/fashionista.glb)
+
+[Chic.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/chic.glb)
+
+[Pose_Fingers.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/pose_fingers.glb)
