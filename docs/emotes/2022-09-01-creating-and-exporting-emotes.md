@@ -14,8 +14,6 @@ This documentation will cover the file specifications, the basics of animation i
 
 ### Animation Specs Chart
 
-### Animation Specs Chart
-
 | Frame Rate | 30 fps |
 | --- | --- |
 | Max Length | 10 seconds (300 frames) |
