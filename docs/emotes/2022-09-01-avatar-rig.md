@@ -5,10 +5,13 @@ description: Basics about the avatar rig.
 categories:
   - emotes
 type: Document
+redirect_from:
+  - /emotes/avatar-rig
+slug: /creator/emotes/avatar-rig
 ---
 
 
-202A rig is a virtual skeleton that allows a model to move. It consists of a hierarchy of individual bones, much like a real life skeleton, and it works under a parent/child relationship.  This document will cover some basic rigging concepts, such as bone position, bone orientation, deforming and non-deforming bones, the difference between IK and FK and their purposes. The structure of an avatar’s rig, custom attributes, and setup for animating can be found in [rig features](/emotes/rig-features).
+202A rig is a virtual skeleton that allows a model to move. It consists of a hierarchy of individual bones, much like a real life skeleton, and it works under a parent/child relationship.  This document will cover some basic rigging concepts, such as bone position, bone orientation, deforming and non-deforming bones, the difference between IK and FK and their purposes. The structure of an avatar’s rig, custom attributes, and setup for animating can be found in [rig features](/creator/emotes/rig-features).
 
 # The Basics
 

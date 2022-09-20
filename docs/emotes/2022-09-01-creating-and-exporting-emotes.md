@@ -5,6 +5,9 @@ description: Steps for creating and exporting an avatar emote.
 categories:
   - emotes
 type: Document
+redirect_from:
+  - /emotes/creating-and-exporting-emotes
+slug: /creator/emotes/creating-and-exporting-emotes
 ---
 
 
@@ -40,7 +43,7 @@ _Changing to Pose Mode._
 
 **Workspace Windows**
 
-In the rig file, other than the two windows for the viewport (front and side view), there are three more at the bottom: a ***Graph Editor***, ***a Dope Sheet***, and a ***Timeline***. 
+In the rig file, other than the two windows for the viewport (front and side view), there are three more at the bottom: a ***Graph Editor***, ***a Dope Sheet***, and a ***Timeline***.
 
 - ***Graph Editor***: In this editor, it is possible to edit the animation curves of each transform property of the selected controls. Those curves show how the interpolation is being calculated and they can be edited to achieve the wanted effect in the animation. Both in here and in the dope sheet the ***Only Show Selected*** tool is toggled, which means it’ll only include channels related to the selected control. This can be turned on and off by simply clicking on the arrow icon.
 - ***Dope Sheet***: Here you can edit the keyframes. This is also where you can create new animations or go through the multiple ones created. Keep in mind that in order to have access to the animation, the ***Action Editor*** must be selected. This option is right next to the *Dope Sheet* icon, in a dropdown menu.
@@ -48,7 +51,7 @@ In the rig file, other than the two windows for the viewport (front and side vie
 
 With this workspace, you have everything needed to start animating!
 
- 
+
 
 ![These are the bottom windows. The top one is in the ***Graph Editor,*** the middle one in the ***Dope Sheet,*** and the bottom one is the ***Timeline.*** The top red arrow shows the ***Only Show Selected*** tool and the bottom one shows the ***Auto Keying***.](/images/emotes/workspace.png)
 
@@ -60,9 +63,9 @@ _These are the bottom windows. The top one is in the ***Graph Editor,*** the mid
 
 **Starting Pose**
 
-In the rig file provided, there’s already an action, the ***Starting_Pose***. Considering that all avatar actions start from the idle pose, **we really encourage starting your animation from that pose and also using it again in the last frame**. This will make for a better transition from Idle to Emote and a more fluid animation. 
+In the rig file provided, there’s already an action, the ***Starting_Pose***. Considering that all avatar actions start from the idle pose, **we really encourage starting your animation from that pose and also using it again in the last frame**. This will make for a better transition from Idle to Emote and a more fluid animation.
 
-**Ground Reference and Animation Area** 
+**Ground Reference and Animation Area**
 
 In order to avoid ground penetration during animation, a plane has been added to the file as a ground reference. Along with the animation area reference, it also helps identify the area that can be used for the animation.
 
@@ -90,7 +93,7 @@ _Browsing animations: The ones with an F will be saved, and the ones with 0 will
 
 **Naming**
 
-**An animation’s name should start with a capital letter and if the name is more than one word long, the words should be separated by _.** Do not use spaces or special characters. Here are some examples of naming: 
+**An animation’s name should start with a capital letter and if the name is more than one word long, the words should be separated by _.** Do not use spaces or special characters. Here are some examples of naming:
 
 - Snowfall
 - Rainbow_Dance
@@ -119,13 +122,13 @@ Animations should be exported as .**GLB**. The file can only contain the deformi
 
 **Sampling**
 
-Since constraints can’t be exported, the only way to export the animation clip is by baking it, which means that all the deforming bones’ positions, rotation, and scale will be keyframed in every single frame of the animation. If the clip is too long, like up to 300 frames, it’ll have 300 keyframes after exporting and the more keyframes it has, the heavier the file gets. 
+Since constraints can’t be exported, the only way to export the animation clip is by baking it, which means that all the deforming bones’ positions, rotation, and scale will be keyframed in every single frame of the animation. If the clip is too long, like up to 300 frames, it’ll have 300 keyframes after exporting and the more keyframes it has, the heavier the file gets.
 
-Sampling is a good way to optimize the animation. The sampling rate will define how often a keyframe will be baked in the animation. For example, if the sampling rate is set to 2, that means a keyframe will be created at every two frames. A sampling rate of 3 will bake a keyframe every three frames and so on. The higher the sampling rate, the lighter the file. 
+Sampling is a good way to optimize the animation. The sampling rate will define how often a keyframe will be baked in the animation. For example, if the sampling rate is set to 2, that means a keyframe will be created at every two frames. A sampling rate of 3 will bake a keyframe every three frames and so on. The higher the sampling rate, the lighter the file.
 
-The drawback, however, is that the animation will start getting less and less fluid since it loses some important keyframes (they are distributed through the animation in an uneven way). It’s also important to notice that **sampling is NOT dividing the number of the animation’s frames by the sampling rate**. 
+The drawback, however, is that the animation will start getting less and less fluid since it loses some important keyframes (they are distributed through the animation in an uneven way). It’s also important to notice that **sampling is NOT dividing the number of the animation’s frames by the sampling rate**.
 
-Usually, a **sampling rate of 2 or 3** will do the trick. Those numbers can optimize the animation without compromising the quality. 
+Usually, a **sampling rate of 2 or 3** will do the trick. Those numbers can optimize the animation without compromising the quality.
 
 > Tip: If the number of frames of the animation can be divided by the sampling rate, that’s a good thing! It means that the final frame will be baked, preserving the transition from end to start of the animation.
 
@@ -151,7 +154,7 @@ For the export settings, expand ***Include*** and in ***Limit to*** toggle ***Vi
 
 ![visible_objects2.gif](/images/emotes/visible_objects2.gif)
 
-Next, expand the ***Animation*** tab, expand the second ***Animation*** tab and toggle ***Export Deformation Bones Only.*** This is also where the ***Sampling Rate*** is defined. 
+Next, expand the ***Animation*** tab, expand the second ***Animation*** tab and toggle ***Export Deformation Bones Only.*** This is also where the ***Sampling Rate*** is defined.
 
 ![export2.png](/images/emotes/export2.png)
 
@@ -161,11 +164,11 @@ That’s it for exporting the animation!
 
 ### Import into the Builder
 
-When all the files are ready to go you can import them to the builder to test the animation! Go to [https://builder.decentraland.org/](https://builder.decentraland.org/) and import the item you want to test. 
+When all the files are ready to go you can import them to the builder to test the animation! Go to [https://builder.decentraland.org/](https://builder.decentraland.org/) and import the item you want to test.
 
 ![Screen Shot 2022-08-04 at 12.39.58.png](/images/emotes/Screen_Shot_2022-08-04_at_12.39.58.png)
 
-Once it is imported, click on this eye icon to visualize it! 
+Once it is imported, click on this eye icon to visualize it!
 
 ![visulize.png](/images/emotes/visulize.png)
 

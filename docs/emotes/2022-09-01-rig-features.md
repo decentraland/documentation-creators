@@ -5,6 +5,9 @@ description: Features about the avatar rig and downloadable file.
 categories:
   - emotes
 type: Document
+redirect_from:
+  - /emotes/rig-features
+slug: /creator/emotes/rig-features
 ---
 
 This documentation explains the set up for Rig 1.0, its controls, and features.
@@ -40,7 +43,7 @@ _Behavior when mirrorring poses._
 
 ### Layers
 
-To avoid any accidents and to make it easier to identify the controls, this rig is organized in layers that can be accessed in the *Object Data Properties* tab in Blender. The first set of layers (on the left) has all the controls needed for avatar animation. The second set (on the right) has constraint setups and the base skeleton; there’s no need to select those. 
+To avoid any accidents and to make it easier to identify the controls, this rig is organized in layers that can be accessed in the *Object Data Properties* tab in Blender. The first set of layers (on the left) has all the controls needed for avatar animation. The second set (on the right) has constraint setups and the base skeleton; there’s no need to select those.
 
 ![Object Data Properties tab.](/images/emotes/layers.png)
 
@@ -79,7 +82,7 @@ _3rd Bottom Layer._
 
 _4th Top Layer._
 
-To see all the controls together, select all of the first top four and bottom 2nd and 3rd. To work with separate groups, select just the one you need.  While going through the layers, make sure you’re selecting only *Layers*. 
+To see all the controls together, select all of the first top four and bottom 2nd and 3rd. To work with separate groups, select just the one you need.  While going through the layers, make sure you’re selecting only *Layers*.
 
 > **Warning**: **Do not select *Protected Layers*.**
 
@@ -157,9 +160,9 @@ _Keyframing with the Keying option._
 
 ### Reverse IK Foot Setup
 
-Animating an FK foot is pretty straightforward: just grab any of the controls and rotate it. Since there’s a control for the foot and another for the toes, the animator has full control over the movements. However, for the IK it’s not so simple. The foot has to stick to the ground, while also being able to rotate on the ball and heels and side to side. 
+Animating an FK foot is pretty straightforward: just grab any of the controls and rotate it. Since there’s a control for the foot and another for the toes, the animator has full control over the movements. However, for the IK it’s not so simple. The foot has to stick to the ground, while also being able to rotate on the ball and heels and side to side.
 
-This rig was set up in a way to give the animator freedom of foot movement without losing the advantages of the IK system. It consists of four controls: 
+This rig was set up in a way to give the animator freedom of foot movement without losing the advantages of the IK system. It consists of four controls:
 
 - Foot roll: this control rotates the foot back and forth and side to side. To avoid bending too much on the heel or too much on the ball, a limit was set so the foot rig doesn’t break. When it reaches this limit, the foot will stop rotating.
 
