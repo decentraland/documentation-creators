@@ -6,7 +6,7 @@ categories:
   - emotes
 type: Document
 redirect_from:
-  - /emotes/creating-and-exporting-emotes
+  - /emotes/creating-and-exporting-emotes/
 slug: /creator/emotes/creating-and-exporting-emotes
 ---
 
@@ -21,6 +21,8 @@ This documentation will cover the file specifications, the basics of animation i
 | Export Format | .glb |
 | Sampling Rate | 2 or 3 (if needed) |
 | Max File Size | 1 MB |
+| Max Animation Distance | 1 meter (in any direction) |
+| Max Animation Height | 1 meter |
 
 You can find a more detailed explanation of the animation specifications [**below**](#the-animation-specifications).
 
