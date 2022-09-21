@@ -11,7 +11,7 @@ type: Document
 slug: /creator/development-guide/scene-files/
 ---
 
-After [creating a new scene](https://docs.decentraland.org/#create-your-first-scene) using the CLI, the scene folder will have a series of files with default content.
+After [creating a new scene](/creator/development-guide/sdk-101) using the CLI, the scene folder will have a series of files with default content.
 
 ## Default files in a local scene
 
@@ -23,67 +23,33 @@ Scenes include the following files:
 - **tsconfig.json**: Typescript configuration file.
 - **.dclignore**: Lists what files in your project not to deploy to IPFS.
 
-#### game.ts
+### game.ts
 
-This is the entry point to your scene's code. You could fit your entire scene's logic into this file, although for clarity in most cases we recommend spreading out your code over several other _.ts_ files and importing them into _game.ts_.
+This is the entry point to your scene's code. You could fit your entire scene's logic into this file, although for clarity in most cases we recommend spreading out your code over several other _.ts_ files.
 
-In most cases, you'll only need to edit this file to create your scene. It contains the code that generates an entity tree, which is what end users of your parcel will see.
+In most cases, you'll only need to edit this and other .ts files to create your scene. It contains the code that generates the [entities, components](/creator/development-guide/entities-components) and [systems](/creator/development-guide/systems) of your scene.
 
-Below is a basic example of a _game.ts_ file:
+When running the scene, the contents of your `.ts` files are compiled to a single minified `.js` file, `bin/scene.js`. 
 
-```ts
-// Create a component group to track entities with Transform components
-let group = engine.getComponentGroup(Transform)
+> Note: You can use another tool or language instead of TypeScript, so long as your scripts are contained within a single Javascript file (bin/scene.js). All provided type declarations are made in TypeScript, and other languages and transpilers are not officially supported.
 
-// Create a system
-export class RotatorSystem {
-  // The update() function runs on every frame.
-  update() {
-    // Cycle over the entities in the component group
-    for (let entity of group.entities) {
-      const transform = entity.getComponent(Transform)
-      transform.rotation.y += 2
-    }
-  }
-}
+### scene.json
 
-// Create an entity
-const cube = new Entity()
+The _scene.json_ file is a JSON formatted manifest for a scene in the world. A scene can span a single or multiple LAND parcels. The _scene.json_ manifest describes what objects exist in the scene, a list of any assets needed to render it, contact information for the parcel owner, and security settings. 
 
-// Add a cube shape to the entity
-cube.addComponent(new BoxShape())
-
-// Add a transform component to the entity
-cube.addComponent(
-  new Transform({
-    position: new Vector3(5, 0, 5),
-  })
-)
-
-// Add the entity to the engine
-engine.addEntity(cube)
-
-// Add the system to the engine
-engine.addSystem(new RotatorSystem())
-```
-
-#### scene.json
-
-The _scene.json_ file is a JSON formatted manifest for a scene in the world. A scene can span a single or multiple LAND parcels. The _scene.json_ manifest describes what objects exist in the scene, a list of any assets needed to render it.
-
-contact information for the parcel owner, and security settings. For more information and an example of a
-_scene.json_ file, please visit the [Decentraland specification proposal](https://github.com/decentraland/proposals/blob/master/dsp/0020.mediawiki).
+For more information see [scene metadata](/creator/development-guide/scenes#metadata). You can also read the original [specification proposal](https://github.com/decentraland/proposals/blob/master/dsp/0020.mediawiki) for this metadata.
 
 All of this metadata is optional for previewing the scene locally, but part of it is needed for deploying. You can change this information manually at any time.
 
-#### package.json
+### package.json
 
-This file provides information to NPM that allows it to identify the project, as well as handle the project's dependencies. Decentraland scenes need two packages:
+This file provides information to NPM that allows it to identify the project, as well as handle the project's dependencies. Decentraland scenes require one main package:
 
-- **decentraland-api**: allows the scene to communicate with the world engine.
-- **typescript**: used to compile the file _game.ts_ to javascript.
+- **decentraland-ecs**: the fundamental dependency of the Decentraland SDK, including all the definitions and types for the engine, components, systems, etc.
 
-#### package-lock.json
+Your scene may include any number of other packages, for example to include [libraries](https://github.com/decentraland-scenes/Awesome-Repository#Libraries) that can help make the writing of code easier, or enable special functionalities.
+
+### package-lock.json
 
 This file lists the versions of all the other dependencies of the project. These versions are locked, meaning that the compiler will use literally the same minor release listed here.
 
@@ -93,7 +59,8 @@ You can change any package version manually by editing this file.
 
 Directories containing a _tsconfig.json_ file are root directories for TypeScript Projects. The _tsconfig.json_ file specifies the root files and options required to compile your project from TypeScript into JavaScript.
 
-> You can use another tool or language instead of TypeScript, so long as your scripts are contained within a single Javascript file (scene.js). All provided type declarations are made in TypeScript, and other languages and transpilers are not officially supported.
+When installing any additional libraries to your scene, an entry should be added automatically to this file. For installing Decentraland utils libraries, it shouldn't be necessary to manually do any changes to this file.
+
 
 ## Recommended file locations
 

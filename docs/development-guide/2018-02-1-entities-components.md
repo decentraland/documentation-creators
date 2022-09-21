@@ -20,138 +20,105 @@ slug: /creator/development-guide/entities-components/
 
 Decentraland scenes are built around [_entities_, _components_ and _systems_](https://en.wikipedia.org/wiki/Entity%E2%80%93component%E2%80%93system). This is a common pattern used in the architecture of several game engines, that allows for easy composability and scalability.
 
+
+TODO: Change image
 ![](/images/media/ecs-big-picture.png)
 
 ## Overview
 
-_Entities_ are the basic unit for building everything in Decentraland scenes. All visible and invisible 3D objects and audio players in your scene will each be an entity. An entity is nothing more than a container that holds components. The entity itself has no properties or methods of its own, it simply groups several components together.
+_Entities_ are the basic unit for building everything in Decentraland scenes. All visible and invisible 3D objects and audio players in your scene will each be an entity. An entity is nothing more than an id, that can be referenced by components. The entity itself has no properties or methods of its own, it simply serves to group several components together.
 
-_Components_ define the traits of an entity. For example, a `transform` component stores the entity's coordinates, rotation and scale. A `BoxShape` component gives the entity a box shape when rendered in the scene, a `Material` component gives the entity a color or texture. You could also create a custom `health` component to store an entity's remaining health value, and add it to entities that represent non-player enemies in a game.
+_Components_ define the traits of an entity. For example, a `transform` component stores the entity's coordinates, rotation and scale. A `BoxShape` component gives the entity a box shape when rendered in the scene, a `Material` component gives the entity a color or texture. You can also create custom components to serve your scene's required data, for example a custom `health` could store an entity's remaining health value, and add it to entities that represent non-player enemies in a game.
 
 If you're familiar with web development, think of entities as the equivalent of _Elements_ in a _DOM_ tree, and of components as _attributes_ of those elements.
 
-> Note: In previous versions of the SDK, the _scene state_ was stored in an object that was separate from the entities themselves. As of version 5.0, the _scene state_ is directly embodied by the components that are used by the entities in the scene.
+> Note: In previous versions of the SDK, Entities were _objects_ that were instanced, and could be extended to add functions. As of version 7.0 of the SDK, entities are only an ID. This structure better fits the principles of [data oriented programming](/creator/development-guide/data-oriented-programming) and can help in the scene's performance.
 
+TODO: change imag
 <img src="/images/media/ecs-components.png" alt="Armature" width="400"/>
 
-Components like `Transform`, `Material` or any of the _shape_ components are closely tied in with the rendering of the scene. If the values in these components change, that alone is enough to change how the scene is rendered in the next frame.
-
-Components are meant to store data about their parent entity. They only store this data, they shouldn't modify it themselves. All changes to the values in the components are carried out by [Systems](/creator/development-guide/systems). Systems are completely decoupled from the components and entities themselves. Entities and components are agnostic to what _systems_ are acting upon them.
-
-See [Component Reference](https://github.com/decentraland/ecs-reference) for a reference of all the available constructors for predefined components.
-
-## Syntax for entities and components
-
-Entities and components are declared as TypeScript objects. The example below shows some basic operations of declaring, configuring and assigning these.
-
-```ts
-// Create an entity
-const box = new Entity()
-
-// Create and add a `Transform` component to that entity
-box.addComponent(new Transform())
-
-// Set the fields in the component
-box.getComponent(Transform).position.set(3, 1, 3)
-
-// Create and apply a `BoxShape` component to give the entity a visible form
-box.addComponent(new BoxShape())
-
-// Add the entity to the engine
-engine.addEntity(box)
-```
-
-## Add entities to the engine
-
-When you create a new entity, you're instancing an object and storing it in memory. A newly created entity isn't _rendered_ and it won't be possible for a player to interact with it until it's added to the _engine_.
+Components like `Transform`, `Material` or any of the _shape_ components are closely tied in with the rendering of the scene. If the values in these components change, that alone is enough for the engine to change how the scene is rendered in the next frame.
 
 The engine is the part of the scene that sits in the middle and manages all of the other parts. It determines what entities are rendered and how players interact with them. It also coordinates what functions from [systems](/creator/development-guide/systems ) are executed and when.
 
+
+Components are meant to store data about their referenced entity. They can only store this data, they can't modify this data themselves. All changes to the values in the components are carried out by [Systems](/creator/development-guide/systems). Systems are completely decoupled from the components and entities themselves. Entities and components are agnostic to what _systems_ are acting upon them.
+
+
+## Syntax for entities and components
+
+The example below shows some basic operations for declaring, and configuring basic entities and components.
+
 ```ts
 // Create an entity
-const box = new Entity()
+const door = engine.addEntity()
 
-// Give the entity a shape
-box.addComponent(new BoxShape())
+// Give the entity a position via a transform component
+Transform.create(door, {
+	position: { x: 5, y: 1, z: 5 }
+})
 
-// Add the entity to the engine
-engine.addEntity(box)
+// Give the entity a visible shape via a GLTFShape component
+GLTFShape.create(door)
 ```
 
-In the example above, the newly created entity isn't viewable by players on your scene until it's added to the engine.
+> Note: In previous versions of the SDK, it was necessary to manually add an entity to the engine to start rendering it. As of version 7 of the SDK, entities are implicitly added to the engine as soon as they are assigned a component.
 
-> Note: Entities aren't added to [Component groups](/creator/development-guide/component-groups) either until they are added to the engine.
+When a component is created, it's always assigned to a parent entity. The component's values then affect the entity.
 
-It’s sometimes useful to preemptively create entities and not add them to the engine until they are needed. This is especially true for entities that have elaborate geometries that might otherwise take long to load.
+## Remove entities
 
-When an entity is added to the engine, its `alive` property is implicitly set to _true_. You can check if an entity is currently added to the engine via this property.
+To remove an entity from your scene, you must remove each of its components. As a short cut, you can call the REMOVE ENTITY FUNCTION
 
-```ts
-if (myEntity.alive) {
-  log("the entity is added to the engine")
-}
-```
+TODO: remve entity
 
-> Note: It's always recommended to add a `Transform` component to an entity before adding it to the engine. Entities that don't have a Transform component are rendered in the _(0, 0, 0)_ position of the scene, so if the entity is added before it has a `Transform`, it will be momentarily rendered in that position, and with its original size and rotation.
 
-## Remove entities from the engine
-
-Entities that have been added to the engine can also be removed from it. When an entity is removed, it stops being rendered by the scene and players can no longer interact with it.
-
-```ts
-// Remove an entity from the engine
-engine.removeEntity(box)
-```
-
-Note: Removed entities are also removed from all [Component groups](/creator/development-guide/component-groups).
-
-If your scene has a pointer referencing a removed entity, it will remain in memory, allowing you to still access and change its component's values and add it back.
-
+TODO: CONFIRM THIS:
 If a removed entity has child entities, all children of that entity are removed too.
+
+You can also manually remove each of the components in the entity one by one
+
+TODO: snippet
+
+NOTE: not the same as making invisible - link to invisible
+
+The entity's id is then free to be reused by a new entity
+
 
 ## Nested entities
 
 An entity can have other entities as children. Thanks to this, we can arrange entities into trees, just like the HTML of a webpage.
 
+
+TODO: change image
 <img src="/images/media/ecs-nested-entities.png" alt="nested entities" width="400"/>
 
-To set an entity as the parent of another, simply use `.setParent()`:
+To set an entity as the parent of another, the child entity must have a `Transform` component. You can then set the `parent` field with a reference to the parent entity.
 
 ```ts
 // Create entities
-const parentEntity = new Entity()
-engine.addEntity(parentEntity)
+const parentEntity = engine.addEntity()
 
-const childEntity = new Entity()
+const childEntity = engine.addEntity()
 
 // Set parent
-childEntity.setParent(parentEntity)
+Transform.create(childEntity, {
+	parent: parentEntity
+})
 ```
 
-> Note: Child entities should not be explicitly added to the engine, as they are already added via their parent entity.
 
-Once a parent is assigned, it can be read off the child entity with `.getParent()`.
+Once a parent is assigned, it can be read off the child entity from the `parent` field on its `Transform` component.
 
 ```ts
 // Get parent from an entity
-const parent = childEntity.getParent()
+const parent = Transform.get(childEntity).parent
 ```
 
-<!--
-You can also iterate over an entity's children in the following way.
 
-```ts
-// Get the first child listed in the library
-for(let id in parent.children){
-  const child = parent.children[id]
-  // do something with the child entity
-}
-```
+If a parent entity has a `Transform` component that affects its position, scale or rotation, its children entities are also affected. Any position or rotation values are added, any scale values are multiplied.
 
-> Note: `.children` returns a library that lists all the child entities.
--->
-
-If a parent entity has a `transform` component that affects its position, scale or rotation, its children entities are also affected.
+If either the parent or child entity doesn't have a `Transform` component, the following default values are used.
 
 - For **position**, the parent's center is _0, 0, 0_
 - For **rotation** the parent's rotation is the quaternion _0, 0, 0, 1_ (equivalent to the Euler angles _0, 0, 0_)
@@ -162,101 +129,102 @@ Entities with no shape component are invisible in the scene. These can be used a
 To remove an entity's parent, you can assign the entity's parent to `null`.
 
 ```ts
-childEntity.setParent(null)
+const mutableChildTransform = Transform.get(childEntity)
+mutableChildTransform.parent = null
 ```
+
+TODO: Confirm this
 
 If you set a new parent to an entity that already had a parent, the new parent will overwrite the old one.
 
+TODO: Confirm this
+
 ## Get an entity by ID
 
-Every entity in your scene has a unique autogenrated _id_ property. You can retrieve a specific entity from the engine based on this ID, by referring to the `engine.entities[]` array.
+Every entity in your scene has a unique number _id_. You can retrieve a component that refers to a specific entity from the engine based on this ID.
 
 ```typescript
-engine.entities[entityId]
+// fetch a Transform component
+Transform.get(1000 as Entity)
 ```
 
-For example, if a player's click or a raycast hits an entity, this will return the id of the hit entity, and you can use the command above to fetch the entity that matches that id.
+TODO: get reserved ids
 
-## Add a component to an entity
+Note: The entity ids lover than 1000 FIND OUT REAL NUMBER are reserved 
+see link reserved entities
 
-When a component is added to an entity, the component's values affect the entity.
+For example, if a player's click or a raycast hits an entity, this will return the id of the hit entity, and you can use the command above to fetch the transform of the entity that matches that id.
 
-One way of doing this is to first create the component instance, and then add it to an entity in a separate expression:
+
+## Add or replace a component
+
+Each entity can only have one component of a given kind. For example, if you attempt to assign a Transform to an entity that already has one, this will cause an error.
+
+To prevent this error, you can use `.createOrReplace` instead of `.create`. This command overwrites any existing components of the same kind if they exists, otherwise it creates a new component just like `.create`.
+
 
 ```ts
-// Create entity
-const box = new Entity()
-engine.addEntity(box)
-
-// Create component
-const myMaterial = new Material()
-
-// Configure component
-myMaterial.albedoColor = Color3.Red()
-
-// Add component
-box.addComponent(myMaterial)
+Transform.createOrReplace(door, {
+	position: { x: 5, y: 1, z: 5 }
+})
 ```
 
-You can otherwise use a single expression to both create a new instance of a component and add it to an entity:
+> Note: Since `.createOrReplace` runs an additional check before creating the component, it's always more performant to use `.create`. If you're sure that the entity doesn't already have a component like the one you're adding, use `.create`.
 
-```ts
-// Create entity
-const box = new Entity()
-engine.addEntity(box)
 
-// Create and add component
-box.addComponent(new Material())
-
-// Configure component
-box.getComponent(Material).albedoColor = Color3.Red()
-```
-
-> Note: In the example above, as you never define a pointer to the entity's material component, you need to refer to it through its parent entity using `.getComponent()`.
-
-#### Add or replace a component
-
-By using `.addComponentOrReplace()` instead of `.addComponent()` you overwrite any existing components of the same kind on a specific entity.
 
 ## Remove a component from an entity
 
-To remove a component from an entity, simply use the entity's `removeComponent()` method.
+To remove a component from an entity, use the entity's `deleteFrom()` method of the component type.
 
 ```ts
-myEntity.removeComponent(Material)
+Transform.deleteFrom(myEntity)
 ```
 
 If you attempt to remove a component that doesn't exist in the entity, this action won't raise any errors.
 
-A removed component might still remain in memory even after removed. If your scene adds new components and removes them regularly, these removed components will add up and cause memory problems. It's advisable to instead use an [object pool](#pooling-entities-and-components) when possible to handle these components.
+> NOTE: To remove all the components of an entity at once, see TODO link to section up
 
 ## Access a component from an entity
 
-You can reach components through their parent entity by using the entity's `.getComponent()` function.
+You can access components of an entity by using the entity's `.get()` or the `getMutable()` functions.
 
 ```ts
-// Create entity and component
-const box = new Entity()
+// Create entity
+const box = engine.addEntity()
 
-// Create and add component
-box.addComponent(new Transform())
+// Create and add component to that entity
+Transform.create(box)
 
-// Using get
-let transform = box.getComponent(Transform)
+// Get read-only version of component
+let transform = Transform.get(box)
 
-// Edit values in the component
-transform.position = new Vector3(5, 0, 5)
+// Get mutable version of component
+let transform = Transform.getMutable(box)
 ```
 
-The `getComponent()` function fetches a reference to the component object. If you change the values of what's returned by this function, you're changing the component itself. For example, in the example above, we're setting the `position` stored in the component to _(5, 0, 5)_.
+The `get()` function fetches a read-only reference to the component. You cannot change any values from this reference of the component.
+
+If you wish to change the values of the component, use the `getMutable()` function instead. If you change the values in the mutable version of the component, you're directly affecting the entity that component belongs to.
+
+See [mutable data](/creator/development-guide/mutable-data) for more details.
+
+> Note: Only use `getMutable()` if you're actually going to make changes to the component's values. Otherwise, always use `get()`. This practice follows the principles of [data oriented programming](/creator/development-guide/data-oriented-programming), and can significantly help in the scene's performance.
 
 ```ts
-box.getComponent(Transform).scale.x = Math.random() * 10
+// Get mutable version of component
+let transform = Transform.getMutable(box)
+
+// change a value of the component
+transform.scale.x = 5
 ```
 
 The example above directly modifies the value of the _x_ scale on the Transform component.
 
-If you're not entirely sure if the entity does have the component you're trying to retrieve, use `getComponentOrNull()` or `getComponentOrCreate()`
+If you're not entirely sure if the entity does have the component you're trying to retrieve, use `getOrNull()` or `getMutableOrNull()`.
+
+> Note: Avoid using `getOrNull()` or `getMutableOrNull()` when possible, as these functions involve additional checks that and are therefore less efficient than `.get()` and `getMutable()`.
+
 
 ```ts
 //  getComponentOrNull
@@ -268,16 +236,21 @@ let scale = box.getComponentOrCreate(Transform)
 
 If the component you're trying to retrieve doesn't exist in the entity:
 
-- `getComponent()` returns an error.
-- `getComponentOrNull()` returns `Null`.
-- `getComponentOrCreate()` instances a new component in its place and retrieves it.
+- `get()` and `getMutable()` returns an error.
+- `getOrNull()` and `getMutableOrNull()` returns `Null`.
 
+<!-- - `getComponentOrCreate()` instances a new component in its place and retrieves it. -->
+
+<!--
 When you're dealing with [Interchangeable component](#interchangeable-components), you can also get a component by _space name_ instead of by type. For example, both `BoxShape` and `SphereShape` occupy the `shape` space of an entity. If you don't know which of these an entity has, you can fetch the `shape` of the entity, and it will return whichever component is occupying the `shape` space.
 
 ```ts
 let entityShape = myEntity.getComponent(shape)
 ```
 
+-->
+
+<!--
 ## Pooling entities and components
 
 If you plan to spawn and despawn similar entities from your scene, it's often a good practice to keep a fixed set of entities in memory. Instead of creating new entities and deleting them, you could add and remove existing entities from the engine. This is an efficient way to deal with the player's memory.
@@ -338,3 +311,5 @@ Similarly, if you plan to set and remove certain components from your entities, 
 ```ts
 ```
 -->
+
+

@@ -1,7 +1,7 @@
 ---
 date: 2018-02-26
-title: Scene metadata
-description: Learn how to add metadata to a scene.
+title: Scenes
+description: Learn how to set up a scene and configure its metadata.
 categories:
   - development-guide
 type: Document
@@ -10,9 +10,11 @@ redirect_from:
 slug: /creator/development-guide/scene-metadata/
 ---
 
-All scenes have a `scene.json` file where you can set metadata for the scene. Some fields in this file are predefined with information that's necessary for the Decentraland client.
+A scene is a Decentraland project that is spatially delimited, and is mapped to one or several LAND parcels. If a scene is deployed to the Decentraland map, players can experience it by visiting the scene's coordinates.
 
-You're also free to add any fields that you wish. In the future, custom fields can then be checked by alternative clients, or other scripts embedded in interactive inventory items.
+## Metadata
+
+All scenes have a `scene.json` file where you can set metadata for the scene. Some fields in this file are predefined with information that's necessary to load your scene. You're also free to add any fields that you wish.
 
 ## Scene parcels
 
@@ -86,11 +88,10 @@ The above commands all generate rectangular-shaped scenes. Decentraland scenes c
 
 ## Scene title, description, and image
 
-Give your scene a title, a description and a thumbnail image to attract players to your scene and so they know what to expect.
+It's very important to give your scene a title, a description and a thumbnail image to attract players to your scene and so they know what to expect.
 
-Players will see these when they select the parcels of your scene on the map, they will also see these in a confirmation screen when being [teleported](/creator/development-guide/external-links) there by another scene.
+Players will see these displayed on a modal when they select the parcels of your scene on the map. They will also see these in a confirmation screen when being [teleported](/creator/development-guide/external-links) there by another scene. Setting up compelling data here can significantly help drive traffic to your scene.
 
-<!-- screenshot -->
 
 When players navigate the world and enter your scene, they are able to read the scene title from under the minimap.
 
@@ -174,8 +175,6 @@ A single scene can have multiple spawn points. This is useful to limit the overl
 ```
 
 Spawn points marked as `default` are given preference. When there are multiple spawn points marked as `default`, one of them will be picked randomly from the list.
-
-> Note: In future releases, when a player tries to spawn into a scene and the default spawn points are occupied by other players, the player will be sent to another of the listed locations. This will open the door to allowing players to teleport to a spawn point based on the spawn point's name, as described in the `scene.json`.
 
 ### Spawn regions
 
@@ -272,7 +271,9 @@ If a `featureToggles` property doesn't exist in your `scene.json` file, create i
 
 ## Fetch metadata from scene code
 
-You may need a scene's code to access the fields from the metadata, like the parcels that the scene is deployed to, or the spawn point positions. This is especially useful for scenes that are meant to be replicated, or for code that is meant to be reused in other scenes. It's also very useful for smart items, where the smart item's code might for example need to know where the scene limits are.
+TODO: check if this is still like this
+
+You may need a scene's code to access the fields from the scene metadata, like the parcels that the scene is deployed to, or the spawn point positions. This is especially useful for scenes that are meant to be replicated, or for code that is meant to be reused in other scenes. It's also very useful for libraries, where the library might for example need to know where the scene limits are.
 
 To access this data, first import the `ParcelIdentity` library to your scene:
 

@@ -16,7 +16,7 @@ To build scenes for Decentraland you will need to install the Command Line Inter
 
 The CLI allows you to compile and preview your scene in an "off-chain" development environment. After testing your scene locally, you can use the CLI to upload your content to the content server, linking it with your LAND.
 
-**Please note:** Currently, the Decentraland SDK (bundled with the CLI installation) only supports TypeScript.
+**Please note:** The Decentraland SDK (bundled with the CLI installation) only supports TypeScript.
 
 The Decentraland CLI is distributed via [npm](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm).
 
@@ -34,11 +34,17 @@ Open the _Terminal_ app and run the following command:
 npm install -g decentraland
 ```
 
+> Tip: You can run this command on any folder, as it affects the installation globally.
+
 Once the installation is complete, the `dcl` command will be globally available.
 
-## Update the CLI on any platform
+## Run updates
 
-To update the CLI to the latest supported version, we recommend first uninstalling the CLI and then reinstalling a fresh version. To do this, run the following commands:
+### Update the CLI
+
+New versions of the CLI are launched periodically. If you've been already using the CLI for some time, you may require to update to access the latest features or bug fixes.
+
+To update the CLI to the latest supported version, we recommend first uninstalling the CLI and then reinstalling a fresh version. To do this, run the following commands on any folder:
 
 ```bash
 // uninstall
@@ -48,11 +54,13 @@ npm rm decentraland -g
 npm install -g decentraland
 ```
 
-#### Update the SDK version of a scene
+> Tip: You can run these commands on any folder, as it affects the installation globally.
+
+### Update the SDK version of a scene
 
 If your CLI is up to date, the new projects you create with it will use the latest version of the SDK.
 
-The SDK version used by your existing projects doesn't change by updating the CLI. You need to manually update the SDK version in the projects.
+The SDK version used by an existing project won't change automatically. So even if your CLI is up to date, you may need to also separately update older projects to use the latest SDK version.
 
 Run the following command on the scene folder:
 

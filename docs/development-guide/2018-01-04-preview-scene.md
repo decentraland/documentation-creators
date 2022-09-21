@@ -37,11 +37,11 @@ Any dependencies that are missing are installed and then the CLI opens the scene
 
 Every time you make changes to the scene, the preview reloads and updates automatically, so there's no need to run the command again.
 
-> Note: Some scenes depend on an external server to store a shared state for all players in the scene. When previewing one of these scenes, you'll likely have to also run the server locally on another port. Check the scene's readme for instructions on how to launch the server as well as the scene.
+> Note: Some scenes depend on communicating with an external server to carry out custom logic or store and retrieve data. When previewing one of these scenes, you'll likely have to also run the server locally on another port. Check the scene's readme for instructions on how to launch the server as well as the scene.
 
 ## Upload a scene to decentraland
 
-Once you're happy with your scene, you can upload it and publish it to Decentraland, see [publishing](/creator/development-guide/publishing) ) for instructions on how to do that.
+Once you're happy with your scene, you can upload it and publish it to Decentraland, see [publishing](/creator/development-guide/publishing) for instructions on how to do that.
 
 You can also upload a preview to a free 3rd party server, [see instructions here]((/creator/development-guide/deploy-third-party) ).
 
@@ -49,18 +49,19 @@ You can also upload a preview to a free 3rd party server, [see instructions here
 
 You can add the following flags to the `dcl start` command to change its behavior:
 
-- `--port` to assign a specific port to run the scene. Otherwise it will use whatever port is available.
-- `--no-debug` Disable the debug panel, that shows scene and performance stats
-- `--no-browser` to prevent the preview from opening a new browser tab.
-- `--w` or `--no-watch` to not open watch for filesystem changes and avoid hot-reload
-- `--c` or `--ci` To run the parcel previewer on a remote unix server
-- `--web3` Connects preview to browser wallet to use the associated avatar and account
+- `--web3` Connects preview to browser wallet to use the associated avatar and account.
 - `--skip-version-checks` Avoids checking if the scene's ECS library version matches your CLI version, and launches the preview anyway.
-- `--desktop-client` Runs the preview in the Decentraland Desktop client
+- `--desktop-client` Runs the preview in the Decentraland Desktop client.
+- `--port` to assign a specific port to run the scene. Otherwise it will use whatever port is available.
+- `--no-debug` Disable the debug panel, that shows scene and performance stats.
+- `--no-browser` to prevent the preview from opening a new browser tab.
+- `--w` or `--no-watch` to not open watch for filesystem changes and avoid hot-reload whenever the scene's code changes.
+- `--c` or `--ci` To run the parcel previewer on a remote unix server,
+
 
 > Note: To preview old scenes that were built for older versions of the SDK, you must set the corresponding version of `decentraland-ecs` in your project's `package.json` file.
 
-## Preview scene size
+## Scene size
 
 The scene size shown in the preview is based on the scene's configuration, you set this when building the scene using the CLI. By default, the scene occupies a single parcel (16 x 16 meters).
 
@@ -78,12 +79,13 @@ If you're building a scene to be uploaded to several adjacent parcels, you can e
   },
 ```
 
+You can also change the coordinates by running the `dcl coords` command from the command line, this is especially useful on large scenes with many parcels. See [set parcels via the command line](/creator/development-guide/scene-metadata/#set-parcels-via-the-command-line) for more details.
+
 > Tip: While running the preview, the parcel coordinates don't need to match those that your scene will really use, as long as they're adjacent and are arranged into the same shape. You will have to replace these with the actual coordinates later when you [deploy the scene](#upload-a-scene-to-decentraland).
 
 ## Run preview in Desktop
 
 To run a preview scene in the Desktop native client, instead of in the web browser: 
-
 
 1) Make sure you have downloaded and installed the [Windows](https://decentraland.org/download/) or [Mac](https://github.com/decentraland/explorer-desktop-launcher/releases/latest/download/Decentraland.dmg) desktop client.
 

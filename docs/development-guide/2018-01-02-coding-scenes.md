@@ -1,6 +1,6 @@
 ---
 date: 2018-01-01
-title: Coding scenes
+title: SDK coding essentials
 description: This set will help you understand how things work in the client and SDK of decentraland.
 redirect_from:
   - /documentation/introduction/
@@ -24,7 +24,7 @@ slug: /creator/development-guide/coding-scenes/
 
 ## The development tools
 
-At a very high level, the **Decentraland Software Development Kit** (SDK) allows you to do the following:
+At a very high level, the Decentraland **Software Development Kit** (SDK) allows you to do the following:
 
 - Generate a default _project_ containing a Decentraland scene, including all the assets needed to render and run your content.
 - Build, test, and preview the content of your scene locally in your web browser - completely offline, and without having to make any Ethereum transactions or own LAND.
@@ -53,38 +53,66 @@ You must have the following:
 
 - **The Decentraland CLI**: Used to build, preview and upload scenes. See [Installation guide](/creator/development-guide/installation-guide)
 
-- **A source code editor**: Helps you create scenes a lot faster and with less errors. A source code editor marks syntax errors, autocompletes while you write and even shows you smart suggestions that depend on the context that you're in. You can also click on an object in the code to see the full definition of its class and what attributes it supports. We recommend [Visual Studio Code](https://code.visualstudio.com/) or [Atom](https://atom.io/).
+- **A source code editor**: Helps you create scenes a lot faster and with less errors. A source code editor marks syntax errors, autocompletes while you write and even shows you smart suggestions that depend on the context that you're in. You can also click on an object in the code to see the full definition of its class and what attributes it supports. We recommend [Visual Studio Code](https://code.visualstudio.com/), which is a free tool with a rich ecosystem of helpful extensions.
+
 
 ## Supported languages and syntax
 
-#### TypeScript (recommended)
+### TypeScript
 
-We use [TypeScript (.ts)](https://www.typescriptlang.org/docs/handbook/jsx.html)
-to create our scenes.
+Decentraland employs [TypeScript (.ts)](https://www.typescriptlang.org/docs/handbook/jsx.html) as the default language for writing scenes.
 
-TypeScript is a superset of JavaScript, so if you're familiar with JavaScript you'll find it's almost the same, but TypeScript allows you to employ object-oriented programming and type declarations. Features like autocomplete and type-checking speed up development times and allow for the creation of a more solid codebase. These features are all key components to a positive developer experience.
+TypeScript is a superset of JavaScript, so if you're familiar with JavaScript you'll find it's almost the same, but TypeScript includes type declarations. Thanks to type declarations, it's possible to have features like autocomplete better debugging hints, these speed up development times and allow for the creation of a more solid codebase. These features are all key components to a positive developer experience.
 
-#### Other languages
+When a scene is built, the Typescript code you wrote is compiled into minified Javascript, to make it lighter. The original source code in Typescript is never uploaded to the servers, only the compiled Javascript version.
+
+### Other languages
 
 You can use another tool or language instead of TypeScript and compile it into JavaScript, as long as your compiled scripts are contained within a single JavaScript file named _game.js_. All provided type declarations are made in TypeScript, and other languages and transpilers are not officially supported.
 
 ## Scenes
 
-The content you deploy to your LAND is called a **scene**. A scene is an interactive program that renders content, this could be a game, an interactive experience, an art gallery, whatever you want!
+The content you deploy to your LAND is called a **scene**. A scene is an interactive program that renders 3d content, this could be a game, an interactive experience, an art gallery, whatever you want!
 
-Scenes are deployed to virtual LAND in Decentraland. LAND is a scarce and non-fungible asset maintained in an Ethereum smart contract. Deploy to a single **parcel**, a 16 meter by 16 meter piece of LAND, or to an **estate**, comprised of multiple adjacent parcels.
+Scenes are deployed to virtual LAND in Decentraland. LAND is a scarce and non-fungible asset maintained in an Ethereum smart contract. Deploy to a single **parcel**, a 16 meter by 16 meter plot of LAND, or to multiple adjacent parcels.
 
-We are developing the web client that will allow players to explore Decentraland. All of the content you upload to your LAND will be rendered and viewable through this client. We have included a preview tool in the SDK so that you can preview, test, and interact with your content in the meantime.
+When players visit Decentraland, they download and render the content of each scene as they walk through the map. They unload scenes as they walk away from them.
+
+You can also run a scene locally on your machine by running a preview from the CLI. You can also [upload a preview](/creator/development-guide/deploy-third-party) to run remotely on a 3rd party server to easily share your work with others.
 
 ## Entities and Components
 
-Three dimensional scenes in Decentraland are based on an [Entity-Component-System](https://en.wikipedia.org/wiki/Entity%E2%80%93component%E2%80%93system) architecture, where everything in a scene is an _entity_, and each entity can include _components_ that determine its characteristics.
+Three dimensional scenes in Decentraland are based on an [Entity-Component-System](https://en.wikipedia.org/wiki/Entity%E2%80%93component%E2%80%93system) architecture, where everything in a scene is an _entity_. Entities have _components_, each component gives the entity it belongs to specific properties. A door entity is likely to have at least a Transform component (that sets position, rotation & scale) and another to provide it a shape. Components are just a place to store data, they don’t carry out any actions. 
 
+// TODO: Change diagram
 <img src="/images/media/ecs-components.png" alt="nested entities" width="400"/>
 
-Entities are nested inside other entities to form a tree structure. If you're familiar with web development, you might find it useful to think of entities as elements in a DOM tree and of components as the attributes of each of these elements.
+
+```ts
+// Create an entity
+const door = engine.addEntity()
+
+// Give the entity a position via a transform component
+Transform.create(door, {
+	position: { x: 5, y: 1, z: 5 }
+})
+
+// Give the entity a visible shape via a GLTFShape component
+GLTFShape.create(door)
+```
+ 
+The default set of components are interpreted by the engine and have direct consequences on how the entity will look, its position, if it emits sounds, etc. You can also define custom components to store data that might be useful to the mechanics in your scene. The engine won't directly interpret what the values on these components mean, but you can write logic in your scene's code to monitor these values and respond to them.
+
+
+For example, I can define a custom “doorState” component to track the door’s open/closed/locked state. In this case, the component is nothing more than a place to store a value that keeps track of this state, I have to implement the logic that interprets these values separately. 
+
+
+Entities may be nested inside other entities to form a tree structure. If you're familiar with web development, you might find it useful to think of entities as elements in a DOM tree and of components as the attributes of each of these elements.
 
 <img src="/images/media/ecs-nested-entities.png" alt="nested entities" width="400"/>
+
+Entities are an abstract concept. An entity is just an id, that is used as a reference to group different components.
+
 
 See [Entities and components](/creator/development-guide/entities-components) for an in-depth look of both these concepts and how they're used by Decentraland scenes.
 
@@ -98,83 +126,130 @@ The [game loop](http://gameprogrammingpatterns.com/game-loop.html) is the backbo
 
 In most traditional software programs, all events are triggered directly by player actions. Nothing in the program's state will change until the player clicks on a button, opens a menu, etc.
 
-But interactive environments and games are different from that. Not all changes to the scene are necessarily caused by a player's actions. Your scene could have animated objects that move on their own or even non-player characters that have their own AI. Some player actions might also take multiple frames to be completed, for example if the opening of a door needs to take a whole second, the door's rotation must be incrementally updated about 30 times as it moves.
+But interactive environments and games are different from that. Not all changes to the scene are necessarily caused by a player's actions. Your scene could have animated objects that move on their own or even non-player characters that have their own AI. Some player actions might also take multiple ticks to be completed, for example if the opening of a door needs to take a whole second, the door's rotation must be incrementally updated about 30 times as it moves.
 
-We call each iteration over the loop a _frame_. Decentraland scenes are rendered at 30 frames per second whenever possible. If a frame takes more time than that to be rendered, then less frames will be processed.
+We call each iteration over the loop a _tick_. Decentraland scenes are rendered at 30 ticks per second, whenever possible. If the machine is struggling to render each tick, it may result in less frequent updates.
 
-In each frame, the scene is updated; then the scene is re-rendered, based on the updated values.
+In each tick, the scene is updated; then the scene is re-rendered, based on the updated values.
 
-In Decentraland scenes, there is no explicitly declared game loop, but rather the `update()` functions on the [Systems](/creator/development-guide/systems) of the scene make up the game loop.
+In Decentraland scenes, there is no explicitly declared game loop, but rather the [Systems](/creator/development-guide/systems) of the scene make up the game loop.
 
 The compiling and rendering of the scene is carried out in the backend, you don't need to handle that while developing your scene.
 
 ## Systems
 
-Entities and components are places to store information about the objects in a scene. _Systems_ hold functions that change the information that's stored in components.
+Entities and components are places to store information about the objects in a scene. _Systems_ hold functions that change the information that's stored in components over time.
 
-_Systems_ are what make a static scene dynamic, allowing things to change over time or in response to player interaction.
+Systems are where we implement game logic, they carry out the actions that need to be updated or checked periodically on every tick of the game loop. 
 
-Each System has an `update()` method that's executed on every frame of the game loop, following the [_update pattern_](http://gameprogrammingpatterns.com/update-method.html).
+A system is a pure and simple function that gets called once on every tick (up to 30 times a second), following the [_update pattern_](http://gameprogrammingpatterns.com/update-method.html).
+
+```ts
+// Basic system
+function mySystem() {
+  log("my system is running")
+}
+
+engine.addSystem(mySystem)
+
+// System with dt
+function mySystemDT(dt: number) {
+  log("time since last frame:  ", dt)
+ }
+ 
+engine.addSystem(mySystemDT)
+```
+
+A single scene can have 0 or many systems running at the same time. Systems can be turned on or off at different moments during the scene’s duration. It’s generally a good practice to keep independent behaviors in separate systems.
 
 See [Systems](/creator/development-guide/systems) for more details about how systems are used in a scene.
 
-## Component groups
+## Querying components
 
-[Component groups](/creator/development-guide/component-groups) keep track of all entities in the scene that have certain components in them. Once a component group is created, it automatically keeps its list up to date with each new entity or component that is added or removed.
+You can [query components](/creator/development-guide/querying-components) with the method `engine.getEntitiesWith(...components)` to keep track of all entities in the scene that have certain components.
 
-If you attempt to update all the entities in the scene on every frame, that could have a significant cost in performance. By referring only to the entities in a component group, you ensure you're only dealing with those that are relevant.
+It often makes sense to query components within a [system](/creator/development-guide/systems), to then loop over each of the returned entities and perform a same set of actions on each.
 
-Component groups can be referenced by the functions in a [system](/creator/development-guide/systems). Typically an `update()` function will loop over the entities in the component group, performing the same actions on each.
-
-## Putting it all together
-
-The _engine_ is what sits in between _entities_, _components_ and _component groups_ on one hand and _systems_ on the other. It calls system's functions, updates groups when entities are added, etc.
-
-![](/images/media/ecs-big-picture.png)
-
-All of the values stored in the components in the scene represent the scene's state at that point in time. With every frame of the game loop, the engine runs the `update()` function of each of the systems to update the values stored in the components.
-
-After all the systems run, the components on each entity will have new values. When the engine renders the scene, it will use these new updated values and players will see the entities change to match their new states.
+If you attempt to iterate over all the entities in the scene on every tick of the game loop, that could have a significant cost in performance. By referring only to the entities returned by a query, you ensure you're only dealing with those that are relevant.
 
 ```ts
-// Create a group to track all entities with a Transform component
-const myGroup = engine.getComponentGroup(Transform)
-
 // Define a System
-export class RotatorSystem implements ISystem {
-  // The update function runs on every frame of the game loop
-  update() {
-    // The function iterates over all the entities in myGroup
-    for (let entity of myGroup.entities) {
-      const transform = entity.getComponent(Transform)
-      transform.rotate(Vector3.Left(), 0.1)
-    }
+function boxHeightSystem(dt: number) {
+
+  // query for entities that include both BoxShape and Transform components	
+  for (const [entity] of engine.getEntitiesWith(BoxShape, Transform)) {
+    const transform = Transform.get(entity)
+    log("a box is at height:  ", transform.position.y)
   }
 }
 
 // Add the system to the engine
-engine.addSystem(new RotatorSystem())
-
-// Create an entity
-const cube = new Entity()
-
-// Give the entity a transform component
-cube.addComponent(
-  new Transform({
-    position: new Vector3(5, 1, 5),
-  })
-)
-
-// Give the entity a box shape
-cube.addComponent(new BoxShape())
-
-// Add the entity to the engine
-engine.addEntity(cube)
+engine.addSystem(rotationSystem)
 ```
 
-In the example above, a `cube` entity and a `RotatorSystem` system are added to the engine. The `cube` entity has a `Transform`, and a `BoxShape` component. In every frame of the game loop, the `update()` function of `RotationSystem` is called, and it changes the rotation values in the `Transform` component of the `cube` entity.
 
-Note that most of the code above is executed just once, when loading the scene. The exception is the `update()` method of the system, which is called on every frame of the game loop.
+## Mutability
+
+You can choose to deal with mutable or with immutable (read-only) versions of a component. The `.get()` function in a component returns an immutable version of the component. You can only read its values, but can't change any of the properties on it.
+
+The `.getMutable()` function returns representation of the component that allows you to change its values. Use mutable versions only when you plan to make changes to a component. Dealing with immutable versions of components results in a huge gain in performance.
+
+```ts
+// fetch an immutable version (read-only)
+const immutableTransform = Transform.get(myEntity)
+
+// the following does NOT work:
+// 	immutableTransform.position.y = 2
+
+const mutableTransform = Transform.getMutable(myEntity)
+
+// the following DOES change the entity's position
+mutableTransform.position.y = 2
+```
+
+See [mutable data](/creator/development-guide/mutable-data) for more details.
+
+
+## Putting it all together
+
+The _engine_ is what sits in between _entities_, and _components_ on one hand and _systems_ on the other.
+
+![](/images/media/ecs-big-picture.png)
+
+All of the values stored in the components in the scene represent the scene's state at that point in time. With every tick of the game loop, the engine runs the functions of each of the systems to update the values stored in the components.
+
+After all the systems run, the components on each entity will have new values. When the engine renders the scene, it will use these new updated values and players will see the entities change to match their new states.
+
+```ts
+
+// Create an entity
+const cube = engine.addEntity()
+
+// Give the entity a position via a transform component
+Transform.create(cube, {
+	position: { x: 5, y: 1, z: 5 }
+})
+
+// Give the entity a visible shape via a BoxShape component
+BoxShape.create(entity)
+
+// Define a System
+function rotationSystem(dt: number) {
+
+  // query for entities that include both BoxShape and Transform components	
+  for (const [entity] of engine.getEntitiesWith(BoxShape, Transform)) {
+    const transform = Transform.getMutable(entity)
+    transform.rotation = Quaternion.multiply(transform.rotation, Quaternion.angleAxis(dt * 10, Vector3.Up()))
+  }
+}
+
+// Add the system to the engine
+engine.addSystem(rotationSystem)
+```
+
+In the example above, a `cube` entity and a `rotationSystem` system are added to the engine. The `cube` entity has a `Transform`, and a `BoxShape` component. In every tick of the game loop, the `rotationSystem` system is called, and it changes the rotation values in the `Transform` component of the `cube` entity.
+
+Note that most of the code above is executed just once, when loading the scene. The exception is the `rotationSystem` system, which is called on every tick of the game loop.
 
 ## Scene Decoupling
 
@@ -188,4 +263,6 @@ The decoupling works by using RPC protocol, this protocol assigns a small part o
 
 We have also abstracted the communication protocol. This allows us to run the scenes locally in a WebWorker.
 
-We don't want developers to intervene with the internals of the engine or even need to know what lies inside the engine. We need to ensure a consistent experience for players throughout the Decentraland map, and mistakes are more likely to happen at that "low" level.
+We don't want developers to intervene with the internals of the engine or even need to know what lies inside the engine. We need to ensure a consistent experience for players throughout the Decentraland map, and mistakes are more likely to happen at that "low" level. 
+
+This decoupling is also important to prevent neighbor scenes from interfering with the experience of players while they're on someone else's scene. A player might have multiple nearby scenes loaded at the same time, each running their own code. Some actions (like opening external links, or moving the player) are only permitted when the player is standing on that particular scene, not if the scene is loaded but the player is outside.
