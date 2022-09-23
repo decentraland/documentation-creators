@@ -215,9 +215,14 @@ That’s it for exporting the animation!
 
 ### Import into the Builder
 
-When all the files are ready to go you can import them to the builder to test the animation! Go to [](https://builder.decentraland.org/)[https://builder.decentraland.org/](https://builder.decentraland.org/) and import the item you want to test. You’ll be asked to choose a thumbnail and define the rarity of your emote.
+
+When all the files are ready to go you can import them to the builder to test the animation! Go to https://builder.decentraland.org/ and import the item you want to test. You’ll be asked to choose the rarity of your emote, define the category, add name and play mode (Loop or Play Once).
 
 ![Screen Shot 2022-08-04 at 12.39.58.png](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/screen_shot_2022-08-04_at_12.39.58.png)
+
+Next step is to choose the thumbnail that shows the emote as its best! Select the key frame that better represents the action.
+
+![Screen Shot 2022-08-04 at 12.39.58.png](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/screen_shot_2022-09-21_at_13.48.58.png)
 
 ### Attention!
 
@@ -247,12 +252,8 @@ If you’re still not sure where to start or need some reference or inspiration,
 
 [Pose_Spin.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/pose_spin.glb)
 
-[Thalia.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/thalia.glb)
-
 [Spotlight.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/spotlight.glb)
 
 [Fashionista.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/fashionista.glb)
 
 [Chic.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/chic.glb)
-
-[Pose_Fingers.glb](https://raw.githubusercontent.com/decentraland/documentation-creators/main/images/emotes/pose_fingers.glb)
