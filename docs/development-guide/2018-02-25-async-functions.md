@@ -10,6 +10,8 @@ redirect_from:
 slug: /creator/development-guide/async-functions/
 ---
 
+TODO: executeTask doesn't currently work. Change examples?
+
 ## Overview
 
 Most of the code in your scene runs synchronously using a single thread. That means that commands are executed sequentially line by line. Each command must first wait for the previous command to finish executing before it can start.
@@ -85,6 +87,8 @@ myEntity.addComponent(
 )
 ```
 
+TODO: use new click component
+
 ## Subscribe a listener
 
 Another way to run asynchronous code is to instance an event listener. Event listeners trigger the running of an asynchronous lambda function every time that a given event occurs.
@@ -96,6 +100,8 @@ Input.instance.subscribe("BUTTON_DOWN", (e) => {
 ```
 
 The example above runs a function every time that the button _A_ is pressed down.
+
+TODO: change example?
 
 ## The await statement
 

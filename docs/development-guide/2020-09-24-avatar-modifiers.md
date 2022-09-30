@@ -19,28 +19,22 @@ Avatars behave and look consistently throughout Decentraland as they walk across
 Add an entity with an `AvatarModifierArea` component and position this entity by using a `Transform` component.
 
 ```ts
-const modArea = new Entity()
-modArea.addComponent(
-  new AvatarModifierArea({
-    area: { box: new Vector3(16, 4, 16) },
-    modifiers: [AvatarModifiers.HIDE_AVATARS],
-  })
-)
-modArea.addComponent(
-  new Transform({
-    position: new Vector3(8, 0, 8),
-  })
-)
-engine.addEntity(modArea)
+const entity = engine.addEntity()
+
+engine.baseComponents.AvatarModifierArea.create(entity, {
+	area: {x: 4, y:3, z:4},
+	modifiers: [AvatarModifier.HIDE_AVATARS],
+})
+
+Transform.create(childEntity, {
+	position: {x: 8, y:0, z:8}
+})
 ```
 
 When creating an `AvatarModifierArea` component, you must provide the following:
 
-- `area`: Size and shape of the modifier area
-- `modifiers`: An array listing the modifiers to implement in the area
-
-The only currently supported shape for the area is `box`. Specify the scale of this box as a `Vector3`, for example
-`{ box: new Vector3(16, 4, 16) }`.
+- `area`: Size of the modifier area
+- `modifiers`: An array listing the modifiers to implement in the area. This property uses values from the `AvatarModifier` enum.
 
 The supported modifiers are:
 
@@ -51,7 +45,8 @@ All the effects of an `AvatarModifierArea` only take place within the region of 
 
 An `AvatarModifierArea` affects only players that are inside the area, entering the area doesn't affect how other players that are outside the area are perceived.
 
-The effects of an `AvatarModifierArea` are calculated locally for each player. You can have an `AvatarModifierArea` that is only present in the scene for some players and not for others. For example, if the area hides avatars, then the players that don't have the area in their local version of the scene will see all avatars normally. Even those that experience themselves as hidden. Players that do have the area will experience themselves and all other avatars as affected by the area when they enter it.
+The effects of an `AvatarModifierArea` are calculated locally for each player. You can have an `AvatarModifierArea` that is only present in the scene for some of the players and not for others. For example, you could make a "marco polo" game, where only one player in the scene has a modifier area that hides all of the other players. All the other players that don't have this modifier area in their local version of the scene are able to see each other normally. 
+If the area hides avatars, then the players that don't have the area in their local version of the scene will see all avatars normally. Even those that experience themselves as hidden. Players that do have the area will experience themselves and all other avatars as affected by the area when they enter it.
 
 > Note: Avatar modifier areas are affected by the _position_ and _rotation_ of the Transform component of their host entity, but they're not affected by the _scale_.
 
@@ -60,19 +55,16 @@ The effects of an `AvatarModifierArea` are calculated locally for each player. Y
 When a player walks into an `AvatarModifierArea` that has the `HIDE_AVATARS` modifier, the player's avatar stops being rendered. This applies both for the player in 3rd person view, and for when other players walk into the area.
 
 ```ts
-const modArea = new Entity()
-modArea.addComponent(
-  new AvatarModifierArea({
-    area: { box: new Vector3(16, 4, 16) },
-    modifiers: [AvatarModifiers.HIDE_AVATARS],
-  })
-)
-modArea.addComponent(
-  new Transform({
-    position: new Vector3(8, 0, 8),
-  })
-)
-engine.addEntity(modArea)
+const entity = engine.addEntity()
+
+engine.baseComponents.AvatarModifierArea.create(entity, {
+	area: {x: 4, y:3, z:4},
+	modifiers: [AvatarModifier.HIDE_AVATARS],
+})
+
+Transform.create(childEntity, {
+	position: {x: 8, y:0, z:8}
+})
 ```
 
 This allows you to replace the default Decentraland avatar with any custom avatar you might want to show in your scene. Note that if you want to see other players with custom avatars, you should handle the syncing of player positions yourself.
@@ -82,19 +74,16 @@ This allows you to replace the default Decentraland avatar with any custom avata
 When a player walks into an `AvatarModifierArea` that has the `DISABLE_PASSPORTS` modifier, clicking on them no longer opens up the passport UI that shows the player bio, inventory, etc.
 
 ```ts
-const modArea = new Entity()
-modArea.addComponent(
-  new AvatarModifierArea({
-    area: { box: new Vector3(16, 4, 16) },
-    modifiers: [AvatarModifiers.DISABLE_PASSPORTS],
-  })
-)
-modArea.addComponent(
-  new Transform({
-    position: new Vector3(8, 0, 8),
-  })
-)
-engine.addEntity(modArea)
+const entity = engine.addEntity()
+
+engine.baseComponents.AvatarModifierArea.create(entity, {
+	area: {x: 4, y:3, z:4},
+	modifiers: [AvatarModifier.DISABLE_PASSPORTS],
+})
+
+Transform.create(childEntity, {
+	position: {x: 8, y:0, z:8}
+})
 ```
 
 This is especially useful in games where accidentally opening this UI could interrupt the flow of a game, for example in a multiplayer shooter game.
@@ -104,19 +93,12 @@ This is especially useful in games where accidentally opening this UI could inte
 Players are normally free to switch between first and third person camera by pressing V on the keyboard. Use a `CameraModeArea` to force the camera mode to either 1st or 3rd person for all players that stand within a specific area in your scene.
 
 ```ts
-const modArea = new Entity()
-modArea.addComponent(
-  new CameraModeArea({
-    area: { box: new Vector3(16, 1, 14) },
-    cameraMode: CameraMode.FirstPerson,
-  })
-)
-modArea.addComponent(
-  new Transform({
-    position: new Vector3(8, 0, 8),
-  })
-)
-engine.addEntity(modArea)
+const entity = engine.addEntity()
+
+engine.baseComponents.CameraModeArea.create(entity, {
+	area: {x: 4, y:3, z:4},
+	mode: CameraModeValue.FIRST_PERSON
+})
 ```
 
 If a player's current camera mode doesn't match that of the `CameraModeArea`, they will transition to that camera mode. A toast appears onscreen to clarify that this change is due to the scene. While inside, players can't change their camera mode. When a player leaves the `CameraModeArea`, their camera mode is restored to what they had before entering.
@@ -129,38 +111,32 @@ Use `CameraModeArea` in regions where players would have a significantly better 
 
 When creating an `CameraModeArea` component, you must provide the following:
 
-- `area`: Size and shape of the modifier area
-- `cameraMode`: Which camera mode to force in this area, from the `CameraMode` enum.
-
-The only currently supported shape for the area is `box`. Specify the scale of this box as a `Vector3`, for example
-`{ box: new Vector3(16, 4, 16) }`.
+- `area`: Size of the modifier area
+- `cameraMode`: Which camera mode to force in this area, from the `CameraModeValue` enum.
 
 The supported camera modes are:
 
-- `CameraMode.FirstPerson`
-- `CameraMode.ThirdPerson`
+- `CameraModeValue.FIRST_PERSON`
+- `CameraModeValue.THIRD_PERSON`
 
 ## Exclude Avatars
 
 You can exclude a list of players from being affected by a modifier area by adding their player Ids to an array in the `excludeIds` property of the modifier area.
 
-This example hides all avatars in an area, except those of players with specific IDs. You could use this for a live event, to only show the event hosts on the stage, and hide any other players that jump onto the stage.
+This example hides all avatars in an area, except those of players with specific IDs. You could use this for example on a live event, to only show the event hosts on the stage, and hide any other players that jump onto the stage.
 
 ```ts
-const modArea = new Entity()
-modArea.addComponent(
-  new AvatarModifierArea({
-    area: { box: new Vector3(16, 4, 16) },
-    modifiers: [AvatarModifiers.HIDE_AVATARS],
-    excludeIds: ['0xx1...', '0xx2...'],
-  })
-)
-modArea.addComponent(
-  new Transform({
-    position: new Vector3(8, 0, 8),
-  })
-)
-engine.addEntity(modArea)
+const entity = engine.addEntity()
+
+engine.baseComponents.AvatarModifierArea.create(entity, {
+	area: {x: 4, y:3, z:4},
+	modifiers: [AvatarModifier.HIDE_AVATARS],
+	excludeIds: ['0xx1...', '0xx2...'],
+})
+
+Transform.create(childEntity, {
+	position: {x: 8, y:0, z:8}
+})
 ```
 
 > Note: Make sure the player IDs are all written with lower-case letters. Use `.toLowerCase()` if necessary.
@@ -176,20 +152,17 @@ executeTask(async () => {
   let userData = await getUserData()
   if (!userData) return
 
-  const modArea = new Entity()
-  modArea.addComponent(
-    new Transform({
-      position: new Vector3(8, 0, 8),
-    })
-  )
-  modArea.addComponent(
-    new AvatarModifierArea({
-      area: { box: new Vector3(16, 4, 16) },
-      modifiers: [AvatarModifiers.HIDE_AVATARS],
-      excludeIds: [userData.userId],
-    })
-  )
-  engine.addEntity(modArea)
+  const entity = engine.addEntity()
+
+  engine.baseComponents.AvatarModifierArea.create(entity, {
+	area: {x: 16, y:5, z:16},
+	modifiers: [AvatarModifier.HIDE_AVATARS],
+	excludeIds: [userData.userId],
+  })
+
+  Transform.create(childEntity, {
+	position: {x: 8, y:0, z:8}
+  })
 })
 ```
 
@@ -202,23 +175,20 @@ To verify the positions of a `AvatarModifierArea` or a `CameraModeArea`, give th
 > Note: Modifier areas aren't affected by the `scale` property of the transform, their size is based on their `area` property.
 
 ```ts
-const myEntity = new Entity()
-myEntity.addComponent(
-  new Transform({
-    position: new Vector3(8, 1, 8),
-    scale: new Vector3(8, 3, 8),
-    rotation: Quaternion.Euler(0, 30, 0),
-  })
-)
-myEntity.addComponent(
-  new CameraModeArea({
-    area: { box: new Vector3(8, 3, 8) },
-    cameraMode: CameraMode.FirstPerson,
-  })
-)
 
-myEntity.addComponent(new BoxShape()).withCollisions = false
-engine.addEntity(myEntity)
+const entity = engine.addEntity()
+
+engine.baseComponents.AvatarModifierArea.create(entity, {
+	area: {x: 8, y:3, z:8},
+	modifiers: [AvatarModifier.HIDE_AVATARS],
+})
+
+Transform.create(entity, {
+	position: {x: 8, y:0, z:8},
+	scale: {x: 8, y:3, z:8}
+})
+
+BoxShape.create(entity)
 ```
 
 To activate the effects of the modifier area, the player's head or torso should enter the area. It won't take effect if only the feet of the player are covered. Make sure the player can't easily evade the area by jumping.

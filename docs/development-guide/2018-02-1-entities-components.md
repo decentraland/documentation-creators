@@ -135,9 +135,6 @@ mutableChildTransform.parent = null
 
 TODO: Confirm this
 
-If you set a new parent to an entity that already had a parent, the new parent will overwrite the old one.
-
-TODO: Confirm this
 
 ## Get an entity by ID
 
@@ -171,19 +168,6 @@ Transform.createOrReplace(door, {
 
 > Note: Since `.createOrReplace` runs an additional check before creating the component, it's always more performant to use `.create`. If you're sure that the entity doesn't already have a component like the one you're adding, use `.create`.
 
-
-
-## Remove a component from an entity
-
-To remove a component from an entity, use the entity's `deleteFrom()` method of the component type.
-
-```ts
-Transform.deleteFrom(myEntity)
-```
-
-If you attempt to remove a component that doesn't exist in the entity, this action won't raise any errors.
-
-> NOTE: To remove all the components of an entity at once, see TODO link to section up
 
 ## Access a component from an entity
 
@@ -238,6 +222,32 @@ If the component you're trying to retrieve doesn't exist in the entity:
 
 - `get()` and `getMutable()` returns an error.
 - `getOrNull()` and `getMutableOrNull()` returns `Null`.
+
+
+## Remove a component from an entity
+
+To remove a component from an entity, use the entity's `deleteFrom()` method of the component type.
+
+```ts
+Transform.deleteFrom(myEntity)
+```
+
+If you attempt to remove a component that doesn't exist in the entity, this action won't raise any errors.
+
+> NOTE: To remove all the components of an entity at once, see TODO link to section up
+
+## Check for a component
+
+You can check if an entity owns an instance of a certain component by using the `has()` function. This function returns _true_ if the component is present, and _false_ if it's not. This can be very handy for using in conditional logic in your scene.
+
+```ts
+const hasTransform = Transform.has(myEntity)
+```
+
+
+> Tip: You can also [query components](/creator/development-guide/querrying-components) to fetch a full list of components that hold a specific component, or a specific set of components. Do not iterate over all entities in the scene manually to check each with a `has()`, that approach is a lot less efficient. 
+
+
 
 <!-- - `getComponentOrCreate()` instances a new component in its place and retrieves it. -->
 

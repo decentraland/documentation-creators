@@ -59,6 +59,8 @@ The other numbers in the panel refer to the usage of resources, in relation to t
 
 #### Run code only in preview
 
+TODO: Check if isPreviewMode still works
+
 You can detect if a scene is running as a preview or is already deployed in production, so that the same code behaves differently depending on the case. You can use this to add debugging logic to your code without the risk of forgetting to remove it and having it show in production.
 
 To use this function, import the `@decentraland/EnvironmentAPI` library.

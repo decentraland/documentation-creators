@@ -25,17 +25,15 @@ The picture frame is displayed adjusting to the dimensions of the NFT image. If 
 Add an `NFTShape` component to an entity to display a 2D token in your scene.
 
 ```ts
-const entity = new Entity()
-const shapeComponent = new NFTShape(
-  "ethereum://0x06012c8cf97BEaD5deAe237070F9587f8E7A266d/558536"
-)
-entity.addComponent(shapeComponent)
-entity.addComponent(
-  new Transform({
-    position: new Vector3(4, 1.5, 4),
-  })
-)
-engine.addEntity(entity)
+const nft = engine.addEntity()
+
+Transform.create(nft, {
+	position: { x: 8, y: 1, z: 8 }
+})
+
+NFTShape.create(nft, {
+	src: 'ethereum://0x06012c8cf97bead5deae237070f9587f8e7a266d/558536'
+})
 ```
 
 The `NFTShape` component must be instanced with a parameter that includes the following:
@@ -50,14 +48,14 @@ The example above fetches an NFT with the contract address `0x06012c8cf97BEaD5de
 By default, the image will have a purple background and have a frame with a pulsating emissive texture around it. You can set the following properties to better match the style of the NFT and the scene:
 
 - `color`: Determines the back side of the model, and also the background of the image in case the NFT image has transparency.
-- `style`: Selects a frame model from an enum of several predetermined options.
+- `style`: Selects a frame model from an enum of several predetermined options. Use a value from the enum `PBNFTShape_PictureFrameStyle`, which contains a list of all available styles.
 
 ```ts
 const shapeComponent = new NFTShape(
   "ethereum://0x06012c8cf97BEaD5deAe237070F9587f8E7A266d/558536",
   {
     color: Color3.Green(),
-    style: PictureFrameStyle.Gold_Edges,
+    style: PBNFTShape_PictureFrameStyle.Gold_Edges,
   }
 )
 ```
@@ -93,9 +91,11 @@ Here's the full list of supported frame styles:
 Some frames use more materials than others. For example, the default frame adds 1 material for the NFT itself, 1 material for a background colored plane, and 2 materials for the frame (shared with other picture frames of the same style). If you need to reduce materials to [stay within scene limitations]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})), pick a style that is simpler. For example "none" only uses only 1 material for the NFT itself.
 
 
-> Tip: Using Visual Studio Code (or another IDE), see the whole list by typing `PictureFrameStyle.` and waiting for the smart suggestions display the list of options. Use `PictureFrameStyle.None`to display the plain NFT as is, with no frame or background color.
+> Tip: Using Visual Studio Code (or another IDE), see the whole list by typing `PBNFTShape_PictureFrameStyle.` and waiting for the smart suggestions display the list of options. Use `PBNFTShape_PictureFrameStyle.None`to display the plain NFT as is, with no frame or background color.
 
 ## Open an NFT UI
+
+TODO: is this still a thing??
 
 Open a prebuilt UI that displays the name, owner, and description of an NFT. It also includes the NFT's current price and price of last sale if applicable, and a button that links to the NFT's page on OpenSea, where more information is available and it can be purchased.
 
@@ -104,6 +104,8 @@ Open a prebuilt UI that displays the name, owner, and description of an NFT. It 
 Open this UI by calling the function `openNFTDialog(), passing it the NFT's contract and id, just like with the NFT shape. The UI must be opened as a result of a button event, to prevent abusive spamming. The button event doesn't necessarily need to be on the same picture frame or on an NFTShape.
 
 To open this UI, add the following:
+
+TODO: update code snippets if this is still athing
 
 ```ts
 myPictureFrame.addComponent(

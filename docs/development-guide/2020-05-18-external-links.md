@@ -33,19 +33,10 @@ To move a player to another set of coordinates inside the current scene, use the
 To add a link to an external website, use the `openExternalURL()` command.
 
 ```ts
-const entity = new Entity()
-entity.addComponent(new BoxShape())
-const transform = new Transform({ position: new Vector3(4, 0, 4) })
-entity.addComponent(transform)
-entity.addComponent(
-  new OnPointerDown(() => {
-    openExternalURL("https://docs.decentraland.org")
-  })
-)
-engine.addEntity(entity)
+openExternalURL("https://docs.decentraland.org")
 ```
 
-To prevent any abusive usage of this feature to spam players, it's only possible to call the `openExternalURL` from an explicit click or button event on an entity. It's not possible to call this function as a result of a timer, or a collision area, or a global click event.
+To prevent any abusive usage of this feature to spam players, it's only possible to call the `openExternalURL` from an explicit click or button event on an entity. It's not possible to call this function as a result of a timer, or a collision area, or a global click event. See [Button events](/creator/development-guide/click-events) for details on how to do this.
 
 When `openExternalURL` is called, players are prompted with a confirmation screen, where they are informed of where the link will take them, and where can accept of decline to visit the link.
 

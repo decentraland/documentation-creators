@@ -9,18 +9,16 @@ redirect_from:
 slug: /creator/development-guide/mutable-data/
 ---
 
-When referencing data from a [component](/creator/development-guide/entities-components), you can either fetch the mutable or the immutable (read-only) versions. 
+When referencing data from a [component](/creator/development-guide/entities-components), you can either fetch the mutable or the read-only (immutable) version. 
 
-Dealing with read-only versions of data as much as possible can bring a very significant improvement in the performance of your scene, when compared to dealing with that same data from mutable versions.
-
-
+When possible, you should always try to deal with the read-only versions of data as much as possible. This can bring a very significant improvement in the performance of your scene, when compared to always dealing with that same data from mutable versions.
 
 The `.get()` function in a component returns an immutable (read-only) version of the component. You can only read its values, but can't change any of the properties on it.
 
-The `.getMutable()` function returns representation of the component that allows you to change its values. Use mutable versions only when you plan to make changes to a component, otherwise, always use `get()`.
+The `.getMutable()` function returns a representation of the component that allows you to change its values. Use mutable versions only when you plan to make changes to a component, otherwise, always use `get()`.
 
 ```ts
-// fetch an immutable version (read-only)
+// fetch a read-only (immutable) version
 const immutableTransform = Transform.get(myEntity)
 
 // the following does NOT work:
@@ -28,7 +26,7 @@ const immutableTransform = Transform.get(myEntity)
 
 const mutableTransform = Transform.getMutable(myEntity)
 
-// the following DOES change the entity's position
+// the following line DOES change the entity's position
 mutableTransform.position.y = 2
 ```
 
@@ -36,32 +34,34 @@ A good practice may be to iterate over read-only components, and then only fetch
 
 
 ```ts
-// Define the system
-function RisingSystem(dt: number) {
-	// iterate over all entiities with a Transform and a custom TargetHeight component
-  for (const [entity] of engine.getEntitiesWith(Transform, TargetHeight)) {
+// hard-coded maximum height
+const MAX_HEIGHT = 10
 
-	// get read-only values
-	const targetHeight = TargetHeight.get(entity).targetHeight
+// Define the system
+function HeightLimitSystem(dt: number) {
+	// iterate over all entities that have a Transform component
+  for (const [entity] of engine.getEntitiesWith(Transform)) {
 
 	// get read-only values
 	const currentHeight = Transform.get(entity).position.y
 
 	// compare values
-	if(targetHeight > currentHeight){
+	if(currentHeight > MAX_HEIGHT){
 
-		// only fetch mutable version if there's a change to make
+		// fetch mutable version to make a change
 		const mutableTransform = Transform.getMutable(entity)
-		mutableTransform.position.y += dt
+
+		// change transform
+		mutableTransform.position.y = MAX_HEIGHT
 	}
   }
 }
 
 // Add system to engine
-engine.addSystem(RisingSystem)
+engine.addSystem(HeightLimitSystem)
 ```
 
-In the example above, a system checks the read-only values of both an entity's transform and a custom TargetHeight component. On every frame it checks to see if these values match. If the height on the transform happens to be less than the one stored on TargetHeight, then and only then we fetch the mutable version of the Transform. This may seem like extra work, but in a scene where we're checking values for many entities on every tick of the game loop, and only making changes occasionally, it results in huge performance gains.
+In the example above, a system checks the read-only values of an entity's `Transform` component. On every tick it checks to see if the position's _y_ is higher than a hard-coded maximum height. If the height on the transform happens to be above this limit, then and only then we fetch the mutable version of the Transform. This may seem like extra work, but in a scene where we're checking values for many entities on every tick of the game loop, and only making changes occasionally, it results in huge performance gains.
 
 This practice follows the principles of [data oriented programming](/creator/development-guide/data-oriented-programming).
 
