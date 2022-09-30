@@ -38,6 +38,8 @@ Below are the maximum number of elements that a scene is allowed to render at th
 
 - **File count:** `200 files per parcel` Total count of the files uploaded. Includes 3D models and audio. Doesn't include files that aren't uploaded, such as node.js packages.
 
+- **Max file size** `50 MB per file` No individual file of any type in the scene can exceed 50 MB, no matter how many parcels the scene has.
+
 ## Optimizing
 
 See [Performance Optimization]({{ site.baseurl }}{% post_url /development-guide/2021-01-11-performance-optimization %})) for tips about how you can keep your scene below these limits and make it run smoother for players.
