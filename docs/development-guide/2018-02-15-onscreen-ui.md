@@ -387,7 +387,7 @@ uiTrigger.addComponent(
   })
 )
 
-uiTrigger.addComponent(new BoxShape())
+MeshRenderer.create(myEntity, { box: {} })
 engine.addEntity(uiTrigger)
 ```
 

@@ -34,7 +34,7 @@ const myEntity = engine.addEntity()
 Transform.create(myEntity, {
 	position: {x: 4, y: 1, z: 4}
 })
-BoxShape.create(myEntity)
+MeshRenderer.create(myEntity, { box: {} })
 ```
 
 In this example we're moving an entity by 0.1 meters per tick of the game loop.
@@ -60,7 +60,7 @@ const myEntity = engine.addEntity()
 Transform.create(myEntity, {
 	position: {x: 4, y: 1, z: 4}
 })
-BoxShape.create(myEntity)
+MeshRenderer.create(myEntity, { box: {} })
 ```
 
 TODO: Verify this rotate example running it
@@ -94,7 +94,7 @@ Transform.create(childEntity, {
 	position: {x: 1, y: 0, z: 0},
 	parent: pivotEntity
 })
-BoxShape.create(childEntity)
+MeshRenderer.create(childEntity, { box: {} })
 
 ```
 
@@ -120,7 +120,7 @@ const myEntity = engine.addEntity()
 Transform.create(myEntity, {
 	position: {x: 4, y: 1, z: 4}
 })
-BoxShape.create(myEntity)
+MeshRenderer.create(myEntity, { box: {} })
 ```
 
 The example above keeps movement at approximately the same speed as the movement example above, even if the frame rate drops. When running at 30 frames per second, the value of `dt` is 1/30.
@@ -195,7 +195,7 @@ Transform.create(myEntity, {
 	position: {x: 4, y: 1, z: 4}
 })
 
-BoxShape.create(myEntity)
+MeshRenderer.create(myEntity, { box: {} })
 
 LerpTransformComponent.create(myEntity, {
   start: {x: 4, y: 1, z: 4},
@@ -273,7 +273,7 @@ Transform.create(myEntity, {
 	position: {x: 4, y: 1, z: 4}
 })
 
-BoxShape.create(myEntity)
+MeshRenderer.create(myEntity, { box: {} })
 
 SlerpData.create(myEntity, {
   start: Quaternion.rotationYawPitchRoll(0, 90, 0),
@@ -340,7 +340,7 @@ engine.addSystem(new LerpSize())
 
 const myEntity = new Entity()
 myEntity.addComponent(new Transform())
-myEntity.addComponent(new BoxShape())
+MeshRenderer.create(myEntity, { box: {} })
 
 myEntity.addComponent(new LerpSizeData())
 myEntity.getComponent(LerpSizeData).origin = 0.1
@@ -404,7 +404,7 @@ Transform.create(myEntity, {
 	position: {x: 4, y: 1, z: 4}
 })
 
-BoxShape.create(myEntity)
+MeshRenderer.create(myEntity, { box: {} })
 
 LerpTransformComponent.create(myEntity, {
   start: {x: 4, y: 1, z: 4},
@@ -473,7 +473,7 @@ Transform.create(myEntity, {
 	position: {x: 4, y: 1, z: 4}
 })
 
-BoxShape.create(myEntity)
+MeshRenderer.create(myEntity, { box: {} })
 
 const point1 = {x: 1, y: 1, z: 1}
 const point2 = {x: 8, y: 1, z: 3}

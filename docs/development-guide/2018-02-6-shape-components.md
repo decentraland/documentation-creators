@@ -49,10 +49,10 @@ Primitive shapes don't include materials. To give it a color or a texture, you m
 
 For more complex shapes, you can build a 3D model in an external tool like Blender and then import them in _.glTF_ or _.glb_ (binary _.glTF_). [glTF](https://www.khronos.org/gltf) (GL Transmission Format) is an open project by Khronos providing a common, extensible format for 3D assets that is both efficient and highly interoperable with modern web technologies.
 
-To add an external model into a scene, add a `GLTFShape` component to an entity and set its `src` to the path of the glTF file containing the model.
+To add an external model into a scene, add a `GltfContainer` component to an entity and set its `src` to the path of the glTF file containing the model.
 
 ```ts
-myEntity.addComponent(new GLTFShape("models/House.gltf"))
+myEntity.addComponent(new GltfContainer("models/House.gltf"))
 ```
 
 Since the `src` field is required, you must give it a value when constructing the component.

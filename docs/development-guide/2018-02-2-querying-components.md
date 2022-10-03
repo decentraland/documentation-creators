@@ -47,7 +47,7 @@ for (const [entity] of engine.getEntitiesWith(Transform, Physics, NextPosition))
 // Define a System
 function PhysicsSystem(dt: number) {
 
-  // query for entities that include both BoxShape and Transform components	
+  // query for entities that include both a Transform and a Physics component
   for (const [entity] of engine.getEntitiesWith(Transform, Physics)) {
     const transform = Transform.getMutable(entity)
 	cons vel = Physics.get(entity).velocity

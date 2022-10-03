@@ -197,7 +197,9 @@ function payment(){
 }
 
 const button = new Entity()
-button.addComponent(new BoxShape())
+
+//MeshRenderer.create(meshEntity, { box: { } })
+
 button.addComponent(new OnClick( e => {
     payment()
   }))

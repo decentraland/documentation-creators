@@ -28,7 +28,7 @@ TODO: Change image
 
 _Entities_ are the basic unit for building everything in Decentraland scenes. All visible and invisible 3D objects and audio players in your scene will each be an entity. An entity is nothing more than an id, that can be referenced by components. The entity itself has no properties or methods of its own, it simply serves to group several components together.
 
-_Components_ define the traits of an entity. For example, a `transform` component stores the entity's coordinates, rotation and scale. A `BoxShape` component gives the entity a box shape when rendered in the scene, a `Material` component gives the entity a color or texture. You can also create custom components to serve your scene's required data, for example a custom `health` could store an entity's remaining health value, and add it to entities that represent non-player enemies in a game.
+_Components_ define the traits of an entity. For example, a `transform` component stores the entity's coordinates, rotation and scale. A `MeshRenderer` component gives the entity a visible shape (like a cube or a sphere) when rendered in the scene, a `Material` component gives the entity a color or texture. You can also create custom components to serve your scene's required data, for example a custom `health` could store an entity's remaining health value, and add it to entities that represent non-player enemies in a game.
 
 If you're familiar with web development, think of entities as the equivalent of _Elements_ in a _DOM_ tree, and of components as _attributes_ of those elements.
 
@@ -58,8 +58,8 @@ Transform.create(door, {
 	position: { x: 5, y: 1, z: 5 }
 })
 
-// Give the entity a visible shape via a GLTFShape component
-GLTFShape.create(door)
+// Give the entity a visible shape via a GltfContainer component
+GltfContainer.create(door)
 ```
 
 > Note: In previous versions of the SDK, it was necessary to manually add an entity to the engine to start rendering it. As of version 7 of the SDK, entities are implicitly added to the engine as soon as they are assigned a component.

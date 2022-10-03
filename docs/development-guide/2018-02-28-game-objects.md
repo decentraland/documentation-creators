@@ -24,7 +24,7 @@ export class Door extends Entity {
 
   // Allow each room to specify a unique look and feel
   constructor(
-    model: GLTFShape,
+    model: GltfContainer,
     transform: TranformConstructorArgs,
     sound: AudioClip
   ) {

@@ -105,7 +105,7 @@ Open this UI by calling the function `openNFTDialog(), passing it the NFT's cont
 
 To open this UI, add the following:
 
-TODO: update code snippets if this is still athing
+TODO: update code snippets if this is still a thing
 
 ```ts
 myPictureFrame.addComponent(

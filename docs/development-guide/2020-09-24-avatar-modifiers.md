@@ -170,7 +170,7 @@ executeTask(async () => {
 
 It can be tough to know exactly what parts of the scene your modifier areas cover based on the code. Visual feedback helps a lot to confirm that they're well placed.
 
-To verify the positions of a `AvatarModifierArea` or a `CameraModeArea`, give the entity holding it a `BoxShape` component, and set the scale to the same size as the `area` of the modifier area.
+To verify the positions of a `AvatarModifierArea` or a `CameraModeArea`, give the entity holding it a `MeshRenderer` component with a `box` shape, and set the scale to the same size as the `area` of the modifier area.
 
 > Note: Modifier areas aren't affected by the `scale` property of the transform, their size is based on their `area` property.
 
@@ -188,7 +188,7 @@ Transform.create(entity, {
 	scale: {x: 8, y:3, z:8}
 })
 
-BoxShape.create(entity)
+MeshRenderer.create(entity, { box: {} })
 ```
 
 To activate the effects of the modifier area, the player's head or torso should enter the area. It won't take effect if only the feet of the player are covered. Make sure the player can't easily evade the area by jumping.

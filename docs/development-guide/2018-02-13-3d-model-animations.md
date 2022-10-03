@@ -45,7 +45,7 @@ An `Animator` component is used to access all the animations of the entity and c
 const shark = engine.addEntity()
 
 // Add a 3D model to it
-GLTFShape.create(shark, {
+GltfContainer.create(shark, {
 	src: 'models/shark.glb'
 })
 
@@ -188,7 +188,7 @@ Animations exist in _layers_ in an `Animator` component. If two animations are i
 const shark = engine.addEntity()
 
 // Add a 3D model to it
-GLTFShape.create(shark, {
+GltfContainer.create(shark, {
 	src: 'models/shark.glb'
 })
 

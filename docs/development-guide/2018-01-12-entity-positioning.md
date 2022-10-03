@@ -11,7 +11,7 @@ type: Document
 slug: /creator/development-guide/entity-positioning/
 ---
 
-You can set the _position_, _rotation_ and _scale_ of any entity by using the `Transform` component. This can be used on any entities, affecting where 3d objects are rendered, like primitive shapes (cube, sphere, plane, etc) and 3D models (`GLTFShape`).
+You can set the _position_, _rotation_ and _scale_ of any entity by using the `Transform` component. This can be used on any entities, affecting where 3d objects are rendered, like primitive shapes (cube, sphere, plane, etc) and 3D models (`GltfContainer`).
 
 TODO: check image
 <img src="/images/media/ecs-simple-components.png" alt="nested entities" width="400"/>
@@ -175,7 +175,7 @@ Billboards were a common technique used in 3D games of the 90s, where most entit
 const cube = engine.addEntity()
 
 // Give the entity a visible shape
-BoxShape.create(cube)
+MeshRenderer.create(cube, { box: {} })
 
 // Create transform with a predefined position
 Transform.create(cube, {
@@ -424,7 +424,7 @@ Set an entity as a child of the `Attachable.FIRST_PERSON_CAMERA` object to fix t
 
 ```ts
 const followTheCamera = new Entity()
-followTheCamera.addComponent(new BoxShape())
+MeshRenderer.create(meshEntity, { box: {} })
 followTheCamera.addComponent(
   new Transform({
     position: new Vector3(0, 0.5, 3),
@@ -440,7 +440,7 @@ To fix an entity's rotation only in the _x_ axis to the player, set an entity as
 
 ```ts
 const followAvatar = new Entity()
-followAvatar.addComponent(new BoxShape())
+MeshRenderer.create(meshEntity, { box: {} })
 followAvatar.addComponent(
   new Transform({
     position: new Vector3(0, 0.5, 3),

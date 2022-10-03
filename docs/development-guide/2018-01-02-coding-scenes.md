@@ -97,8 +97,8 @@ Transform.create(door, {
 	position: { x: 5, y: 1, z: 5 }
 })
 
-// Give the entity a visible shape via a GLTFShape component
-GLTFShape.create(door)
+// Give the entity a visible shape via a GltfContainer component
+GltfContainer.create(door)
 ```
  
 The default set of components are interpreted by the engine and have direct consequences on how the entity will look, its position, if it emits sounds, etc. You can also define custom components to store data that might be useful to the mechanics in your scene. The engine won't directly interpret what the values on these components mean, but you can write logic in your scene's code to monitor these values and respond to them.
@@ -176,8 +176,8 @@ If you attempt to iterate over all the entities in the scene on every tick of th
 // Define a System
 function boxHeightSystem(dt: number) {
 
-  // query for entities that include both BoxShape and Transform components	
-  for (const [entity] of engine.getEntitiesWith(BoxShape, Transform)) {
+  // query for entities that include both MeshRenderer and Transform components	
+  for (const [entity] of engine.getEntitiesWith(MeshRenderer, Transform)) {
     const transform = Transform.get(entity)
     log("a box is at height:  ", transform.position.y)
   }
@@ -230,14 +230,14 @@ Transform.create(cube, {
 	position: { x: 5, y: 1, z: 5 }
 })
 
-// Give the entity a visible shape via a BoxShape component
-BoxShape.create(entity)
+// Give the entity a visible shape via a MeshRenderer component
+MeshRenderer.create(cube, { box: {} })
 
 // Define a System
 function rotationSystem(dt: number) {
 
-  // query for entities that include both BoxShape and Transform components	
-  for (const [entity] of engine.getEntitiesWith(BoxShape, Transform)) {
+  // query for entities that include both MeshRenderer and Transform components	
+  for (const [entity] of engine.getEntitiesWith(MeshRenderer, Transform)) {
     const transform = Transform.getMutable(entity)
     transform.rotation = Quaternion.multiply(transform.rotation, Quaternion.angleAxis(dt * 10, Vector3.Up()))
   }
@@ -247,7 +247,7 @@ function rotationSystem(dt: number) {
 engine.addSystem(rotationSystem)
 ```
 
-In the example above, a `cube` entity and a `rotationSystem` system are added to the engine. The `cube` entity has a `Transform`, and a `BoxShape` component. In every tick of the game loop, the `rotationSystem` system is called, and it changes the rotation values in the `Transform` component of the `cube` entity.
+In the example above, a `cube` entity and a `rotationSystem` system are added to the engine. The `cube` entity has a `Transform`, and a `MeshRenderer` component. In every tick of the game loop, the `rotationSystem` system is called, and it changes the rotation values in the `Transform` component of the `cube` entity.
 
 Note that most of the code above is executed just once, when loading the scene. The exception is the `rotationSystem` system, which is called on every tick of the game loop.
 
