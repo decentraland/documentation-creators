@@ -271,14 +271,12 @@ If a `featureToggles` property doesn't exist in your `scene.json` file, create i
 
 ## Fetch metadata from scene code
 
-TODO: check if this is still like this
-
 You may need a scene's code to access the fields from the scene metadata, like the parcels that the scene is deployed to, or the spawn point positions. This is especially useful for scenes that are meant to be replicated, or for code that is meant to be reused in other scenes. It's also very useful for libraries, where the library might for example need to know where the scene limits are.
 
 To access this data, first import the `ParcelIdentity` library to your scene:
 
 ```ts
-import { getParcel } from "@decentraland/ParcelIdentity"
+import { getParcel } from "~system/ParcelIdentity"
 ```
 
 Then you can call the `getParcel()` function from this library, which returns a json object that includes much of the contents of the scene.json file.
@@ -286,26 +284,43 @@ Then you can call the `getParcel()` function from this library, which returns a 
 The example bleow shows the path to obtain several of the more common fields you might need from this function's response:
 
 ```ts
-import { getParcel } from "@decentraland/ParcelIdentity"
 
-executeTask(async () => {
-  const parcel = await getParcel()
+import { getParcel } from "~system/ParcelIdentity"
 
-  // parcels
-  log("parcels: ", parcel.land.sceneJsonData.scene.parcels)
-  log("base parcel: ", parcel.land.sceneJsonData.scene.base)
+async function getSceneData(){
+	const parcel = await getParcel({})
 
-  // spawn points
-  log("spawnpoints: ", parcel.land.sceneJsonData.spawnPoints)
+	if(parcel){
 
-  // general scene data
-  log("title: ", parcel.land.sceneJsonData.display?.title)
-  log("author: ", parcel.land.sceneJsonData.contact?.name)
-  log("email: ", parcel.land.sceneJsonData.contact?.email)
+		// full scene json
+		log("full json: ",  parcel.land!.sceneJsonData)
 
-  // other info
-  log("tags: ", parcel.land.sceneJsonData.tags)
-})
+		const sceneJson = JSON.parse(parcel.land!.sceneJsonData)
+
+		// parcels
+		log("parcels: ", sceneJson.scene.parcels)
+		log("base parcel: ", sceneJson.scene.base)
+
+		// spawn points
+		log("spawnpoints: ", sceneJson.spawnPoints)
+
+		// general scene data
+		log("title: ", sceneJson.display?.title)
+		log("author: ", sceneJson.contact?.name)
+		log("email: ", sceneJson.contact?.email)
+
+		// required permissions
+		log("email: ", sceneJson.requiredPermissions)
+
+		// other info
+		log("tags: ", sceneJson.sceneJsonData.tags)
+	}
+  
+	
+}
+  
+getSceneData()
 ```
 
 > Note: `getParcel()` needs to be run as an [async function](/creator/development-guide/async-functions), since the response may delay a fraction of a second or more in returning data.
+

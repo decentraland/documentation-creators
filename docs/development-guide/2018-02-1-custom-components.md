@@ -86,8 +86,6 @@ TODO: tips
 
 You may want to add a component that simply flags an entity to differentiate it from others, without using it to store any data. To do this, leave the schema as an empty object.
 
-TODO: is there a neater way to do this??
-
 This is especially useful when using [querying components](/creator/development-guide/querying-components). A simple flag component can be used tell entities apart from others, and avoid having the system iterate over more entities than needed.
 
 ```ts
@@ -132,6 +130,9 @@ const mySchema = {
 export const WheelSpinComponent = engine.defineComponent(mySchema, 2000)
 ```
 
+> Tip: When creating an instance of a component, the VS Studio autocomplete options will suggest what fields you can add to the component by pressing _Ctrl + Space_.
+
+> Note: All values in a custom component are optional when instancing a component. There is no mechanism to define default values for these fields when instancing the component, but you can define systems that execute default behaviors if no values are present for a given field.
 
 ### Basic Schema types
 

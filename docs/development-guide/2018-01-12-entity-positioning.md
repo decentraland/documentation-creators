@@ -372,7 +372,7 @@ To attach an entity to an avatar, you must provide the user's ID in the field `a
 - Fetch the local player's `userId` via `getUserData()`.
 
 ```ts
-import { getUserData } from "@decentraland/Identity"
+import { getUserData } from "~system/UserIdentity"
 
 executeTask(async () => {
   let data = await getUserData()
@@ -383,7 +383,7 @@ executeTask(async () => {
 - Fetch the `userId` for all other nearby players via `getConnectedPlayers()`
 
 ```ts
-import { getConnectedPlayers } from "@decentraland/Players"
+import { getConnectedPlayers } from "~system/Players"
 
 executeTask(async () => {
   let players = await getConnectedPlayers()
@@ -396,20 +396,19 @@ executeTask(async () => {
 Using it together with `AvatarAttach`, it could look like this:
 
 ```ts
-import { getUserData } from "@decentraland/Identity"
+import { getUserData } from "~system/UserIdentity"
 
-async () => {
-  let data = await getUserData()
-  log(data.userId)
+async function attachEntity (entity: Entity){
+  let userData = await getUserData({})
+  if(!userData.data) return
+  log(userData.data.userId)
 
-  AvatarAttach.create(cube, {
+  AvatarAttach.create(entity, {
 	anchorPointId: AvatarAnchorPoint.LEFT_HAND,
-	avatarId: data.userId
-})
+	avatarId: userData.data.userId
+  })
 }
 ```
-
-TODO: Check that this example works!!   The import is not working!
 
 See other ways to fetch other user's IDs in [Get Player Data](/creator/development-guide/user-data#get-player-data).
 
