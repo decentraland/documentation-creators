@@ -12,17 +12,126 @@ type: Document
 slug: /creator/development-guide/click-events/
 ---
 
+
 Decentraland accepts events from pointer clicks, a primary button and a secondary button.
 
 Clicks can be done either with a mouse, a touch screen, a VR controller or some other device, these all generate the same type of event.
 
 The primary and secondary buttons map respectively to the E and F key on a keyboard.
 
-> Note: Entities that don't have a shape component, or that have their shape's `visible` field set to _false_ don't respond to pointer events.
+## Detect pointer events
+
+```ts
+PointerEvents.create(pointerDownCube, {
+    pointerEvents: [
+      {
+        eventType: PointerEventType.DOWN,
+        eventInfo: {
+          button: ActionButton.POINTER,
+          hoverText: 'Activate'
+        }
+      }
+    ]
+  })
+```
+
+> Note: Entities that don't have a [collider](/creator/development-guide/colliders) don't respond to button events. If an entity has no collider, give it a `MeshCollider` component to make it clickable.
+
+## Types of pointer events
+
+DOWN, UP, HOVER_ENTER, HOVER_LEAVE
+
+
+## Buttons
+
+Available buttons
+
+## Handle pointer events
+
+
+wasEntityClicked()
+
+why it's important
+
+isPointerEventActive()
+
+
+Handle single clickable entity
+```ts
+PointerEvents.create(tree, {
+	pointerEvents: [
+		{
+		  eventType: PointerEventType.DOWN,
+		  eventInfo: {
+			button: ActionButton.PRIMARY,
+			hoverText: 'Shake'
+		  }
+		}
+	  ]
+})
+
+
+
+export function clickTree(){
+	 if (wasEntityClicked(tree, ActionButton.PRIMARY)) {
+	 	createHummingBird()
+	 	let anim = Animator.getMutable(tree)
+	 	anim.states[0].playing = true
+	}
+}
+```
+
+Handle arrray
+```ts
+
+function spawnerSystem() {
+  const clickedCubes = engine.getEntitiesWith(PointerEvents)
+  for (const [entity] of clickedCubes) {
+    if (wasEntityClicked(entity, ActionButton.PRIMARY)) {
+      createCube(
+        1 + Math.random() * 8,
+        Math.random() * 8,
+        1 + Math.random() * 8,
+        false
+      )
+    }
+  }
+}
+engine.addSystem(spawnerSystem)
+```
+
+link to systems
+and to component queries
+
+## Button event arguments
+
+## Optional properties
+
+### Hint messages
+
+
+### Max distance
+
+
+### Multiple buttons on an entity
+
+
+### Differentiate meshes inside a model
+
+
+## Global button events
+
 
 ## Pointer event components
 
-#### OnPointerDown
+### Detect hit entities
+???
+
+
+
+
+
+### OnPointerDown
 
 The best way to handle pointer and button down events is to add an `OnPointerDown` component to an entity.
 
@@ -50,7 +159,14 @@ The `OnPointerDown` component has a second optional parameter, this parameter is
 - `hoverText`: Hint text to display on the UI when pointing at the entity.
 - `distance`: Maximum click distance.
 
-#### OnPointerUp
+### Handle button events
+
+
+
+
+
+
+### OnPointerUp
 
 Add an `OnPointerUp` component to track when a player releases the mouse button, the primary or the secondary button while pointing at the entity.
 
@@ -69,7 +185,7 @@ myEntity.addComponent(
 )
 ```
 
-#### Specific button events
+### Specific button events
 
 The `OnPointerDown` and `OnPointerUp` components can respond to the following different buttons:
 
@@ -95,7 +211,7 @@ myEntity.addComponent(
 )
 ```
 
-#### Hint messages
+### Hint messages
 
 When a player hovers the cursor over an item with an `OnPointerDown` or `OnPointerUp` component, the cursor changes shape to hint to the player that the entity is interactive.
 
@@ -148,7 +264,7 @@ myEntity.addComponent(
 )
 ```
 
-#### Max click distance
+### Max click distance
 
 By default, entities are only clickable when the player is within a close range of the entity, at a maximum distance of _10 meters_. You can optionally configure the maximum distance through the `distance` parameter of the `OnPointerDown` and `OnPointerUp` components.
 
@@ -170,7 +286,7 @@ myEntity.addComponent(
 
 The example above sets the maximum distance to _8 meters_.
 
-#### Event arguments
+### Event arguments
 
 The _pointer down event_ and the _pointer up event_ objects are implicitly passed as parameters of the functions in the `OnPointerDown` and `OnPointerUp` components, respectively. This event object contains various properties that might be useful for the function. See [Properties of button events](#properties-of-button-events) for more details.
 
@@ -188,7 +304,7 @@ myEntity.addComponent(
 )
 ```
 
-#### Multiple buttons on an entity
+### Multiple buttons on an entity
 
 You may want to make an entity respond to different buttons in different ways. Each entity can only have _one_ `OnPointerDown` component, and _one_ `OnPointerUp` component, but you can use `ActionButton.ANY` and then tell them apart within the function.
 
@@ -231,7 +347,7 @@ The events from `OnPointerDown` and `OnPointerUp` components, as well as all the
   - `worldNormal`: The normal of the hit, in world space, as a _Vector3_
   - `entityId`: The ID of the entity, if applicable, as a _string_
 
-#### Differentiate meshes inside a model
+### Differentiate meshes inside a model
 
 Often, _.glTF_ 3D models are made up of multiple meshes, that each have an individual internal name. All button events events include the information of what specific mesh was clicked, so you can use this information to trigger different click behaviors in each case.
 
@@ -318,7 +434,7 @@ The event objects of both the `BUTTON_DOWN` and the `BUTTON_UP` contain various 
 
 > Note: The code for subscribing an input event only needs to be executed once, the `subscribe()` method keeps polling for the event. Don't add this into a system's `update()` function, as that would register a new listener on every frame.
 
-#### Detect hit entities
+### Detect hit entities
 
 If the third argument of the `subscribe()` function (`useRaycast`)is true, and the player is pointing at an entity that has a collider, the event object includes a nested `hit` object. The `hit` object includes information about the collision and the entity that was hit.
 
@@ -351,7 +467,7 @@ The event data returns a string for the `entityId`. If you want to reference the
 
 > Note: We recommend that when possible you use the approach of adding an `OnPointerDown` component to each entity you want to make interactive, instead of using a global button event. The scene's code isn't able to hint to a player that an entity is interactive when hovering on it unless the entity has an `OnPointerDown`, `OnPointerUp`, or `OnClick` component.
 
-#### Tracking player movements
+### Tracking player movements
 
 In real-time multiplayer games where the timing of player movements is critical, you may want to keep track of each player's position using a 3rd party server as the source of truth. You can improve response time by listening to the button in advance and predict their effects in your server before the avatar has shifted position.
 
@@ -442,46 +558,3 @@ class ButtonChecker implements ISystem {
 
 engine.addSystem(new ButtonChecker())
 ```
-
-
-
-## OnClick Component - DEPRECATED
-
-As an alternative to `OnPointerDown`, you can use the `OnClick` component. This component only tracks button events from the `POINTER`, not from the primary or secondary buttons.
-
-You declare what to do in the event of a click by writing a function in the `OnClick` component.
-
-```ts
-const myEntity = new Entity()
-myEntity.addComponent(new BoxShape())
-
-myEntity.addComponent(
-  new OnClick((e) => {
-    log("myEntity clicked")
-  })
-)
-```
-
-The `OnClick` component passes less event information than the `OnPointerDown` component, it lacks the click distance or the mesh name, for example.
-
-<!--
-
-It only contains the following parameter, which can be accessed by your function:
-
-- `buttonId`: ID of the button that triggered the event (_PRIMARY_ or _SECONDARY_)
-
-```ts
-const myEntity = new Entity()
-myEntity.addComponent(new BoxShape())
-
-myEntity.addComponent(
-  new OnClick(e => {
-    log("pointer Id" + e.buttonId)
-  })
-)
-```
-
--->
-
-> Note: Entities that don't have a shape component, or that have their shape's `visible` field set to _false_ can't be clicked.
-
