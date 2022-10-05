@@ -337,10 +337,6 @@
 							"slug": "/creator/development-guide/game-objects"
 						},
 						{
-							"name": "Custom events",
-							"slug": "/creator/development-guide/custom-events"
-						},
-						{
 							"name": "Async functions",
 							"slug": "/creator/development-guide/async-functions"
 						}
