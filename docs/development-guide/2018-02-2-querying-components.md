@@ -120,31 +120,3 @@ You can then refer to these references as you iterate over the collection of res
 	log("has position : ", transformReadOnly.position)
   }
 ```
-
-<!-->
-## All entities
-
-You can access the full list of entities that have been added to the engine, regardless of what components they have, through `engine.entities`.
-
-```ts
-engine.entities
-```
--->
-
-
-<!--
-## Change a component group while iterating
-
-Component groups are mutable. You shouldn't modify the component group while you're iterating over it, because that could have unwanted consequences.
-
-For example, if you iterate over a component group to remove each entity from the engine, the act of removing an entity displaces the other entities in the array, which can lead to some entities being skipped.
-
-To overcome this problem, use the following code to remove all entities from the engine:
-
-```ts
-while (myGroup.entities.length) {
-  engine.removeEntity(myGroup.entities[0])
-}
-```
-
--->

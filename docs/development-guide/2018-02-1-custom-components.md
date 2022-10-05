@@ -70,9 +70,7 @@ const readOnlyInstance MyCustomComponent.deleteFrom(myEntity)
 
 ## About the ID
 
-Each component must have a unique ID, that differentiates it internally. The Decentraland SDK has the numbers 0-1000?? reserved for the base components. Any new component you create must have an id that is higher than X???.
-
-TODO: Check the reserved component ids
+Each component must have a unique ID, that differentiates it internally. The Decentraland SDK has the numbers 1000 to 2000 reserved for the base components. Any new component you create must have an id that is a number higher than **2000**.
 
 To easily create new ids....
 

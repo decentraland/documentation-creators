@@ -28,7 +28,7 @@ TODO: Change image
 
 _Entities_ are the basic unit for building everything in Decentraland scenes. All visible and invisible 3D objects and audio players in your scene will each be an entity. An entity is nothing more than an id, that can be referenced by components. The entity itself has no properties or methods of its own, it simply serves to group several components together.
 
-_Components_ define the traits of an entity. For example, a `transform` component stores the entity's coordinates, rotation and scale. A `MeshRenderer` component gives the entity a visible shape (like a cube or a sphere) when rendered in the scene, a `Material` component gives the entity a color or texture. You can also create custom components to serve your scene's required data, for example a custom `health` could store an entity's remaining health value, and add it to entities that represent non-player enemies in a game.
+_Components_ define the traits of an entity. For example, a `Transform` component stores the entity's coordinates, rotation and scale. A `MeshRenderer` component gives the entity a visible shape (like a cube or a sphere) when rendered in the scene, a `Material` component gives the entity a color or texture. You can also create custom components to serve your scene's required data, for example a custom `health` could store an entity's remaining health value, and add it to entities that represent non-player enemies in a game.
 
 If you're familiar with web development, think of entities as the equivalent of _Elements_ in a _DOM_ tree, and of components as _attributes_ of those elements.
 
@@ -68,21 +68,33 @@ When a component is created, it's always assigned to a parent entity. The compon
 
 ## Remove entities
 
-To remove an entity from your scene, you must remove each of its components. As a short cut, you can call the REMOVE ENTITY FUNCTION
+To remove an entity from the engine, use `engine.removeEntity()`
 
-TODO: remve entity
+```ts
+// Create an entity
+const door = engine.addEntity()
+
+// Give the entity a visible shape via a GltfContainer component
+GltfContainer.create(door)
+
+// Remove entity
+engine.removeEntity(door)
+```
+
+If a removed entity has any child entities, these change their parent back to the default `engine.RootEntity` entity, which is positioned at the scene base position, with a scale of _1_.
+
+TODO: remove children too
 
 
-TODO: CONFIRM THIS:
-If a removed entity has child entities, all children of that entity are removed too.
-
-You can also manually remove each of the components in the entity one by one
-
-TODO: snippet
 
 NOTE: not the same as making invisible - link to invisible
 
-The entity's id is then free to be reused by a new entity
+
+### Removing entities behind the scenes
+
+An entity is just an id that is referenced by its components. So when removing an entity you're really removing each of the components that reference this entity. This means that if you manually remove all of the components of an entity, it will have the same effect as doing `engine.removeEntity()`.
+
+Once the entity's components are removed, that entity's id is free to be referenced by new components as a fresh new entity.
 
 
 ## Nested entities
@@ -126,14 +138,12 @@ If either the parent or child entity doesn't have a `Transform` component, the f
 
 Entities with no shape component are invisible in the scene. These can be used as wrappers to handle and position multiple entities as a group.
 
-To remove an entity's parent, you can assign the entity's parent to `null`.
+To separate a child entity from its parent, you can assign the entity's parent to `null`.
 
 ```ts
 const mutableChildTransform = Transform.get(childEntity)
 mutableChildTransform.parent = null
 ```
-
-TODO: Confirm this
 
 
 ## Get an entity by ID

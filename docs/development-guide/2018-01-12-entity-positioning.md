@@ -192,7 +192,7 @@ The three optional parameters when creating a `Billboard` component are booleans
 
 ```ts
 // rotate on all three axis
-Billboard.create(cube, {x: true, y: true, z: true})
+Billboard.create(cube, {})
 
 // rotate only in the X axis
 Billboard.create(cube, {x: true, y: false, z: false})
