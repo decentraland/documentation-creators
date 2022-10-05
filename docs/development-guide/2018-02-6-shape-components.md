@@ -22,28 +22,31 @@ Several basic shapes, often called _primitives_, can be added to an entity.
 
 The following primitive shape components are available:
 
-- `BoxShape`
-- `SphereShape`
-- `PlaneShape`
-- `CylinderShape`
-- `ConeShape`
+- `box`
+- `sphere`
+- `plane`
+- `cylinder`
 
-Each of these components has certain fields that are specific to that shape, for example the _cylinder_ shape has `arc`, `radiusTop`, `radiusBottom`, etc.
-
-To apply a component to an entity, you can instance a new component and assign it all in one operation:
+To apply a primitive shape to an entity, give it a `MeshRenderer` component:
 
 ```ts
-myEntity.addComponent(new SphereShape())
+const primitiveEntity = engine.addEntity()
+
+MeshRenderer.create(primitiveEntity, { box: {} })
 ```
 
-Or you can first create the component instance and then assign it to the entity.
-
-```ts
-let sphere = new SphereShape()
-myEntity.addComponent(sphere)
-```
 
 Primitive shapes don't include materials. To give it a color or a texture, you must assign a [material component](/creator/development-guide/materials) to the same entity.
+
+To make a primitive clickable, or to prevent players from walking through it, you must give the entity a _collider_ via a [MeshCollider](/creator/development-guide/colliders) component.
+
+
+Each of these components has certain fields that are specific to that shape, for example the _cylinder_ shape has `radiusTop` and `radiusBottom`, etc.
+
+> Tip: You can make a cone out of a cylinder by setting the `radiusTop` or `radiusBottom` to 0.
+
+Primitives of type `box` or `plane` include a `uvs` field that allows you to handle how to map textures to their surface. See [materials](/creator/development-guide/materials) for more details. 
+
 
 ## 3D models
 
@@ -52,12 +55,14 @@ For more complex shapes, you can build a 3D model in an external tool like Blend
 To add an external model into a scene, add a `GltfContainer` component to an entity and set its `src` to the path of the glTF file containing the model.
 
 ```ts
-myEntity.addComponent(new GltfContainer("models/House.gltf"))
+const houseEntity = engine.addEntity()
+
+GltfContainer.create(houseEntity, { 
+	src: "models/House.gltf" 
+})
 ```
 
-Since the `src` field is required, you must give it a value when constructing the component.
-
-In the example above, the model is located in a `models` folder at root level of the scene project folder.
+The `src` field is required, you must give it a value when constructing the component. In the example above, the model is located in a `models` folder at root level of the scene project folder.
 
 > Tip: We recommend keeping your models separate in a `/models` folder inside your scene.
 
@@ -65,7 +70,7 @@ glTF models can include their own embedded textures, materials, colliders and an
 
 Keep in mind that all models, their shaders and their textures must be within the parameters of the [scene limitations](/creator/development-guide/scene-limitations).
 
-#### Free libraries for 3D models
+### Free libraries for 3D models
 
 Instead of building your own 3d models, you can also download them from several free or paid libraries.
 
@@ -82,58 +87,39 @@ To get you started, below is a list of libraries that have free or relatively in
 
 > Note: Pay attention to the license restrictions that the content you download has.
 
-Note that in several of these sites, you can choose what format to download the model in. Always choose _.glTF_ format if available. If not available, you must convert them to _glTF_ before you can use them in a scene. For that, we recommend importing them into Blender.
+Note that in several of these sites, you can choose what format to download the model in. Always choose _.glTF_ format if available. If not available, you must convert them to _glTF_ before you can use them in a scene. For that, we recommend importing them into Blender and exporting as _.glTF_ from there.
 
-## Collisions
 
-Entities that have collisions enabled occupy space and block a player's path, entities without collisions can be walked through by a player`s avatar.
+### Optimize 3D models
 
-Collision settings currently don't affect how other entities interact with each other, entities can always overlap. Collision settings only affect how the entity interacts with the player's avatar.
+To ensure that 3D models in your scene load faster and take up less memory, follow these best practices:
 
-Decentraland currently doesn't have a physics engine, so if you want entities to fall, crash or bounce, you must code this behavior into the scene.
+- Save your models in _.glb_ format, which is a lighter version of _.gltf_.
+- If you have multiple models that share the same textures, export your models with textures in a separate file. That way multiple models can refer to a single texture file that only needs to be loaded once.
+- If your scene has entities that appear and disappear, it might be a good idea to pool these entities and keep them underground, or at a scale of 0. This will help them appear faster, the trade-off is that they will occupy memory when not in use. See [entities and components](/creator/development-guide/entities-components#pooling-entities-and-components)
 
-Entities don't use collisions by default. Depending on the type of the shape component it has, collisions are enabled as follows:
 
-- For _primitive_ shapes (boxes, spheres, planes etc), you enable collisions by setting the `withCollisions` field of the shape component to _true_.
+## Stretching a shape
 
-  This example defines a box entity that can't be walked through.
-
-  ```ts
-  let box = new BoxShape()
-  box.withCollisions = true
-  myEntity.addComponent(box)
-  ```
-
-  > Note: Planes only block movement in one direction.
-
-- To use collisions in a _glTF_ shape, you can either:
-
-  - Overlay an invisible entity with a primitive shape and the `withCollisions` field set to _true_.
-  - Edit the model in an external tool like Blender to include a _collider object_. The collider must be named _x_collider_, where _x_ is the name of the model. So for a model named _house_, the collider must be named _house_collider_.
-
-A _collider_ is a set of geometric shapes or planes that define which parts of the model are collided with. This allows for much greater control and is a lot less demanding on the system, as the collision object is usually a lot simpler (with less vertices) than the original model.
-
-See [3D models](/creator/3d-modeling/3d-models) for more details on how to add colliders to a 3D model.
-
-## Pointer blocking
-
-All shapes block player [button events](/creator/development-guide/click-events) by default, so that for example a player can't click through a wall, or pick something up that is locked inside a chest.
-
-You can however disable this behavior on any shape, no matter if it's a primitive or an imported 3D model.
-
-To do so, set the `isPointerBlocker` property of the shape component to _false_.
+Primitive shapes and 3d models have default dimensions that you can alter by changing the scale in the entity's `Transform` component.
 
 ```ts
-let box = new BoxShape()
-box.isPointerBlocker = false
-myEntity.addComponent(box)
-```
+const primitiveEntity = engine.addEntity()
 
-By using this property, you could for example have an invisible wall that players can't walk through, but that does allow them to click on items on the other side of the wall.
+MeshRenderer.create(primitiveEntity, { box: {} })
+
+Transform.create(primitiveEntity, {
+	position: {x: 8, y:1, z: 8},
+	scale: {x: 4, y:0.5, z: 4}
+})
+```
 
 ## Make invisible
 
-You can make an entity invisible by setting the `visible` field in its shape component. Doing this is especially useful when using the shape as a collider.
+TODO: Invisible component exists????
+
+
+You can make an entity invisible by setting the `visible` field in its shape component.
 
 All components for primitive shape and 3D models are visible by default.
 
@@ -144,39 +130,3 @@ myEntity.getComponent(BoxShape).visible = false
 ```
 
 If an entity is invisible, its collider can block a player's path, but it can't be clicked. To make an entity that's both invisible and clickable, keep the `visible` property set to _true_, and instead give it a [material](/creator/development-guide/materials#pooling-entities-and-components) with 100% transparency.
-
-## Optimize 3D models
-
-To ensure that 3D models in your scene load faster and take up less memory, follow these best practices:
-
-- Save your models in _.glb_ format, which is a lighter version of _.gltf_.
-- If you have multiple models that share the same textures, export your models with textures in a separate file. That way multiple models can refer to a single texture file that only needs to be loaded once.
-- If you have multiple entities using the same 3D model, instance a single `GLTFShape` component and assign that same one to the entities that will use it.
-- If your scene has entities that appear and disappear, it might be a good idea to pool these entities and keep them already defined but removed from the engine until needed. This will help them appear faster, the trade-off is that they will occupy memory when not in use. See [entities and components](/creator/development-guide/entities-components#pooling-entities-and-components)
-
-## Reuse shapes
-
-If multiple entities in your scene use a same primitive or 3D model, there's no need to create an instance of the shape component for each. All entities can share one same instance.
-
-This keeps your scene lighter to load and prevents you from exceeding the [maximum amount](/creator/development-guide/scene-limitations) of _bodies_ per scene.
-
-> Note: Reused shapes are added to the _triangle_ count of the scene. So it is possible to exceed the triangle limit by reusing shapes.
-
-```ts
-// Create shape component
-const house = new GLTFShape("models/House.gltf")
-
-// Create entities
-const myEntity = new Entity()
-const mySecondEntity = new Entity()
-const myThirdEntity = new Entity()
-
-// Assign shape component to entities
-myEntity.addComponent(house)
-mySecondEntity.addComponent(house)
-myThirdEntity.addComponent(house)
-```
-
-Each entity that shares a shape can apply different scales, rotations or even materials (in the case of primitives) without affecting how the other entities are being rendered.
-
-Entities that share a 3D model instance can also have animations that run independently of each other. Each must have a separate `Animator` component, with separate `AnimationState` objects to keep track of what part of the animation is currently being played. See [3D model animations](/creator/development-guide/3d-model-animations)
