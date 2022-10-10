@@ -24,13 +24,13 @@ This example defines a box entity that can't be walked through.
 
 ```ts
 // create entity
-const meshEntity = engine.addEntity()
+const myEntity = engine.addEntity()
 
 // visible shape
-MeshRenderer.create(meshEntity, { box: {} })
+MeshRenderer.create(myEntity, { box: {} })
 
 // collider
-MeshCollider.create(meshEntity, { box: {} })
+MeshCollider.create(myEntity, { box: {} })
 ```
 
 The shape used by the `MeshCollider` doesn't need to necessarily match the one used by the `MeshRenderer`.
@@ -54,18 +54,26 @@ See [3D models](/creator/3d-modeling/3d-models) for more details on how to add c
 
 ## Pointer blocking
 
-Only shapes that have colliders block player [button events](/creator/development-guide/click-events), so that for example a player can't click through a wall, or pick something up that is locked inside a chest.
+Only shapes that have colliders can be activated with [pointer events](/creator/development-guide/click-events). An entity also needs to have a collider to block pointer events on entities behind it. So for example, a player can't pick something up that is locked inside a chest, if the chest has colliders around it. The player's pointer events are only affected by collider meshes, not by the model's visible geometry.
 
+You can configure a `MeshCollider` component to only respond to one kind of interaction. To do this, set the `collisionMask` property to one of the following values:
 
-TODO: check if this is all still true!!!
-
-You can however disable this behavior on any shape, no matter if it's a primitive or an imported 3D model.
+- `ColliderLayer.Physics`: Only blocks player movement (and doesn't affect pointer events)
+- `ColliderLayer.Pointer`: responds only to pointer events (and doesn't block the player movement)
 
 
 ```ts
-let box = new BoxShape()
-box.isPointerBlocker = false
-myEntity.addComponent(box)
+// create entity
+const myEntity = engine.addEntity()
+
+// visible shape
+MeshRenderer.create(myEntity, { box: {} })
+
+// create a MeshCollider component that only responds to player physics
+MeshCollider.create(myEntity, {
+  collisionMask: ColliderLayer.Physics,
+  box: {}
+ })
 ```
 
-By using this property, you could for example have an invisible wall that players can't walk through, but that does allow them to click on items on the other side of the wall.
+The example above creates a `MeshCollider` component that is configured to only respond to player physics. With this configuration, you could for example have an invisible wall that players can't walk through, but that does allow them to click on items on the other side of the wall.

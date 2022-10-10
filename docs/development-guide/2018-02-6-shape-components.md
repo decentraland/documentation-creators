@@ -12,7 +12,7 @@ slug: /creator/development-guide/shape-components/
 
 Three dimensional scenes in Decentraland are based on the [Entity-Component](https://en.wikipedia.org/wiki/Entity%E2%80%93component%E2%80%93system) model, where everything in a scene is an _entity_, and each entity can include _components_ that shape its characteristics and functionality.
 
-The rendered shape of an entity is determined by what component it uses. Each entity can have only one shape component assigned to it.
+The rendered shape of an entity is determined by what component it uses.
 
 <img src="/images/media/ecs-simple-components.png" alt="nested entities" width="400"/>
 
@@ -116,17 +116,20 @@ Transform.create(primitiveEntity, {
 
 ## Make invisible
 
-TODO: Invisible component exists????
 
+You can make an entity invisible by giving an entity a `VisibilityComponent`, with its `visible` property set to _false_.
 
-You can make an entity invisible by setting the `visible` field in its shape component.
-
-All components for primitive shape and 3D models are visible by default.
 
 ```ts
-const myEntity = new Entity()
-myEntity.addComponent(new BoxShape())
-myEntity.getComponent(BoxShape).visible = false
+const myEntity = engine.addEntity()
+Transform.create(myEntity, { 
+  position: Vector3.create(4, 0, 4)
+})
+MeshRenderer.create(myEntity, { box: {} })
+
+VisibilityComponent.create(myEntity, {visible: false})
 ```
 
-If an entity is invisible, its collider can block a player's path, but it can't be clicked. To make an entity that's both invisible and clickable, keep the `visible` property set to _true_, and instead give it a [material](/creator/development-guide/materials#pooling-entities-and-components) with 100% transparency.
+The `VisibilityComponent` works the same for entities with primitive shapes and with `GLTFContainer` components.
+
+If an entity is invisible, its collider can block a player's path and can prevent clicking entities that are behind it.

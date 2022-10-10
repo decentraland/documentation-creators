@@ -1,6 +1,6 @@
 ---
 date: 2018-01-10
-title: About multiplayer scenes
+title: About multiplayer in scenes
 description: Tips and tricks for scenes with multiple players
 redirect_from:
   - /documentation/remote-scene-considerations/
@@ -39,11 +39,26 @@ Use the `.emit` command of the message bus to send a message to all other player
 ```ts
 const sceneMessageBus = new MessageBus()
 
-box1.AddComponent(
-  new OnClick((e) => {
-    sceneMessageBus.emit("box1Clicked", {})
-  })
-)
+const myEntity = engine.addEntity()
+MeshRenderer.create(myEntity, {box:{uvs:[]}})
+MeshCollider.create(myEntity, {box:{}})
+PointerEvents.create(myEntity, {
+    pointerEvents: [
+      {
+        eventType: PointerEventType.DOWN,
+        eventInfo: {
+          button: ActionButton.POINTER,
+        }
+      }
+    ]
+})
+
+// create a system to react to pointer events on this entity
+engine.addSystem(() => {
+    if (wasEntityClicked(myEntity, ActionButton.POINTER)){
+      sceneMessageBus.emit("box1Clicked", {})
+    }
+})
 ```
 
 Each message can contain a payload as a second argument. The payload is of type `Object`, and can contain any relevant data you wish to send.
@@ -51,9 +66,7 @@ Each message can contain a payload as a second argument. The payload is of type 
 ```ts
 const sceneMessageBus = new MessageBus()
 
-let spawnPos = new Vector3(5, 0, 5)
-
-sceneMessageBus.emit("spawn", { position: spawnPos })
+sceneMessageBus.emit("spawn", { position: {x: 10, y: 2, z: 10} })
 ```
 
 > Tip: If you need a single message to include data from more than one variable, create a custom type to hold all this data in a single object.
@@ -65,12 +78,18 @@ To handle messages from all other players in that scene, use `.on`. When using t
 ```ts
 const sceneMessageBus = new MessageBus()
 
+type NewBoxPosition = {
+  position: {x: number, y: number, z: number}
+}
+
 sceneMessageBus.on("spawn", (info: NewBoxPosition) => {
-  let newCube = new Entity()
-  let transform = new Transform()
-  transform.position.set(info.position.x, info.position.y, info.position.z)
-  newCube.addComponent(transform)
-  engine.addComponent(newCube)
+
+  const myEntity = engine.addEntity()
+  Transform.create(myEntity, {
+	  position:  { x: info.position.x, y: info.position.y, z: info.position.z }
+	})
+  MeshRenderer.create(myEntity, {box:{uvs:[]}})
+  MeshCollider.create(myEntity, {box:{}})
 })
 ```
 
@@ -81,56 +100,56 @@ sceneMessageBus.on("spawn", (info: NewBoxPosition) => {
 This example uses a message bus to send a new message every time the main cube is clicked, generating a new cube in a random position. The message includes the position of the new cube, so that all players see these new cubes in the same positions.
 
 ```ts
-/// --- Spawner function ---
-
-function spawnCube(x: number, y: number, z: number) {
-  // create the entity
-  const cube = new Entity()
-
-  // add a transform to the entity
-  cube.addComponent(new Transform({ position: new Vector3(x, y, z) }))
-
-  // add a shape to the entity
-  cube.addComponent(new BoxShape())
-
-  // add the entity to the engine
-  engine.addEntity(cube)
-
-  return cube
+// Cube factory
+function createCube(x: number, y: number, z: number, spawner = true): Entity {
+  const meshEntity = engine.addEntity()
+  Transform.create(meshEntity, { position: { x, y, z } })
+  MeshRenderer.create(meshEntity, { box: { uvs: [] } })
+  MeshCollider.create(meshEntity, { box: {} })
+  if (spawner) {
+    PointerEvents.create(meshEntity, {
+      pointerEvents: [
+        {
+          eventType: PointerEventType.DOWN,
+          eventInfo: {
+            button: ActionButton.PRIMARY,
+            hoverText: 'Press E to spawn',
+            maxDistance: 100,
+            showFeedback: true
+          }
+        }
+      ]
+    })
+  }
+  return meshEntity
 }
+
+// system to detect clicks and send messagebus messages
+function spawnerSystem() {
+  const clickedCubes = engine.getEntitiesWith(PointerEvents)
+  for (const [entity] of clickedCubes) {
+    if (wasEntityClicked(entity, ActionButton.PRIMARY)) {
+      sceneMessageBus.emit("spawn", { position: {x: 1 + Math.random() * 8, y: Math.random() * 8, z: 1 + Math.random() * 8} })
+    }
+  }
+}
+
+// Init
+createCube(8, 1, 8)
+engine.addSystem(spawnerSystem)
+
 
 /// --- Create message bus ---
 const sceneMessageBus = new MessageBus()
 
-/// --- Define a custom type to pass in messages ---
+// define type of data
 type NewBoxPosition = {
-  position: ReadOnlyVector3
+  position: {x: number, y: number, z: number}
 }
 
-/// --- Call spawner function ---
-const cube = spawnCube(8, 1, 8)
-
-/// --- Emit messages ---
-cube.addComponent(
-  new OnClick(() => {
-    const action: NewBoxPosition = {
-      position: {
-        x: Math.random() * 8 + 1,
-        y: Math.random() * 8,
-        z: Math.random() * 8 + 1,
-      },
-    }
-
-    sceneMessageBus.emit("spawn", action)
-  })
-)
-
-/// --- Receive messages ---
+// on spawn message, create new cube
 sceneMessageBus.on("spawn", (info: NewBoxPosition) => {
-  cube.getComponent(Transform).scale.z *= 1.1
-  cube.getComponent(Transform).scale.x *= 0.9
-
-  spawnCube(info.position.x, info.position.y, info.position.z)
+  createCube(info.position.x, info.position.y, info.position.z)
 })
 ```
 

@@ -221,11 +221,11 @@ If you're not entirely sure if the entity does have the component you're trying 
 
 
 ```ts
-//  getComponentOrNull
-let scale = box.getComponentOrNull(Transform)
+//  getOrNull
+const transformOrNull = Transform.getOrNull(myEntity)
 
-// getComponentOrCreate
-let scale = box.getComponentOrCreate(Transform)
+//  getMutableOrNull
+const mutableTransformOrNull = Transform.getMutableOrNull(myEntity)
 ```
 
 If the component you're trying to retrieve doesn't exist in the entity:
@@ -257,79 +257,5 @@ const hasTransform = Transform.has(myEntity)
 
 > Tip: You can also [query components](/creator/development-guide/querrying-components) to fetch a full list of components that hold a specific component, or a specific set of components. Do not iterate over all entities in the scene manually to check each with a `has()`, that approach is a lot less efficient. 
 
-
-
-<!-- - `getComponentOrCreate()` instances a new component in its place and retrieves it. -->
-
-<!--
-When you're dealing with [Interchangeable component](#interchangeable-components), you can also get a component by _space name_ instead of by type. For example, both `BoxShape` and `SphereShape` occupy the `shape` space of an entity. If you don't know which of these an entity has, you can fetch the `shape` of the entity, and it will return whichever component is occupying the `shape` space.
-
-```ts
-let entityShape = myEntity.getComponent(shape)
-```
-
--->
-
-<!--
-## Pooling entities and components
-
-If you plan to spawn and despawn similar entities from your scene, it's often a good practice to keep a fixed set of entities in memory. Instead of creating new entities and deleting them, you could add and remove existing entities from the engine. This is an efficient way to deal with the player's memory.
-
-Entities that are not added to the engine aren't rendered as part of the scene, but they are kept in memory, making them quick to load if needed. Their geometry doesn't add up to the maximum triangle count for your scene while they aren't being rendered.
-
-```ts
-// Define spawner singleton object
-const spawner = {
-  MAX_POOL_SIZE: 20,
-  pool: [] as Entity[],
-
-  spawnEntity() {
-    // Get an entity from the pool
-    const ent = spawner.getEntityFromPool()
-
-    if (!ent) return
-
-    // Add a transform component to the entity
-    let t = ent.getComponentOrCreate(Transform)
-    t.scale.setAll(0.5)
-    t.position.set(5, 0, 5)
-
-    //add entity to engine
-    engine.addEntity(ent)
-  },
-
-  getEntityFromPool(): Entity | null {
-    // Check if an existing entity can be used
-    for (let i = 0; i < spawner.pool.length; i++) {
-      if (!spawner.pool[i].alive) {
-        return spawner.pool[i]
-      }
-    }
-    // If none of the existing are available, create a new one, unless the maximum pool size is reached
-    if (spawner.pool.length < spawner.MAX_POOL_SIZE) {
-      const instance = new Entity()
-      spawner.pool.push(instance)
-      return instance
-    }
-    return null
-  },
-}
-
-spawner.spawnEntity()
-```
-
-When adding an entity to the engine, its `alive` field is implicitly set to `true`, when removing it, this field is set to `false`.
-
-Using an object pool has the following benefits:
-
-- If your entity uses a complex 3D model or texture, it might take the scene some time to load it from the content server. If the entity is already in memory when it's needed, then that delay won't happen.
-- This is a solution to avoid a common problem, where each entity that's removed could remain lingering in memory after being removed, and these unused entities could add up till they become too many to handle. By recycling the same entities, you ensure this won't happen.
-
-<!--
-Similarly, if you plan to set and remove certain components from your entities, it's recommendable to create a pool of fixed components to add and remove rather than create new component instances each time.
-
-```ts
-```
--->
 
 

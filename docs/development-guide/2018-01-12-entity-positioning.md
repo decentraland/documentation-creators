@@ -186,7 +186,7 @@ Transform.create(cube, {
 Billboard.create(cube, {})
 ```
 
-You can choose which axis to rotate as a billboard. For example, if the Billboard of a cube only rotates in the Y axis, it will follow the player when moving at ground level, but the player will be able to look at it from above or from below.
+You can choose which axis to rotate as a billboard. For example, if the Billboard of a cube only rotates in the Y and Z axis, it will follow the player when moving at ground level, but the player will be able to look at it from above or from below.
 
 The three optional parameters when creating a `Billboard` component are booleans that refer to the _x_, _y_, and _z_ axis. They are all `true` by default.
 
@@ -194,17 +194,9 @@ The three optional parameters when creating a `Billboard` component are booleans
 // rotate on all three axis
 Billboard.create(cube, {})
 
-// rotate only in the X axis
-Billboard.create(cube, {x: true, y: false, z: false})
-
-// rotate only in the Y axis
-Billboard.create(cube, {x: false, y: true, z: false})
-
-// rotate only in the Z axis
-Billboard.create(cube, {x: false, y: false, z: true})
+// rotate following the player at ground level
+Billboard.create(cube, {x: false, y: true, z: true})
 ```
-
-> Tip: To rotate an entity so that it follows the player around while at ground level, give it _Y_ axis rotation.
 
 Billboards are also very handy to add to _text_ entities, since it makes them always legible.
 
