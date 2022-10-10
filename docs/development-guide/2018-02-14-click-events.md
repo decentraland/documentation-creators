@@ -13,278 +13,375 @@ slug: /creator/development-guide/click-events/
 ---
 
 
-Decentraland accepts events from pointer clicks, a primary button and a secondary button.
+A Decentraland scene can detect button events from all of the buttons that are used to control the player's avatar. These include pointer clicks, several action buttons, and the keys that are used to move the avatar around. Button events can come from a mouse, a touch screen, a VR controller or some other device, these are all interpreted the same by the SDK.
 
-Clicks can be done either with a mouse, a touch screen, a VR controller or some other device, these all generate the same type of event.
 
-The primary and secondary buttons map respectively to the E and F key on a keyboard.
+## Pointer events
 
-## Detect pointer events
+To detect button events performed while pointing at an entity, you must give the entity a `PointerEvents` component.
+
+To trigger an action based on a pointer event, you must implement a system that checks for these events and carries out the desired action.
 
 ```ts
-PointerEvents.create(pointerDownCube, {
+// create entity
+const myEntity = engine.addEntity()
+
+// give entity a PointerEvents component
+PointerEvents.create(myEntity, {
     pointerEvents: [
       {
         eventType: PointerEventType.DOWN,
         eventInfo: {
           button: ActionButton.POINTER,
-          hoverText: 'Activate'
         }
+      }
+    ]
+})
+
+// create a system to react to pointer events on this entity
+engine.addSystem(() => {
+    if (wasEntityClicked(myEntity, ActionButton.POINTER)){
+      log("Entity was clicked")
+    }
+})
+```
+
+The `PointerEvents` component requires that you define at least one pointer event. You can potentially add multiple ones as an array. Each pointer event must specify at least what kind of event to listen for (eg: button down, button up), and which button to listen for.
+
+
+
+> Note: The entity must also have a [collider](/creator/development-guide/colliders) to respond to button events. If an entity has no collider, give it a `MeshCollider` component to make it clickable.
+
+
+
+### Types of pointer events
+
+There are various types of pointer event that can be detected. Configure the `PointerEvents` component to include the events you're interested in detecting. Refer to these events through the `PointerEventType` enum.
+
+The following events are available:
+
+- `DOWN`: Player pushes down a specific button while having the cursor pointing at the entity's collider.
+- `UP`: Player releases a specific button while having the cursor pointing at the entity's collider.
+- `HOVER_ENTER`: Player's cursor starts pointing at the entity's collider.
+- `HOVER_LEAVE`: Player's cursor stops pointing at the entity's collider.
+
+A single `PointerEvents` component can detect as many of these events as needed, by including an object for each.
+
+```ts
+PointerEvents.create(myEntity, {
+    pointerEvents: [
+      {
+        eventType: PointerEventType.DOWN,
+        eventInfo: {
+          button: ActionButton.POINTER,
+        }
+      }, {
+        eventType: PointerEventType.UP,
+        eventInfo: {
+          button: ActionButton.POINTER,
+        }
+      }, {
+        eventType: PointerEventType.HOVER_ENTER,
+        eventInfo: {}
+      }, {
+        eventType: PointerEventType.HOVER_LEAVE,
+        eventInfo: {}
       }
     ]
   })
 ```
 
-> Note: Entities that don't have a [collider](/creator/development-guide/colliders) don't respond to button events. If an entity has no collider, give it a `MeshCollider` component to make it clickable.
-
-## Types of pointer events
-
-DOWN, UP, HOVER_ENTER, HOVER_LEAVE
 
 
-## Buttons
+### Pointer buttons
 
-Available buttons
+The following buttons can be registered as pointer events on an entity:
 
-## Handle pointer events
+- `ActionButton.POINTER`: This maps to the left-mouse button on a computer.
+- `ActionButton.PRIMARY`: This maps to the **E** key on a computer.
+- `ActionButton.SECONDARY`: This maps to the **F** key on a computer.
 
-
-wasEntityClicked()
-
-why it's important
-
-isPointerEventActive()
-
-
-Handle single clickable entity
 ```ts
-PointerEvents.create(tree, {
-	pointerEvents: [
-		{
-		  eventType: PointerEventType.DOWN,
-		  eventInfo: {
-			button: ActionButton.PRIMARY,
-			hoverText: 'Shake'
-		  }
-		}
-	  ]
+PointerEvents.create(myEntity, {
+    pointerEvents: [
+      {
+        eventType: PointerEventType.DOWN,
+        eventInfo: {
+          button: ActionButton.PRIMARY,
+        }
+      }, {
+        eventType: PointerEventType.DOWN,
+        eventInfo: {
+          button: ActionButton.SECONDARY,
+        }
+      }
+    ]
 })
-
-
-
-export function clickTree(){
-	 if (wasEntityClicked(tree, ActionButton.PRIMARY)) {
-	 	createHummingBird()
-	 	let anim = Animator.getMutable(tree)
-	 	anim.states[0].playing = true
-	}
-}
 ```
 
-Handle arrray
-```ts
+A single `PointerEvents` component can detect button events from different buttons.
 
-function spawnerSystem() {
+
+Other buttons, such actions 3 to 6 and the movement keys, are not usable as pointer buttons. They can only be detected as global events. For example, you can detect that the player pushed the JUMP key, but the event does not belong to the entity that the cursor was pointing at that time.
+
+### Detect pointer events
+
+Check if an entity was triggered by a pointer event in the last frame by using the `wasEntityClicked()` within a [system](/creator/development-guide/system).
+
+```ts
+engine.addSystem(() => {
+    if (wasEntityClicked(myEntity, ActionButton.POINTER)){
+      log("Entity was just clicked")
+    }
+})
+```
+
+`wasEntityClicked()` returns _true_ only if the indicated button was pressed down in the current tick of the game loop. If the button is not pushed down, or it was already down from the previous tick, it returns _false_.
+
+`wasEntityClicked()` helps disambiguate several corner cases that might occur, especially if the player clicks fast. For example, if the button was pushed down and up since the last tick, this should be considered a new click event, even if the button is currently no longer down. Also, if the button was down on the last tick, but was raised and then pushed down again since the last tick, this should be considered a new click event. 
+
+
+### Detect active pointer events
+
+Check if a button is currently being held down while aiming at an entity by using `isPointerEventActive()` within a system. 
+
+```ts
+engine.addSystem(() => {
+    if (isPointerEventActive(myEntity, ActionButton.POINTER)){
+      log("Entity is currently being clicked")
+    }
+})
+```
+
+`isPointerEventActive()` returns _true_ if the button is currently being held down, no matter when the button was pushed down.
+
+### Handle multiple entities
+
+If your scene has multiple entities that might be affected by pointer events, it makes sense to write a system that iterates over all of them.
+
+```ts
+function killSystem() {
   const clickedCubes = engine.getEntitiesWith(PointerEvents)
   for (const [entity] of clickedCubes) {
     if (wasEntityClicked(entity, ActionButton.PRIMARY)) {
-      createCube(
-        1 + Math.random() * 8,
-        Math.random() * 8,
-        1 + Math.random() * 8,
-        false
-      )
+		engine.removeEntity(entity)
     }
   }
 }
-engine.addSystem(spawnerSystem)
+engine.addSystem(killSystem)
 ```
 
-link to systems
-and to component queries
+This example uses a [component query](/creator/development-guide/querrying-components) to iterate over all the entities with a `PointerEvents` component. It then checks each with `wasEntityClicked()`, and if so removes the entity from the engine.
 
-## Button event arguments
-
-## Optional properties
-
-### Hint messages
-
-
-### Max distance
-
-
-### Multiple buttons on an entity
-
-
-### Differentiate meshes inside a model
-
-
-## Global button events
-
-
-## Pointer event components
-
-### Detect hit entities
-???
-
-
-
-
-
-### OnPointerDown
-
-The best way to handle pointer and button down events is to add an `OnPointerDown` component to an entity.
-
-The component requires that you pass it a function as a main argument. This function declares what to do in the event of a button down event while the player points at the entity.
+Instead of iterating over _all_ the entities with a `PointerEvents` component in a single system, you might want to instead write different systems to handle entities that should behave in different ways.
 
 ```ts
-const myEntity = new Entity()
-myEntity.addComponent(new BoxShape())
-
-myEntity.addComponent(
-  new OnPointerDown((e) => {
-    log("myEntity was clicked", e)
-  })
-)
-```
-
-> Tip: To keep your code easier to read, the function in the `OnPointerDown` can consist of just a call to a separate function that contains all of the logic.
-
-The `OnPointerDown` component has a second optional parameter, this parameter is an object that can include multiple properties about the event. These properties are explained in greater detail in the next few sub-sections.
-
-- `button`: Which key to listen for, from the `ActionButton` enum:
-  - `ActionButton.POINTER` (left mouse click on PC)
-  - `ActionButton.PRIMARY` (_E_ on PC)
-  - `ActionButton.SECONDARY`(_F_ on PC)
-- `hoverText`: Hint text to display on the UI when pointing at the entity.
-- `distance`: Maximum click distance.
-
-### Handle button events
-
-
-
-
-
-
-### OnPointerUp
-
-Add an `OnPointerUp` component to track when a player releases the mouse button, the primary or the secondary button while pointing at the entity.
-
-Like the `OnPointerDown`, the `OnPointerUp` component requires a _callback function_ that declares what to do in the event of a button up event while pointing at the entity.
-
-This component also takes a second argument that supports the same additional fields as teh `OnPointerDown` component.
-
-```ts
-const myEntity = new Entity()
-myEntity.addComponent(new BoxShape())
-
-myEntity.addComponent(
-  new OnPointerUp((e) => {
-    log("pointer up", e)
-  })
-)
-```
-
-### Specific button events
-
-The `OnPointerDown` and `OnPointerUp` components can respond to the following different buttons:
-
-- `POINTER` (left mouse click on PC)
-- `PRIMARY` (_E_ on PC)
-- `SECONDARY`(_F_ on PC)
-
-You can configure the components by setting the `button` field in the second argument of the component initializer.
-
-If no button is specified, `ActionButton.ANY` is used as the default. This detects events from any of the available buttons on these components.
-
-```ts
-const myEntity = new Entity()
-myEntity.addComponent(new BoxShape())
-
-myEntity.addComponent(
-  new OnPointerDown(
-    (e) => {
-      log("myEntity was clicked", e)
-    },
-    { button: ActionButton.POINTER }
-  )
-)
-```
-
-### Hint messages
-
-When a player hovers the cursor over an item with an `OnPointerDown` or `OnPointerUp` component, the cursor changes shape to hint to the player that the entity is interactive.
-
-You can also display a toast message in the UI that lets the player know what happens when interacting with the entity.
-
-```ts
-myEntity.addComponent(
-  new OnPointerDown(
-    (e) => {
-      log("myEntity clicked", e)
-    },
-    {
-      button: ActionButton.PRIMARY,
-      showFeedback: true,
-      hoverText: "open",
+function openDoorSystem() {
+  const clickedDoors = engine.getEntitiesWith(PointerEvents, IsDoor)
+  for (const [entity] of clickedDoors) {
+    if (wasEntityClicked(entity, ActionButton.PRIMARY)) {
+		openDoor(entity)
     }
-  )
-)
+  }
+}
+engine.addSystem(openDoorSystem)
 ```
 
-In the example above, the second argument of the `OnPointerDown` component has an object with the following arguments:
+In the example above, the system iterates over the entities that have both a `PointerEvents` component and a custom `IsDoor` flag component, that is added to all doors in your scene. The system allows you to run the same code for every door that has been clicked.
 
-- `button`: What button to respond to
-- `showFeedback`: Boolean to turn the feedback on or off. It's _true_ by default.
+
+
+### Hint messages
+
+When a player hovers the cursor over an item with an `PointerEvents` component, the cursor changes shape to hint to the player that the entity is interactive.
+
+You can also display a toast message in the UI that lets the player know what happens if they interact with the entity.
+
+```ts
+// create entity
+const chest = engine.addEntity()
+
+// give entity a PointerEvents component
+PointerEvents.create(chest, {
+    pointerEvents: [
+      {
+        eventType: PointerEventType.DOWN,
+        eventInfo: {
+          button: ActionButton.POINTER,
+		  showFeedback: true
+		  hoverText: "Open",
+        }
+      }
+    ]
+})
+```
+
+
+In the example above, the pointer event includes some additional arguments:
+
+- `showFeedback`: Boolean to turn the hover hints on or off. It's _true_ by default.
 - `hoverText`: String to display in the UI while the player points at the entity. By default, this string spells _Interact_, unless `showFeedback` is _false_.
 
 > TIP: The `hoverText` string should describe the action that happens when interacting. For example `Open`, `Activate`, `Grab`, `Select`. These strings should be as short as possible, to avoid stealing too much focus from the player.
 
-The `hoverText` of an `OnPointerUp` component is only displayed while the player is already holding down the corresponding key and pointing at the entity.
+If an entity has multiple pointer events on it, the hover hints for each of these are displayed radially around the cursor.
 
-If an entity has both an `OnPointerDown` and an `OnPointerUp` component, the hint for the `OnPointerDown` is shown while the button is not being pressed. The hint switches to the one from the `OnPointerUp` only when the button is pressed and remains pressed.
+The `hoverText` of an `.UP` pointer event is only displayed while the player is already holding down the corresponding key and pointing at the entity.
 
-```ts
-myEntity.addComponent(
-  new OnPointerDown(
-    (e) => {
-      log("myEntity clicked", e)
-    },
-    { button: ActionButton.PRIMARY, showFeedback: true, hoverText: "Drag" }
-  )
-)
+TODO: Confirm
 
-myEntity.addComponent(
-  new OnPointerUp(
-    (e) => {
-      log("myEntity released", e)
-    },
-    { button: ActionButton.PRIMARY, showFeedback: true, hoverText: "Drop" }
-  )
-)
-```
-
-### Max click distance
-
-By default, entities are only clickable when the player is within a close range of the entity, at a maximum distance of _10 meters_. You can optionally configure the maximum distance through the `distance` parameter of the `OnPointerDown` and `OnPointerUp` components.
+If an entity has both a `DOWN` pointer event and an `UP` pointer event, the hint for the `DOWN` action is shown while the button is not being pressed. The hint switches to the one from the `UP` event only when the button is pressed and remains pressed.
 
 ```ts
-myEntity.addComponent(
-  new OnPointerDown(
-    (e) => {
-      log("myEntity clicked", e)
-    },
-    {
-      button: ActionButton.PRIMARY,
-      showFeedback: true,
-      hoverText: "Activate",
-      distance: 8,
-    }
-  )
-)
+// create entity
+const entity = engine.addEntity()
+
+// give entity a PointerEvents component
+PointerEvents.create(entity, {
+    pointerEvents: [
+      {
+        eventType: PointerEventType.DOWN,
+        eventInfo: {
+          button: ActionButton.POINTER,
+		  hoverText: "Drag",
+        }
+      }, {
+        eventType: PointerEventType.UP,
+        eventInfo: {
+          button: ActionButton.POINTER,
+		  hoverText: "Drop",
+        }
+      }
+    ]
+})
 ```
 
-The example above sets the maximum distance to _8 meters_.
+#### Custom hints
+
+You can otherwise use `HOVER_ENTER` and `HOVER_LEAVE` pointer events to hint that something is interactable in some custom way. For example, you could play a subtle sound when `HOVER_ENTER` event is activated. You could also show a glowing highlight around the entity when a `HOVER_ENTER` event is activated, and hide it when `HOVER_LEAVE` is activated. It could also be used for specific gameplay mechanics.
+
+
+> TIP: Note that all entities with a `PointerEvents` component by default show a UI hint when hovered over. If this conflicts with the feedback you want to show, you can disable this UI hint by setting the `showFeeback` property on the pointer event to false.
+
+```ts
+// create entity
+const entity = engine.addEntity()
+
+// give entity a PointerEvents component
+PointerEvents.create(entity, {
+    pointerEvents: [
+      {
+        eventType: PointerEventType.DOWN,
+        eventInfo: {
+          button: ActionButton.POINTER,
+		  showFeedback: false
+        }
+      },
+	   {
+        eventType: PointerEventType.HOVER_ENTER,
+        eventInfo: {
+        }
+      },
+	   {
+        eventType: PointerEventType.HOVER_LEAVE,
+        eventInfo: {
+        }
+      }
+    ]
+})
+
+
+TODO: trigger actions based on hover events
+```
+
+
+### Max distance
+
+Pointer events have a max range of interaction. If a player is too far away from an entity, the pointer event won't be activated and the hover hint won't be displayed next to the cursor.
+
+By default, entities are only clickable when the player is within a close range of the entity, at a maximum distance of _10 meters_. You can change the maximum distance by setting the `maxDistance` property of a pointer event.
+
+```ts
+// create entity
+const myEntity = engine.addEntity()
+
+// give entity a PointerEvents component
+PointerEvents.create(myEntity, {
+    pointerEvents: [
+      {
+        eventType: PointerEventType.DOWN,
+        eventInfo: {
+          button: ActionButton.POINTER,
+		  maxDistance: 6
+        }
+      }
+    ]
+})
+```
+
+The example above sets the maximum distance to _6 meters_.
+
+
+> Note: The `maxDistance` is measured in meters from meters from the player's camera. Keep in mind that in 3rd person the camera is a bit further away, so make sure the distance you set works well in both modes.
+
+
+### Ray Obstacles
+
+Button events cast rays that only interact with the first entity on their path, as long as the entity is closer than its distance limit.
+
+For an entity to be intercepted by the ray of a button event, the entity's 3d model must either have a collider mesh, or the entity must have a `CollierMesh` component.
+
+If another entity's collider is standing on the way of the entity that the player wants to click, the player won't be able to click the entity that's behind, unless the entity's `MeshCollider` component is configured to allow clicking through it.
+
+
+TODO
+
+### Multiple buttons on an entity
+
+TODO
+
+### Differentiate meshes inside a model
+
+TODO
+
+## Global button events
+
+TODO
+
+### Tracking player movements
+
+
+In real-time multiplayer games where the timing of player movements is critical, you may want to keep track of each player's position using a 3rd party server as the source of truth. You can improve response time by listening to the button in advance and predict their effects in your server before the avatar has shifted position.
+
+This approach helps compensate for network delays, but is sure to result in discrepancies, so you should also regularly poll the player's current position to make corrections. Balancing these predictions and corrections may require plenty of fine-tuning.
+
+## Button event arguments
+
+### Handle pointer events - advanced
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Event arguments
 
@@ -465,96 +562,3 @@ The example above checks if any entities were hit, and if so it fetches the enti
 
 The event data returns a string for the `entityId`. If you want to reference the actual entity by that ID to affect it in some way, use `engine.entities[e.hit.entityId]`.
 
-> Note: We recommend that when possible you use the approach of adding an `OnPointerDown` component to each entity you want to make interactive, instead of using a global button event. The scene's code isn't able to hint to a player that an entity is interactive when hovering on it unless the entity has an `OnPointerDown`, `OnPointerUp`, or `OnClick` component.
-
-### Tracking player movements
-
-In real-time multiplayer games where the timing of player movements is critical, you may want to keep track of each player's position using a 3rd party server as the source of truth. You can improve response time by listening to the button in advance and predict their effects in your server before the avatar has shifted position.
-
-This approach helps compensate for network delays, but is sure to result in discrepancies, so you should also regularly poll the player's current position to make corrections. Balancing these predictions and corrections may require plenty of fine-tuning.
-
-## Ray Obstacles
-
-Button events cast rays that only interact with the first entity on their path, as long as the entity is closer than its distance limit.
-
-For an entity to be intercepted by the ray of a button event, the entity's shape must either have a collider mesh, or the entity must have a component related to button events (`OnPointerDown`, `OnPointerUp` or `OnClick`).
-
-If another entity's collider is standing on the way of the entity that the player wants to click, the player won't be able to click the entity that's behind, unless the entity that's in-front has a shape with its `isPointerBlocker` property set to false.
-
-```ts
-let myEntity = new Entity()
-let box = new BoxShape()
-box.isPointerBlocker = false
-box.visible = false
-myEntity.addComponent(box)
-engine.addEntity(myEntity)
-```
-
-## OnHover Component
-
-Add `OnPointerHoverEnter` and `OnPointerHoverExit` components to an entity to run a callback function every time that the player's cursor starts or stops pointing at the entity.
-
-You can use this to hint that something is interactable in some custom way, like showing a glowing highlight around the entity, playing a subtle sound, etc. It could also be used for specific gameplay mechanics.
-
-```ts
-myEntity.addComponent(
-  new OnPointerHoverEnter((e) => {
-    log("Started Pointing at entity")
-  })
-)
-
-myEntity.addComponent(
-  new OnPointerHoverExit((e) => {
-    log("Stopped Pointing at entity")
-  })
-)
-```
-
-On the `OnPointerHoverEnter` component, you can set a maximum distance, to only trigger the callback when the player is near the entity.
-
-```ts
-myEntity.addComponent(
-  new OnPointerHoverEnter(
-    (e) => {
-      log("Started Pointing at entity")
-    },
-    {
-      distance: 8,
-    }
-  )
-)
-```
-
-> TIP: Note that all entities with an `OnPointerDown` component by default show a UI hint when hovered over. You can disable this UI hint by setting the `showFeeback` property on the `OnPointerDown` component to false.
-
-## Button state
-
-You can check for the button's current state (up or down) using the _Input_ object.
-
-```ts
-let buttonState = Input.instance.isButtonPressed(ActionButton.POINTER)
-
-if(buttonState.BUTTON_DOWN){
-  log("button is being held down")
-} else {
-  log("button is up
-}
-```
-
-You can use the `.isButtonPressed` function to check for the states of any of the globally tracked buttons. The function returns an object that contains a `BUTTON_DOWN` boolean field, with the current state of the button.
-
-As an example, you can implement this in a system's `update()` function to check a button's state regularly.
-
-```ts
-class ButtonChecker implements ISystem {
-  update() {
-    if (Input.instance.isButtonPressed(ActionButton.FORWARD).BUTTON_DOWN) {
-      log("player walking forward")
-    } else {
-      log("player not walking forward")
-    }
-  }
-}
-
-engine.addSystem(new ButtonChecker())
-```
