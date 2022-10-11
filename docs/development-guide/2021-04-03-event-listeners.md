@@ -10,11 +10,30 @@ redirect_from:
 slug: /creator/development-guide/event-listeners/
 ---
 
+TODO: all
+
 There are several events that the scene can subscribe to, to know the actions of the player while in or near the scene.
 
 For button and click events performed by the player, see [Button events](/creator/development-guide/click-events).
 
 ## Player connects or disconnects
+
+Get the full list of currently connected players from `getConnectedPlayers`. 
+
+```ts
+import { getConnectedPlayers } from "~system/Players"
+
+
+executeTask(async () => {
+	let connectedPlayers = await getConnectedPlayers({})
+	connectedPlayers.players.forEach((player) => {
+	  log("player was already here: ", player.userId)
+	})
+})
+```
+
+
+> Note: The `onPlayerConnectedObservable` and `onPlayerDisconnectedObservable` events are deprecated on SDK 7.x. Instead, track the list of connected players, from `getConnectedPlayers()`. This is a more [data oriented approach](/creator/development-guide/data-oriented-programming) and should result in better performance.
 
 Whenever another player starts or stops being rendered by the local engine, this creates an event you can listen to. Players may or may not be standing on the same scene as you, but must be within visual range (not necessarily in sight). The `onPlayerConnectedObservable` detects both when a player newly connects nearby or comes close enough to be in visual range, likewise the `onPlayerDisconnectedObservable` detects when a player ends their session or or walks far away.
 
@@ -28,18 +47,9 @@ onPlayerDisconnectedObservable.add((player) => {
 })
 ```
 
+
 Keep in mind that if other players are already being rendered in the surroundings before the player has loaded your scene, this event won't notify the newly loaded scene of the already existing players. If you need to keep track of all current players, you can query for existing players upon scene loading, and then listen to this event for updates.
 
-```ts
-import { getConnectedPlayers } from "@decentraland/Players"
-
-executeTask(async () => {
-  let players = await getConnectedPlayers()
-  players.forEach((player) => {
-    log("player was already here: ", player.userId)
-  })
-})
-```
 
 ## Player enters or leaves scene
 
@@ -62,21 +72,21 @@ onLeaveSceneObservable.add((player) => {
 You can filter out the triggered events to only react to the player's avatar, rather than other avatars that may be around.
 
 ```ts
-import { getUserData } from "@decentraland/Identity"
+import { getUserData } from "~system/UserIdentity"
 
 executeTask(async () => {
-  let myPlayer = await getUserData()
+  let myPlayer = await getUserData({})
 
   onEnterSceneObservable.add((player) => {
     log("player entered scene: ", player.userId)
-    if (player.userId === myPlayer?.userId) {
+    if (player.userId === myPlayer.data?.userId) {
       log("I entered the scene!")
     }
   })
 
   onLeaveSceneObservable.add((player) => {
     log("player left scene: ", player.userId)
-    if (player.userId === myPlayer?.userId) {
+    if (player.userId === myPlayer.data?.userId) {
       log("I left the scene!")
     }
   })
@@ -90,84 +100,46 @@ This example first obtains the player's id, then subscribes to the events and co
 You can also get the full list of players who are currently on your scene and being rendered by calling `getPlayersInScene()`.
 
 ```ts
-import { getPlayersInScene } from "@decentraland/Players"
+import { getPlayersInScene } from "~system/Players"
 
 executeTask(async () => {
-  let players = await getPlayersInScene()
-  players.forEach((player) => {
+  let connectedPlayers = await getPlayersInScene({})
+  connectedPlayers.players.forEach((player) => {
     log("player was already here: ", player.userId)
   })
 })
 ```
 
-<!--
-## Player moves
-
-Whenever a player moves, this also generates events that can be listened to.
-
-```ts
-onPositionChangedObservable.add((eventData) => {
-  log("position:", eventData.position)
-  log("world position:", eventData.cameraPosition)
-})
-onRotationChangedObservable.add((eventData) => {
-  log("rotation: ", eventData.rotation)
-  log("quaternion: ", eventData.quaternion)
-})
-```
-
-The event detected by `onPositionChangedObservable` includes the following data:
-
-- position
-- cameraPosition
-- playerHeight
-
-The event detected by `onRotationChangedObservable` includes the following data:
-
-- rotation: The camera's rotation in Euler angles
-- quaternion: The camera's rotation in Quaternion angles
-
-> Note: The rotation refers to that of the camera, not to that of the avatar. So if the player is in 3rd person, the avatar may be facing a different direction than the camera.
-
-Using these events is a lot more efficient than fetching the `Camera.instance.position` and `Camera.instance.rotation` on every frame, as there are no updates when the player stays still. Since this position & rotation data updates 10 times a second, it also means that checking these values on every frame (30 times a second) will result in many repeat readings. This gain in efficiency is especially noticeable when communicating position data to a multiplayer server.
-
-```ts
-const cube = new Entity()
-cube.addComponent(new BoxShape())
-let cubeTransform = new Transform({ position: new Vector3(5, 1, 5) })
-cube.addComponent(cubeTransform)
-engine.addEntity(cube)
-
-onRotationChangedObservable.add((eventData) => {
-  cubeTransform.rotation = eventData.rotation
-})
-```
-
-The example above uses the player's rotation to set that of a cube in the scene.
-
-> Note: The `onRotationChangedObservable`, `onPositionChangedObservable` data is updated at a throttled rate of 10 times per second. Due to this, positions may lag slightly in relation to the scene that runs at 30 FPS under ideal conditions.
--->
 
 ## Player changes camera mode
 
-When the player changes the camera mode between 1st and 3rd person in or near your scene, this creates an event you can listen to.
+Knowing the camera mode can be very useful to fine-tune the mechanics of your scene to better adjust to what's more comfortable using this mode. For example, small targets are harder to click when on 3rd person.
+
+The following system regularly checks the player's camera mode:
 
 ```ts
-onCameraModeChangedObservable.add(({ cameraMode }) => {
-  log("Camera mode changed:", cameraMode)
-})
+let previousCameraMode: CameraModeValue
+
+engine.addSystem(
+	function cameraModeCheck(){
+		let cameraEntity = CameraMode.get(engine.CameraEntity)
+
+		if(!cameraEntity) return
+
+		if(cameraEntity.mode !== previousCameraMode ){
+			previousCameraMode = cameraEntity.mode
+			if(cameraEntity.mode == CameraModeValue.THIRD_PERSON){
+				log("The player is using the 3rd person camera")
+			} else {
+				log("The player is using the 1st person camera")
+			}
+		}		
+	}
+)
 ```
 
-The values of the returned property can be:
+See [Check player's camera mode](/creator/development-guide/user-data#check-the-players-camera-mode).
 
-- `CameraMode.FirstPerson`
-- `CameraMode.ThirdPerson`
-
-This event is fired once when the scene first obtains information about the player's current camera mode, and then any time the player changes camera mode while in or around your scene.
-
-> Tip: To encourage players to use a particular camera mode in your scene, display a UI message advising them to switch modes whenever they use the wrong one.
-
-Knowing the camera mode can be very useful to fine-tune the mechanics of your scene to better adjust to what's more comfortable using this mode. For example, small targets are harder to click when on 3rd person.
 
 ## Player plays animation
 
@@ -183,7 +155,11 @@ The event includes the following information:
 
 - expressionId: Name of the emote performed (ie: _wave_, _clap_, _kiss_)
 
-Note: This event is triggered any time the player makes an emote and the scene is loaded. The player could be standing in a nearby scene when this happens.
+> Note: This event is triggered any time the player makes an emote and the scene is loaded. The player could be standing in a nearby scene when this happens.
+
+> Note: The `onPlayerExpressionObservable` event is deprecated from SDK v7.x. Future versions will allow for a more [data-oriented approach](/creator/development-guide/data-oriented-programming), based on regularly querying data rather than events.
+
+
 
 ## Player clicks on another player
 
@@ -195,7 +171,9 @@ onPlayerClickedObservable.add((clickEvent) => {
 })
 ```
 
-Note: Both the player performing the click and the player being clicked must be standing within the parcels of the scene. This listener only detects events of the current player clicking on other players, not those of clicks performed by other players.
+> Note: The `onPlayerClickedObservable` event is deprecated from SDK v7.x. Future versions will allow for a more [data-oriented approach](/creator/development-guide/data-oriented-programming), based on regularly querying data rather than events.
+
+> Note: Both the player performing the click and the player being clicked must be standing within the parcels of the scene. This listener only detects events of the current player clicking on other players, not those of clicks performed by other players.
 
 The event includes the following data:
 
@@ -225,6 +203,8 @@ onPointerLockedStateChange.add(({ locked }) => {
 })
 ```
 
+> Note: The `onPointerLockedStateChange` event is deprecated from SDK v7.x. Future versions will allow for a more [data-oriented approach](/creator/development-guide/data-oriented-programming), based on regularly querying data rather than events.
+
 > Note: This event is triggered even if the player is not standing directly inside the scene.
 
 The `locked` property from this event is a boolean value that is _true_ when the player locks the cursor and _false_ when the player unlocks the cursor.
@@ -243,6 +223,9 @@ onIdleStateChangedObservable.add(({ isIdle }) => {
 })
 ```
 
+> Note: The `onIdleStateChangedObservable` event is deprecated from SDK v7.x. Future versions will allow for a more [data-oriented approach](/creator/development-guide/data-oriented-programming), based on regularly querying data rather than events.
+
+
 The `isIdle` property is a boolean value that is _true_ when the player enters the idle mode and _false_ when the player leaves the idle mode.
 
 This event is especially useful for multiplayer scenes, when you might want to disconnect from the server players who are likely away from the machine or left Decentraland in a tab in the background.
@@ -258,6 +241,9 @@ onProfileChanged.add((profileData) => {
   log("Own profile data is ", profileData)
 })
 ```
+
+> Note: The `onProfileChanged` event is deprecated from SDK v7.x. Future versions will allow for a more [data-oriented approach](/creator/development-guide/data-oriented-programming), based on regularly querying data rather than events.
+
 
 Event data includes only the ID of the player and a version number for that avatar's profile, according to the catalyst server. Every time a change is propagated, the version number increases by 1.
 
@@ -277,6 +263,8 @@ onSceneReadyObservable.add(() => {
 })
 ```
 
+> Note: The `onSceneReadyObservable` event is deprecated from SDK v7.x. Future versions will allow for a more [data-oriented approach](/creator/development-guide/data-oriented-programming), based on regularly querying data rather than events.
+
 ## Video playing
 
 When a `VideoTexture` changes its playing status, the `onVideoEvent` observable receives an event.
@@ -286,6 +274,8 @@ onVideoEvent.add((data) => {
   log("New Video Event ", data)
 })
 ```
+
+> Note: The `onVideoEvent` event is deprecated from SDK v7.x. Future versions will allow for a more [data-oriented approach](/creator/development-guide/data-oriented-programming), based on regularly querying data rather than events.
 
 The input of a video event contains the following properties:
 
@@ -315,6 +305,8 @@ onRealmChangedObservable.add((realmChange) => {
   log("PLAYER CHANGED ISLAND TO ", realmChange.room)
 })
 ```
+
+> Note: The `onRealmChangedObservable` event is deprecated from SDK v7.x. Future versions will allow for a more [data-oriented approach](/creator/development-guide/data-oriented-programming), based on regularly querying data rather than events.
 
 This event includes the following fields:
 
