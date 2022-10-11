@@ -10,6 +10,9 @@ redirect_from:
 slug: /creator/development-guide/poap-tokens/
 ---
 
+> Note: The POAP example scene is currently only available using the older SDK version 6.x. To build in SDK 7.x, you'll have to adapt the code from that example.
+
+
 [Proof Of Attendance Protocol (POAP)](https://app.poap.xyz) tokens are tokens on the [Gnosis Chain](https://www.xdaichain.com/) (Formerly xDai) Ethereum side-chain that serve as evidence of having been to an event. These tokens have become quite popular in Decentraland events. Scenes can gift these tokens to players that visit an event, or to players that achieve a special challenge in a scene.
 
 The Decentraland Foundation has set up a free server that you can use to manage the sending of POAP tokens. This document explains how you can use this server to enable your scene to give away POAP tokens to players who visit.

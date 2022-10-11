@@ -14,6 +14,8 @@ type: Document
 slug: /creator/development-guide/scene-blockchain-operations/
 ---
 
+TODO: Verify that eth-connect still works
+
 A Decentraland scene can interface with the Ethereum blockchain. This can serve to obtain data about the user's wallet and the tokens in it, or to trigger transactions that could involve any Ethereum token, fungible or non-fungible. This can be used in many ways, for example to sell tokens, to reward tokens as part of a game-mechanic, to change how a player interacts with a scene if they own certain tokens, etc.
 
 The following tools currently exist, all of them provided by Decentraland:
@@ -196,14 +198,25 @@ function payment(){
   })
 }
 
-const button = new Entity()
+const myEntity = engine.addEntity()
+MeshRenderer.create(meshEntity, { box: { } })
+MeshCollider.create(meshEntity, { box: { } })
+PointerEvents.create(myEntity, {
+    pointerEvents: [
+      {
+        eventType: PointerEventType.DOWN,
+        eventInfo: {
+          button: ActionButton.POINTER,
+        }
+      }
+    ]
+})
 
-//MeshRenderer.create(meshEntity, { box: { } })
-
-button.addComponent(new OnClick( e => {
-    payment()
-  }))
-engine.addEntity(button)
+engine.addSystem(() => {
+    if (wasEntityClicked(myEntity, ActionButton.POINTER)){
+       payment()
+    }
+})
 ```
 
 The example above listens for clicks on a _button_ entity. When clicked, the player is prompted to make a payment in ETH to a specific wallet for a given amount. Once the player accepts this payment, the rest of the function can be executed. If the player doesn't accept the payment, the rest of the function won't be executed.
@@ -344,7 +357,7 @@ Once you've created a `contract` object, you can easily call the functions that 
 
 ```ts
 import { getProvider } from "@decentraland/web3-provider"
-import { getUserAccount } from "@decentraland/EthereumController"
+import { getUserAccount } from "~system/EthereumController"
 import { RequestManager, ContractFactory } from "eth-connect"
 import { abi } from "../contracts/mana"
 
@@ -357,7 +370,7 @@ executeTask(async () => {
     const contract = (await factory.at(
       "0x2a8fd99c19271f4f04b1b7b9c4f7cf264b626edb"
     )) as any
-    const address = await getUserAccount()
+    const address = await getUserAccount({})
     log(address)
 
     // Perform a function from the contract

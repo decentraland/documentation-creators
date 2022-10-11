@@ -10,6 +10,8 @@ redirect_from:
 slug: /creator/development-guide/special-types/
 ---
 
+TODO: all
+
 ## Vectors
 
 Decentraland uses vectors to represent paths, points in space, and directions. Vectors can also be used to define rotation orientations, as a friendlier alternative to _quaternions_. `Vector2`, `Vector3` and `Vector4` are each defined as different classes, containing a different number of dimensions.

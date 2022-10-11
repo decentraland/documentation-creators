@@ -9,13 +9,15 @@ redirect_from:
 slug: /creator/development-guide/mutable-data/
 ---
 
+TODO: revise
+
 When referencing data from a [component](/creator/development-guide/entities-components), you can either fetch the mutable or the read-only (immutable) version. 
 
-When possible, you should always try to deal with the read-only versions of data as much as possible. This can bring a very significant improvement in the performance of your scene, when compared to always dealing with that same data from mutable versions.
+You should always deal with the read-only versions of data when possible. This practice can bring a very significant improvement in the performance of your scene, when compared to always dealing with mutable versions of that same data.
 
-The `.get()` function in a component returns an immutable (read-only) version of the component. You can only read its values, but can't change any of the properties on it.
+The `.get()` function in a component returns a read-only (immutable) version of the component. You can only read its values, but can't change any of the properties on it.
 
-The `.getMutable()` function returns a representation of the component that allows you to change its values. Use mutable versions only when you plan to make changes to a component, otherwise, always use `get()`.
+The `.getMutable()` function returns a version of the component that allows you to change its values. Use mutable versions only when you plan to make changes to a component, otherwise, always use `get()`.
 
 ```ts
 // fetch a read-only (immutable) version
@@ -30,7 +32,7 @@ const mutableTransform = Transform.getMutable(myEntity)
 mutableTransform.position.y = 2
 ```
 
-A good practice may be to iterate over read-only components, and then only fetch the mutable version when a change is required.
+A good practice is to iterate over read-only components to check values, and then only fetch the mutable version of an individual component when a change is required.
 
 
 ```ts
@@ -61,9 +63,9 @@ function HeightLimitSystem(dt: number) {
 engine.addSystem(HeightLimitSystem)
 ```
 
-In the example above, a system checks the read-only values of an entity's `Transform` component. On every tick it checks to see if the position's _y_ is higher than a hard-coded maximum height. If the height on the transform happens to be above this limit, then and only then we fetch the mutable version of the Transform. This may seem like extra work, but in a scene where we're checking values for many entities on every tick of the game loop, and only making changes occasionally, it results in huge performance gains.
+In the example above, a system checks the read-only values of an entity's `Transform` component. On every tick it checks to see if the position's _y_ is higher than a hard-coded maximum height. If the height on the transform happens to be above this limit, then and only then we fetch the mutable version of the Transform. This may seem like extra work for the scene, but in a scene where we're checking values on every tick of the game loop, and only making changes occasionally, it results in huge performance gains.
 
-This practice follows the principles of [data oriented programming](/creator/development-guide/data-oriented-programming).
+This practice follows the principles of [data oriented programming](/creator/development-guide/data-oriented-programming). It's also gradually being adopted as an industry standard practice in the gaming, because of how much of an improvement it makes.
 
 
-> Note: In older versions of the SDK (6.x or older), components were always treated as mutable. This pattern may be a bit more straight forward to learn, but was a lot less efficient to run.
+> Note: In older versions of the SDK (6.x or older), components were always treated as mutable. That pattern may be a bit more straight forward to learn, but was a lot less efficient to run.

@@ -10,6 +10,8 @@ redirect_from:
 slug: /creator/development-guide/raycasting/
 ---
 
+TODO: all
+
 Raycasting is a fundamental tool in game development. With raycasting, you can trace an imaginary line in space, and query if any entities are intersected by the line. This is useful for calculating lines of sight, trajectories of bullets, pathfinding algorithms and many other applications.
 
 When a player clicks or pushes the primary or secondary button, a ray is traced from the player's position in the direction they are looking, see [button events](/creator/development-guide/click-events) for more details about this. This document covers how to trace an invisible ray from any arbitrary position and direction, independent of player actions, which you can use in many other scenarios.

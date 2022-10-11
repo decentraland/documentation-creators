@@ -11,6 +11,8 @@ redirect_from:
 slug: /creator/development-guide/video-playing/
 ---
 
+TODO: all
+
 There are two different ways you can show a video in a scene. One is to stream the video from an external source, the other is to pack the video file with the scene and play it from there.
 
 In both cases, you assign the video to a `VideoTexture`, which can be used on a [material](/creator/development-guide/materials) and then applied to any [primitive shape](/creator/development-guide/shape-components) like a plane, cube, or even a cone.

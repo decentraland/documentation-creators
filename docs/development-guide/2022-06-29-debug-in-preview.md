@@ -63,6 +63,8 @@ You can detect if a scene is running as a preview or is already deployed in prod
 
 To use this function, import the `~system/EnvironmentAPI` library.
 
+TODO: is execute task still working?
+
 ```ts
 import { isPreviewMode } from "~system/EnvironmentAPI"
 
