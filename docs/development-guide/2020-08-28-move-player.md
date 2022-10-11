@@ -10,27 +10,50 @@ redirect_from:
 slug: /creator/development-guide/move-player/
 ---
 
-To change the player's position in the scene, use the `movePlayerTo()` function. This function takes two arguments:
+To change the player's position in the scene, set the position of the `Transform` component for the `engine.PlayerEntity` entity.
 
-- `position`: Where to move the player, expressed as an object with _x_, _y_, and _z_ properties.
-- `cameraTarget`: (optional) What direction to make the player face, expressed as an object with _x_, _y_, and _z_ properties that represent the coordinates of a point in space to stare at. If no value is provided, the player will maintain the same rotation as before moving.
+<!-- - `position`: Where to move the player, expressed as an object with _x_, _y_, and _z_ properties.
+- `cameraTarget`: (optional) What direction to make the player face, expressed as an object with _x_, _y_, and _z_ properties that represent the coordinates of a point in space to stare at. If no value is provided, the player will maintain the same rotation as before moving. -->
 
 ```ts
-import { movePlayerTo } from '@decentraland/RestrictedActions'
-const respawner = new Entity()
-respawner.addComponent(new BoxShape())
-respawner.addComponent(new Transform({ position: new Vector3(8, 0, 8) }))
-respawner.addComponent(
-  new OnPointerDown(
-    (e) => {
-      movePlayerTo({ x: 1, y: 0, z: 1 }, { x: 8, y: 1, z: 8 })
-    },
-    { hoverText: "Move player" }
-  )
-)
-
-engine.addEntity(respawner)
+const playerTransform = Transform.getMutable(engine.PlayerEntity)
+playerTransform.position = {x: 1, y: 10, z: 1}
 ```
+
+The `engine.PlayerEntity` entity may not be available to modify while the scene is being loaded. The example below performs the player's movement after the scene is loaded, each time an entity is clicked.
+
+```ts
+// create entity
+const myEntity = engine.addEntity()
+MeshRenderer.create(meshEntity, { box: {} })MeshCollider.create(meshEntity, { box: {} })
+
+// give entity a PointerEvents component
+PointerEvents.create(myEntity, {
+    pointerEvents: [
+      {
+        eventType: PointerEventType.DOWN,
+        eventInfo: {
+          button: ActionButton.POINTER,
+        }
+      }
+    ]
+})
+
+// create a system to react to pointer events on this entity
+engine.addSystem(() => {
+    if (wasEntityClicked(myEntity, ActionButton.POINTER)){
+		respawnPlayer()
+    }
+})
+
+function respawnPlayer(){
+ const playerTransform = Transform.getMutable(engine.PlayerEntity)
+	  playerTransform.position = {x: 1, y: 10, z: 1}
+}	
+
+```
+
+
 
 The player's movement occurs instantly, without any confirmation screens or camera transitions.
 
