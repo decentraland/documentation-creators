@@ -25,7 +25,12 @@ The `engine.PlayerEntity` entity may not be available to modify while the scene 
 ```ts
 // create entity
 const myEntity = engine.addEntity()
-MeshRenderer.create(meshEntity, { box: {} })MeshCollider.create(meshEntity, { box: {} })
+MeshRenderer.create(myEntity, { box: {} })
+MeshCollider.create(myEntity, { box: {} })
+
+Transform.create(myEntity, {
+  position: {x:4, y:1, z:4}
+})
 
 // give entity a PointerEvents component
 PointerEvents.create(myEntity, {
@@ -42,15 +47,15 @@ PointerEvents.create(myEntity, {
 // create a system to react to pointer events on this entity
 engine.addSystem(() => {
     if (wasEntityClicked(myEntity, ActionButton.POINTER)){
-		respawnPlayer()
+		  respawnPlayer()
     }
 })
+
 
 function respawnPlayer(){
  const playerTransform = Transform.getMutable(engine.PlayerEntity)
 	  playerTransform.position = {x: 1, y: 10, z: 1}
-}	
-
+}
 ```
 
 
