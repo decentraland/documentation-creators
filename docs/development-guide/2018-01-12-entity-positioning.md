@@ -56,11 +56,15 @@ const mutableTransform = Transform.getMutable(ball)
 // Set the position with an object
 mutableTransform.position = { x: 5, y: 1, z: 5 }
 
+// Set the position with an object (alternative syntax)
+mutableTransform.position = Vector3.create(2, 1, 4)
+
 // Set each axis individually
 mutableTransform.position.x = 3
 mutableTransform.position.y = 1
 mutableTransform.position.z = 3
 ```
+
 
 When setting a position, keep the following considerations in mind:
 
@@ -104,7 +108,10 @@ Transform.create(cube, {
 // Fetch a mutable version of the transform
 const mutableTransform = Transform.getMutable(cube)
 
-// Set the position with an object
+// Set the rotation with an object, from euler angles
+mutableTransform.rotation = Quaternion.euler(0, 90, 0)
+
+// Set the rotation with an object
 mutableTransform.rotation = { x: 0.1, y: 0.5, z: 0.5, w: 0 }
 
 // Set each axis individually
@@ -114,33 +121,34 @@ mutableTransform.rotation.z = 0.3
 mutableTransform.rotation.w = 0
 ```
 
-TODO: How do I use euler angles!!!
-
-<!--
 
 You can also set the rotation field with [_Euler_ angles](https://en.wikipedia.org/wiki/Euler_angles), the more common _x_, _y_ and _z_ notation with numbers that go from 0 to 360 that most people are familiar with. To use Euler angles, use one of the following notations:
 
 ```ts
 // Create transform with a predefined rotation in Euler angles
-let myTransform = new Transform({ rotation: Quaternion.Euler(0, 90, 0) })
+Transform.create(cube, {
+	  rotation: Quaternion.euler(0, 90, 0)
+}
 
-// Use the .setEuler() function
-myTransform.rotation.setEuler(0, 90, 180)
+// Fetch a mutable version of the transform
+const mutableTransform = Transform.getMutable(cube)
 
-// Set the `eulerAngles` field
-myTransform.rotation.eulerAngles = new Vector3(0, 90, 0)
+// Set the rotation with an object, from euler angles
+mutableTransform.rotation = Quaternion.euler(0, 90, 0)
 ```
 
 When using a _3D vector_ to represent Euler angles, _x_, _y_ and _z_ represent the rotation in that axis, measured in degrees. A full turn requires 360 degrees.
 
-> Note: If you set the rotation using _Euler_ angles, the rotation value is still stored internally as a quaternion.
-
 When you retrieve the rotation of an entity, it returns a quaternion by default. To obtain the rotation expressed as in Euler angles, get the `.eulerAngles` field:
 
 ```ts
-myEntity.getComponent(Transform).rotation.eulerAngles
+// Fetch a read-only version of the transform
+const transform = Transform.getMutable(cube)
+
+// Set the rotation with an object, from euler angles
+const eulerAngle = Quaternion.eulerAngles(transform.rotation)
 ```
--->
+
 
 <!--
 ### Add Rotations
