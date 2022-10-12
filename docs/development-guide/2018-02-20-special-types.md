@@ -10,7 +10,7 @@ redirect_from:
 slug: /creator/development-guide/special-types/
 ---
 
-TODO: all
+<!-- TODO: all -->
 
 ## Vectors
 

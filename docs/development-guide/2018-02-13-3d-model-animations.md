@@ -133,17 +133,15 @@ When calling the `play()` function on the Animator component, there are two para
 
 By default, animations are played in a loop that keeps repeating the animation forever.
 
-TODO: Confirm if this is the default or not
-
 Change this setting by setting the `loop` property in the `state` object.
 
 ```ts
 Animator.create(shark, {
 	states:[{
-			name: "swim",
-			clip: "swim",
+			name: "bite",
+			clip: "bite",
 			playing: true,
-			loop: true
+			loop: false
 		}
 	]
 })
@@ -151,16 +149,27 @@ Animator.create(shark, {
 
 If `looping` is set to _false_, the animation plays just once and then stops.
 
-<!--
+
 ## Reset an animation
 
 When an animation finishes playing or is paused, the 3D model remains in the last posture it had.
 
-To stop an animation and set the posture back to the first frame in the animation, use the `stop()` function of the `AnimationState` object.
+To stop an animation and set the posture back to the first frame in the animation, set `shouldReset` to true in the animation state.
 
 ```ts
-clipSwim.stop()
+Animator.create(shark, {
+	states:[{
+			name: "bite",
+			clip: "bite",
+			playing: true,
+			shouldReset: true,
+			loop: true
+		}
+	]
+})
 ```
+
+<!-- TODO: Verify if this part is true -->
 
 To play an animation from the start, regardless of what frame the animation is currently in, set the `reset` property on the `play()` function to _true_.
 
@@ -173,13 +182,13 @@ clipSwim.play(true)
     - apply an animation with a `weight` property of 0 and gradually increase the `weight`
     - create an animation clip that describes a movement from the posture you want to transition from to the default posture you want.
 
--->
+
 
 ## Handle multiple animations
 
 If a 3D model has multiple animations packed into it, a single `Animator` component can deal with all of them.
 
-TODO: Do layers exist?? Can I still play two animations at once?
+<!-- TODO: Do layers exist?? Can I still play two animations at once? -->
 
 Animations exist in _layers_ in an `Animator` component. If two animations are in the same layer, only one of them can play at a time. Starting one will stop the other. If two animations exist on separate layers, they can play at the same time, given that their _weight_ values add up, or if they each control different bones or vertexes from the model.
 

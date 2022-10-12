@@ -10,7 +10,7 @@ redirect_from:
 slug: /creator/development-guide/game-objects/
 ---
 
-TODO: all
+<!-- TODO: all -->
 
 As your scene becomes more complicated, it's useful to put some of the logic into separate game object files. By doing this, you can keep the main code for the scene clean and simple to read, while encapsulating reusable parts that control several entities in the scene.
 

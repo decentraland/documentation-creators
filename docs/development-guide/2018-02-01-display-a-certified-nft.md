@@ -95,7 +95,7 @@ Some frames use more materials than others. For example, the default frame adds 
 
 ## Open an NFT UI
 
-TODO: is this still a thing??
+<!-- TODO: is this still a thing?? -->
 
 Open a prebuilt UI that displays the name, owner, and description of an NFT. It also includes the NFT's current price and price of last sale if applicable, and a button that links to the NFT's page on OpenSea, where more information is available and it can be purchased.
 
@@ -105,7 +105,7 @@ Open this UI by calling the function `openNFTDialog(), passing it the NFT's cont
 
 To open this UI, add the following:
 
-TODO: update code snippets if this is still a thing
+<!-- TODO: update code snippets if this is still a thing -->
 
 ```ts
 myPictureFrame.addComponent(

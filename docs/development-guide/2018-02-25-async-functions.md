@@ -10,7 +10,7 @@ redirect_from:
 slug: /creator/development-guide/async-functions/
 ---
 
-TODO: executeTask doesn't currently work. Change examples?
+<!-- TODO: executeTask doesn't currently work. Change examples? -->
 
 ## Overview
 
@@ -87,7 +87,7 @@ myEntity.addComponent(
 )
 ```
 
-TODO: use new click component
+<!-- TODO: use new pointerevents component -->
 
 ## Subscribe a listener
 
@@ -101,7 +101,7 @@ Input.instance.subscribe("BUTTON_DOWN", (e) => {
 
 The example above runs a function every time that the button _A_ is pressed down.
 
-TODO: change example?
+<!-- TODO: change example? -->
 
 ## The await statement
 

@@ -228,7 +228,7 @@ If an entity has multiple pointer events on it, the hover hints for each of thes
 
 The `hoverText` of an `.UP` pointer event is only displayed while the player is already holding down the corresponding key and pointing at the entity.
 
-TODO: Confirm
+<!-- TODO: Confirm -->
 
 If an entity has both a `DOWN` pointer event and an `UP` pointer event, the hint for the `DOWN` action is shown while the button is not being pressed. The hint switches to the one from the `UP` event only when the button is pressed and remains pressed.
 
@@ -290,9 +290,9 @@ PointerEvents.create(entity, {
     ]
 })
 
-
-TODO: trigger actions based on hover events
 ```
+
+<!-- TODO: trigger actions based on hover events -->
 
 
 ### Max distance
@@ -334,19 +334,19 @@ For an entity to be intercepted by the ray of a button event, the entity's 3d mo
 If another entity's collider is standing on the way of the entity that the player wants to click, the player won't be able to click the entity that's behind, unless the entity's `MeshCollider` component is configured to allow clicking through it.
 
 
-TODO
+<!-- TODO -->
 
 ### Multiple buttons on an entity
 
-TODO
+<!-- TODO -->
 
 ### Differentiate meshes inside a model
 
-TODO
+<!-- TODO -->
 
 ## Global button events
 
-TODO
+<!-- TODO -->
 
 ### Tracking player movements
 

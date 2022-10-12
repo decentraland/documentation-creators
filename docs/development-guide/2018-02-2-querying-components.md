@@ -15,7 +15,7 @@ slug: /creator/development-guide/querying-components/
 You can [query components](/creator/development-guide/querying-components) with the method `engine.getEntitiesWith(...components)` to keep track of all entities in the scene that have certain components.
 
 
-TODO: check image
+<!-- TODO: check image -->
 ![](/images/media/ecs-big-picture-w-compgroup.png)
 
 
@@ -73,9 +73,9 @@ In the example above, the `PhysicsSystem` function iterates over the entities in
 ## Dealing with the entities and components
 
 
-
 The `getEntitiesWith` function returns a collection, that includes references to a set of entities and can also optionally include references to the listed components.
-TODO: confirm, is it really a "collection" any better name?
+
+<!-- TODO: confirm, is it really a "collection" any better name? -->
 
 
 Using the simplest syntax, you fetch only a list of references to the corresponding entities.

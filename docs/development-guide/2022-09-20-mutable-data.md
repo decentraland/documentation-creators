@@ -9,8 +9,6 @@ redirect_from:
 slug: /creator/development-guide/mutable-data/
 ---
 
-TODO: revise
-
 When referencing data from a [component](/creator/development-guide/entities-components), you can either fetch the mutable or the read-only (immutable) version. 
 
 You should always deal with the read-only versions of data when possible. This practice can bring a very significant improvement in the performance of your scene, when compared to always dealing with mutable versions of that same data.

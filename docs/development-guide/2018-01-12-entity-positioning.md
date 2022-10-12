@@ -13,7 +13,7 @@ slug: /creator/development-guide/entity-positioning/
 
 You can set the _position_, _rotation_ and _scale_ of any entity by using the `Transform` component. This can be used on any entities, affecting where 3d objects are rendered, like primitive shapes (cube, sphere, plane, etc) and 3D models (`GltfContainer`).
 
-TODO: check image
+<!-- TODO: check image -->
 <img src="/images/media/ecs-simple-components.png" alt="nested entities" width="400"/>
 
 

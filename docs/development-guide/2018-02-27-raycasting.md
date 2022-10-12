@@ -10,7 +10,6 @@ redirect_from:
 slug: /creator/development-guide/raycasting/
 ---
 
-TODO: all
 
 Raycasting is a fundamental tool in game development. With raycasting, you can trace an imaginary line in space, and query if any entities are intersected by the line. This is useful for calculating lines of sight, trajectories of bullets, pathfinding algorithms and many other applications.
 
@@ -35,7 +34,7 @@ A Raycast component describes the invisible ray that will be used to query for e
 > Note: The `origin` and `direction` are not affected if the entity that holds the `Raycast` component also has a Transform, or if the entity has a parent entity with a Transform. The ray is traced in scene space, relative to the scene's _0, 0, 0_ point. 
 
 
-TODO: Do we want to keep timestamp??
+<!-- TODO: Do we want to keep timestamp?? -->
 
 ```typescript
 let originPos = Vector3.create(2, 1, 4)

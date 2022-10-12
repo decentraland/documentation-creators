@@ -74,7 +74,7 @@ Each component must have a unique ID, that differentiates it internally. The Dec
 
 To easily create new ids....
 
-TODO: tips
+<!-- TODO: tips -->
 
 
 > Warning: Component IDs must be created in a deterministic way. Do not give it a random number, or one that may vary based on in what order the scene loads, or the actions taken by the player. This is especially consideration if changes in the scene are synced between players. If two player's local versions of the scene use different ids for a same component, it won't be possible to properly sync them.

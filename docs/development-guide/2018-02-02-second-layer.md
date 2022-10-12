@@ -35,7 +35,7 @@ Decentraland has a partnership with [Polygon](https://polygon.technology/), who 
 
 To easily make use of MANA on Polygon's side-chain in your scene, use the [l2-utils library](https://github.com/decentraland/decentraland-l2-utils). This library includes simple functions to allow players in your scene to make transactions with MANA on Polygon's network, check the player's current balance of MANA on Polygon, and transfer MANA between mainchain and Polygon.
 
-TODO: is L2 Utils still relevant? does it need revamping for SDK7?
+<!-- TODO: is L2 Utils still relevant? does it need revamping for SDK7? -->
 
 Players don't need to switch networks on their browser wallets to operate on Polygon's network, since these are handled via metatransactions.
 

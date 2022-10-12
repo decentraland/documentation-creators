@@ -10,8 +10,6 @@ redirect_from:
 slug: /creator/development-guide/event-listeners/
 ---
 
-TODO: all
-
 There are several events that the scene can subscribe to, to know the actions of the player while in or near the scene.
 
 For button and click events performed by the player, see [Button events](/creator/development-guide/click-events).

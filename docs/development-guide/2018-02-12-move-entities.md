@@ -536,4 +536,4 @@ The system is very similar to the system in the _lerp_ example, but when a lerp 
  <img src="/images/media/gifs/lerp-path.gif" alt="Move entity" width="300"/>
 
 
- TODO: Check all images in this page!!
+ <!-- TODO: Check all images in this page!! -->

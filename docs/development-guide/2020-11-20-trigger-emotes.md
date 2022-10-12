@@ -11,7 +11,7 @@ slug: /creator/development-guide/trigger-emotes/
 ---
 
 
-TODO: all
+<!-- TODO: all -->
 
 
 To make a player perform an emote, use the `triggerEmote()` function. Note that only existing default emotes are supported for now. This function takes a single argument:

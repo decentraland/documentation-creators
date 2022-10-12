@@ -177,7 +177,7 @@ Material.create(myEntity, {
 
 > Note: If you create a material that only includes a texture as a property, it will by default not be affected by light and shadows in the environment. If you want your material to be affected by the environment lighting, give the material another property, like for example `roughness`.
 
-TODO: See if this behavior changes
+<!-- TODO: See if this behavior changes -->
 
 <!--
 #### Textures from an external URL
@@ -306,7 +306,7 @@ You can also define how the texture is tiled if the mapping spans more than the 
 - `Mirror`: As in wrap, the texture is repeated as many times as it fits, but the orientation of these repetitions is mirrored.
 - `MirrorOnce`: As in mirror, the texture is repeated, but mirrored around just one axis of symmetry.
 
-TODO: I don't see a difference between Mirror & MirrorOnce
+<!-- TODO: I don't see a difference between Mirror & MirrorOnce -->
 
 
 ```ts
@@ -344,7 +344,7 @@ Material.create(myEntity, {
 
 ## Avatar Portraits
 
-TODO: Feature needs doing
+<!-- TODO: Feature needs doing -->
 
 To display a thumbnail image of any player, create an `AvatarTexture`, passing the address of an existing player. This creates a texture from a 256x256 image of the player, showing head and shoulders. The player is displayed wearing the set of wearables that the current server last recorded.
 
@@ -356,7 +356,7 @@ myMaterial.albedoTexture = myTexture
 
 ## Transparent materials
 
-TODO: any alternative to do this???
+<!-- TODO: any alternative to do this??? -->
 
 To make a material with a plain color transparent, simply define the color as a `Color4`, and set the 4th value to something between _0_ and _1_. The closer to _1_, the more opaque it will be.
 
@@ -380,7 +380,7 @@ The `transparencyMode` takes its value from the `TransparencyMode` enum, that ca
 	- `AlphaTestAndAlphaBlend`: Uses a combination of both methods.
 	- `Auto`:  Determines the method based on the provided texture.
 
-TODO: Confirm that auto really works like that!!
+<!-- TODO: Confirm that auto really works like that!! -->
 
 * If you set the `transparencyMode` to `AlphaTest`, you can fine tune the threshold used to determine if each pixel is transparent or not. Set the `alphaTest` property between _0_ and _1_. By default its value is _0.5_.
 
@@ -414,11 +414,11 @@ Material.create(meshEntity3, {
 })
 ```
 
-TODO: not currently working
+<!-- TODO: not currently working -->
 
 ## Video playing
 
-TODO: feature missing
+<!-- TODO: feature missing -->
 
 To stream video from a URL into a material, or play a video from a file stored in the scene, see [video playing](/creator/development-guide/video-playing).
 
