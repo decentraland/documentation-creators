@@ -18,239 +18,214 @@ When a player pushes the pointer button, or the primary or secondary button, a r
 
 Please note that as a general rule, all raycasts in the SDK will only hit objects with colliders. So if you want to detect ray hits against a model that you've imported, that model should contain [collider meshes](/creator/3d-models/colliders), or you should add a [MeshCollider component](/creator/development-guide/colliders).
 
-## PhysicsCast
 
-The `PhysicsCast` object is a static class that serves as the main raycasting interface. You can refer to it in your scene as `PhysicsCast.instance`. You'll see it has several methods that are all specific to raycasting.
-
-```typescript
-let physicsCast = PhysicsCast.instance
-```
 
 ## Create a ray
 
-A ray object describes the invisible ray that will be used to query for entities. Rays are defined using three bits of information:
+A Raycast component describes the invisible ray that will be used to query for entities. Rays are defined using the following data:
 
-- `origin`: _Vector3_ with the coordinates in scene space to start the ray from.
-- `direction`: _Vector3_ describing the direction (as if the ray started from _0,0,0_).
-- `distance`: _number_ to set the length with which this ray will be traced.
+- `timestamp`: _number_ with the time of sending the ray
+- `origin`: _Vector3_ with the coordinates in scene space to start the ray from. 
+- `direction`: _Vector3_ describing the direction of the ray (as if the ray started from _0,0,0_).
+- `maxDistance`: _number_ to set the length with which this ray will be traced.
+- `queryType`: _RaycastQueryType_ enum value, to define if the ray will return all hit entities or just the first. The following options are available:
+	- `RaycastQueryType.QUERY_ALL`: only returns the first hit entity, starting from the origin point.
+	- `RaycastQueryType.HIT_FIRST`: returns all hit entities, from the origin through to the max distance of the ray.
 
-```typescript
-let originPos = new Vector3(2, 1, 4)
-let direction = new Vector3(0, 1, 1)
+> Note: The `origin` and `direction` are not affected if the entity that holds the `Raycast` component also has a Transform, or if the entity has a parent entity with a Transform. The ray is traced in scene space, relative to the scene's _0, 0, 0_ point. 
 
-let ray: Ray = {
-  origin: originPos,
-  direction: direction,
-  distance: 10,
-}
-```
 
-As an alternative, you can also generate a ray from providing two points in space. Both the direction and distance will be implicit in this information. To do this, use the `getRayFromPositions()` method of the `PhysicsCast` object.
+TODO: Do we want to keep timestamp??
 
 ```typescript
-let physicsCast = PhysicsCast.instance
+let originPos = Vector3.create(2, 1, 4)
+let direction = Vector3.create(0, 1, 1)
 
-let originPos = new Vector3(2, 1, 1)
-let targetPos = new Vector3(2, 3, 3)
+// only return first entity
+Raycast.createOrReplace(engine.addEntity(), {
+  timestamp: 123,
+  origin: Vector3.create(8, 1, 0),
+  direction: Vector3.create(0, 0, 1),
+  maxDistance: 16,
+  queryType: RaycastQueryType.HIT_FIRST
+})
 
-let rayFromPoints = physicsCast.getRayFromPositions(originPos, targetPos)
+// return all entities
+Raycast.createOrReplace(engine.addEntity(), {
+  timestamp: 123,
+  origin: Vector3.create(8, 1, 0),
+  direction: Vector3.create(0, 0, 1),
+  maxDistance: 16,
+  queryType: RaycastQueryType.QUERY_ALL
+})
 ```
 
-You can also get generate a ray from the player's current position and rotation. The only piece of information you need to pass in this case is the distance. To do this, use the `getRayFromCamera()` method of the `PhysicsCast` object.
+> Tip: The `Raycast` component must be added to an entity when created. If don't need to reference that entity again, you can do as in the example above, and instance a new entity while creating the component.
 
-```typescript
-let physicsCast = PhysicsCast.instance
 
-let rayFromCamera = physicsCast.getRayFromCamera(1000)
-```
+## Results results
 
-## Run a raycast query
+After creating a Raycast component, the entity that this component is added to will have a `RaycastResult` component. This component includes information about any hits of the ray. Set up a system to check for this data.
 
-Raycast queries are run by the `PhysicsCast` class. there are two methods available for doing this:
+The `RaycastResult` component contains a `hits` array, with one object for each entity that was hit. If there were no hit entities, this array is empty. If the raycast used `RaycastQueryType.HIT_FIRST`, this array will only contain one object.
 
-- `hitFirst()`: this method only returns the first hit entity, starting from the origin point.
-- `hitAll()`: this method returns all hit entities, from the origin through to the length of the ray.
+Each object in the `hits` array includes:
 
-Both these methods need to be passed the following:
-
-- a Ray object
-- a callback function to execute after the query
-- an optional raycast id, to handle separate lossy queues
-
-<!--
-![](/images/media/raycast.png)
--->
-
-Note that the callback function is always executed, even if no entities were hit by the ray.
-
-This sample queries only for the first entity hit by the ray:
-
-```typescript
-let physicsCast = PhysicsCast.instance
-
-let originPos = new Vector3(2, 1, 4)
-let direction = new Vector3(0, 1, 1)
-
-let ray: Ray = {
-  origin: originPos,
-  direction: direction,
-  distance: 10,
-}
-
-physicsCast.hitFirst(
-  ray,
-  (e) => {
-    log(e.entity.entityId)
-  },
-  0
-)
-```
-
-This sample queries for all entities hit by the ray:
-
-```typescript
-let physicsCast = PhysicsCast.instance
-
-let originPos = new Vector3(2, 1, 4)
-let direction = new Vector3(0, 1, 1)
-
-let ray: Ray = {
-  origin: originPos,
-  direction: direction,
-  distance: 10,
-}
-
-physicsCast.hitAll(
-  ray,
-  (e) => {
-    for (let entityHit of e.entities) {
-      log(entityHit.entity.entityId)
-    }
-  },
-  0
-)
-```
-
-## Results from raycast query
-
-After running a raycast query, the callback function will be able to use the following information from the event object:
-
-- `didHit`: _boolean_ that is _true_ if at least one entity was hit, _false_ if there were none.
-- `ray`: _Ray_ that has been used in the query
-- `hitPoint`: _Vector3_ for the point in scene space where the hit occurred. If multiple entities were hit, it returns the first point of ray collision.
-- `hitNormal`: _Vector3_ for the normal of the hit in world space. If multiple entities did hit, it returns the normal of the first point of ray collision.
-
-- `entity`: _Object_ with info about the entity that was hit. This is returned when using `hitFirst()`, and it's only returned if there were any entities hit.
-- `entities` : _Array of `entity` objects_, each with info about the entities that were hit. This is returned when using `hitAll()`, and it's only returned if there were any entities hit.
-
-The `entity` object, and the objects in the `entities` array contain the following data:
-
-- `entityId`: _String_ with the id for the hit entity
+- `entityId`: Id number of the entity that was hit by the ray.
 - `meshName`: _String_ with the internal name of the specific mesh in the 3D model that was hit. This is useful when a 3D model is composed of multiple meshes.
+- `origin`: _Vector3_ for the position where the ray originates (relative to the scene)
+- `position`: _Vector3_ for the position where the ray intersected with the hit entity (relative to the scene)
+- `length`: Length of the ray from its origin to the position where the hit against the entity occurred.
+- `normalHit`: _Quaternion_ for the angle of the normal of the hit in world space.
 
-The example below shows how you can access these properties from the event object in the callback function:
 
-```typescript
-let physicsCast = PhysicsCast.instance
-
-let originPos = new Vector3(2, 1, 4)
-let direction = new Vector3(0, 1, 1)
-
-let ray: Ray = {
-  origin: originPos,
-  direction: direction,
-  distance: 10,
-}
-
-physicsCast.hitFirst(
-  ray,
-  (e) => {
-    if (e.didHit) {
-      engine.entities[e.entity.entityId].addComponentOrReplace(hitMaterial)
-    }
-  },
-  0
-)
-```
-
-> Tip: To reference an entity based on its ID, use the engine's `entities` array, like this: `engine.entities[e.entity.entityId]`.
-
-The example below does the same, but dealing with an array of entities returned from the `hitAll()` function:
+The example below shows how you can access results from an individual entity using a system:
 
 ```typescript
-let physicsCast = PhysicsCast.instance
+let originPos = Vector3.create(2, 1, 4)
+let direction = Vector3.create(0, 1, 1)
 
-let originPos = new Vector3(2, 1, 4)
-let direction = new Vector3(0, 1, 1)
 
-let ray: Ray = {
-  origin: originPos,
-  direction: direction,
-  distance: 10,
-}
+const rayEntity = engine.addEntity()
 
-physicsCast.hitAll(
-  ray,
-  (e) => {
-    if (e.didHit) {
-      for (let entityHit of e.entities) {
-        engine.entities[entityHit.entity.entityId].addComponentOrReplace(
-          hitMaterial
-        )
-      }
-    }
-  },
-  0
-)
+Raycast.createOrReplace(rayEntity, {
+  timestamp: 123,
+  origin: Vector3.create(8, 1, 0),
+  direction: Vector3.create(0, 0, 1),
+  maxDistance: 16,
+  queryType: RaycastQueryType.QUERY_ALL
+})
+
+engine.addSystem(() => {
+	const rayResult = RaycastResult.get(rayEntity)
+	log(rayResult.hits)
+})
 ```
+
+The next example shows how you can access `RaycastResult` components from all entities in the scene, using a [component query](/creator/development-guide/querying-components).
+
+```typescript
+let originPos = Vector3.create(2, 1, 4)
+let direction = Vector3.create(0, 1, 1)
+
+
+const rayEntity = engine.addEntity()
+
+Raycast.createOrReplace(rayEntity, {
+  timestamp: 123,
+  origin: Vector3.create(8, 1, 0),
+  direction: Vector3.create(0, 0, 1),
+  maxDistance: 16,
+  queryType: RaycastQueryType.QUERY_ALL
+})
+
+engine.addSystem(() => {
+	for (const [_, result] of engine.getEntitiesWith(RaycastResult)) {
+		log(result.hits)
+	}
+})
+```
+
+> Note: The results of a raycast do not arrive on the same tick of the game loop that you created the raycast. The results may take one or multiple ticks to arrive.
+
+In a scene where you use multiple kinds of rays for different purposes (like for path finding, line-of-sight checking, projectile tracing, etc), you might want to add custom components as flags to each kind of entity that holds `Raycast` components. Then you can query for these separately, and deal with each in a different way.
+
+
+
+
+
 
 ## Recurrent raycasting
 
-If your scene does raycasting on every frame via a [system](/creator/development-guide/systems), then you should be careful about how it affects your scene's performance.
+If your scene recurrently performs raycasting, then you should be careful about how it affects your scene's performance.
 
-Both the `hitAll` and `hitFirst` methods have a third argument that takes a _raycast id_. All raycast queries that share a same id are handled in a lossy queue, so that if these requests pile up over time then only the latest one to arrive is processed. This can potentially save a lot of resources and makes your scene run a lot more smoothly.
+For example, you might not need to send a new ray on _every_ tick of the game loop. Depending on the use case, it might make more sense to send just one a second, or every half-second.
+
+<!-- 
+TODO: not true anymore, right?
+
+Both the `hitAll` and `hitFirst` methods have a third argument that takes a _raycast id_. All raycast queries that share a same id are handled in a lossy queue, so that if these requests pile up over time then only the latest one to arrive is processed. This can potentially save a lot of resources and makes your scene run a lot more smoothly. 
 
 In some cases you may want to have several separate raycast queries running at the same time, for example you might have a character that sends multiple rays in different directions to check for walls as it walks around. In these cases you should make sure that each raycast query has a separate id. Otherwise, if these different queries share a same id, the results of each might overwrite one another and valuable information will be lost on every frame.
 
+-->
+
 ```typescript
-const Ray1 = { origin: Vector3.zero, direction: Vector3.Left() }
-const Ray2 = { origin: Vector3.zero, direction: Vector3.Right() }
-let id1: number = 0
-let id2: number = 1
+// custom components
+const CubeOscilator = engine.defineComponent(
+  {
+    t: Schemas.Float
+  },
+  212
+)
 
-class RaycastSystem implements ISystem {
-  update(dt: number) {
-    PhysicsCast.instance().hitFirst(
-      Ray1,
-      (e) => {
-        // Do stuff
-      },
-      id1
-    )
+const TimerComponent = engine.defineComponent(
+  {
+    timeStamp: Schemas.Int,
+    t: Schemas.Float
+  },
+  213
+)
 
-    PhysicsCast.instance().hitFirst(
-      Ray2,
-      (e) => {
-        // Do stuff
-      },
-      id2
-    )
+// check rays
+engine.addSystem((dt) => {
+  for (const [entity] of engine.getEntitiesWith(TimerComponent)) {
+    const timer = TimerComponent.getMutable(entity)
+    timer.t += dt
+
+    if (timer.t > 0.1) {
+      timer.timeStamp++
+      timer.t = 0
+
+      Raycast.createOrReplace(entity, {
+        timestamp: timer.timeStamp,
+        origin: Vector3.create(8, 1, 0),
+        direction: Vector3.create(0, 0, 1),
+        maxDistance: 16,
+        queryType: RaycastQueryType.HIT_FIRST
+      })
+    }
   }
-}
 
-engine.addSystem(new RaycastSystem())
+  for (const [_, result] of engine.getEntitiesWith(RaycastResult)) {
+    log("ray hit : ", result.hits.length)
+  }
+})
+
+TimerComponent.create(engine.addEntity())
+
+
+// oscillating cube system
+engine.addSystem((dt) => {
+  for (const [entity, cube] of engine.getEntitiesWith(
+    CubeOscilator,
+    Transform
+  )) {
+    CubeOscilator.getMutable(entity).t += dt
+    Transform.getMutable(entity).position.y = 2 + Math.cos(cube.t)
+  }
+})
+
+// create cube
+const cubeEntity = engine.addEntity()
+Transform.create(cubeEntity, { position: { x:8, y:1, z:8 } })
+CubeOscilator.create(cubeEntity)
+MeshRenderer.create(cubeEntity, { box: { uvs: [] } })
+MeshCollider.create(cubeEntity, { box: {} })
 ```
 
-This example runs two raycast queries on every frame of the scene. Since they each have a different id, the requests from the first query and from the second query are handled on different queues that are independent from the other.
+The example above runs a recurring raycast every 0.1 seconds. It uses a timer component and a system's `dt` property to time these evenly. It also includes a cube that oscillates up and down, controlled by another system, to move in and out of the path of the ray.
+
 
 <!--
+This example runs two raycast queries on every frame of the scene. Since they each have a different id, the requests from the first query and from the second query are handled on different queues that are independent from the other.
+
+-->
 
 ## Collide with the player
 
-You can't directly hit the player with a ray, but what you can do as a workaround is position an entity occupying the same space as the player
+You can't directly hit the player with a ray, but what you can do as a workaround is position an invisible entity occupying the same space as the player using the [`AvatarAttach component](/creator/development-guide/entity-positioning/#attach-an-entity-to-an-avatar), and check collisions with that cube.
 
-would the entity's colliders bother?
--->
 
 <!--
 
